@@ -1,0 +1,37 @@
+<nz-layout>
+  <nz-affix>
+  <nz-header class="header-background">
+    <div class="float-right">
+      {{profile.profile_link}}
+      <img class="avatar"
+        [src]="profile.avatar_link" />
+    </div>
+  </nz-header>
+</nz-affix>
+  <!-- <nz-divider></nz-divider> -->
+  <nz-content>
+    <div nz-row>
+      <div nz-col nzSpan="4"></div>
+      <div nz-col nzSpan="5">
+        <nz-affix nzOffsetTop="64">
+          <p class="phone">
+            <app-demo [profile]="profile" ></app-demo>
+          </p>
+        </nz-affix>
+      </div>
+      <!-- <app-demo nz-col nzSpan="5"></app-demo> -->
+      <div nz-col nzSpan="3"></div>
+      <nz-tabset class="tabs" nz-col nzSpan="12">
+        <nz-tab nzTitle="Links">
+          <app-links [profile]="profile"></app-links>
+        </nz-tab>
+        <nz-tab nzTitle="Design">
+          <app-design [profile]="profile" (sendProfile)="receverProfile($event)"></app-design>
+        </nz-tab>
+        <nz-tab nzTitle="Settings">
+          <app-settings></app-settings>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </nz-content>
+</nz-layout>

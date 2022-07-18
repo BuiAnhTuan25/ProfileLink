@@ -1,0 +1,16 @@
+.avatar{
+    margin-left:20px;
+    width: 120px;
+    height: 120px;
+    border-radius:60px;
+}
+.card {
+    background: #eff0f1;
+  }
+  .button-save{
+    width:40%;
+    border-radius:8px;
+  }
+  .align-center{
+    text-align:center;
+  }

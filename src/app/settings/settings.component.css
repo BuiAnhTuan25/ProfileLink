@@ -1,0 +1,13 @@
+.card {
+    background: #eff0f1;
+  }
+  .button-delete{
+    width:40%;
+    color: white;
+    background-color: #ff4949;
+    border-radius:8px;
+    border:none;
+  }
+  .align-center{
+    text-align:center;
+  }

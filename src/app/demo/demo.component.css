@@ -1,0 +1,55 @@
+.avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.demo{
+    height: 100%;
+    border-radius: 18px;
+}
+
+.center {
+    text-align: center;
+    align-items: center;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.social {
+    font-size: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-link {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    float: left;
+}
+
+.button-link {
+    width: 80%;
+    height: 30px;
+    border:none;
+    font-size: 12px;
+}
+.mt1{
+    margin-top: 10px;
+}
+.mb1{
+    margin-bottom: 10px;
+}
+.title-link{
+    font-weight: bold;
+}
+.button-center{
+    display: flex;
+    justify-content: center;
+}

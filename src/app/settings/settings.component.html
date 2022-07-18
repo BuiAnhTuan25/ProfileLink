@@ -1,0 +1,76 @@
+<nz-card nzTitle="ACCOUNT" class="card">
+  <form nz-form [formGroup]="settingForm">
+    <nz-form-item>
+      <nz-form-control>
+          <input
+            type="text"
+            nz-input
+            formControlName="username"
+            placeholder="Username"
+          />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+          <input
+            type="text"
+            nz-input
+            formControlName="mail"
+            placeholder="email"
+          />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+          <input
+            type="text"
+            nz-input
+            formControlName="role"
+            placeholder="role"
+          />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <button nz-button nzType="primary" (click)="openModal()">
+    Change password
+  </button>
+</nz-card>
+<div class="align-center">
+  <button nz-button class="button-delete">DELETE ACCOUNT</button>
+</div>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="CHANGE PASSWORD"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzContent]="nzModalContent"
+  [nzFooter]="footer"
+>
+</nz-modal>
+<ng-template #nzModalContent>
+  <form nz-form [formGroup]="modalForm">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input new password!">
+          <input
+            type="password"
+            nz-input
+            formControlName="newPassword"
+            placeholder="New Password"
+          />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input confirm password!">
+          <input
+            type="password"
+            nz-input
+            formControlName="confirmPassword"
+            placeholder="Confirm password"
+          />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+<ng-template #footer>
+  <button nz-button nzType="primary" (click)="handleOk()">CHANGE</button>
+</ng-template>

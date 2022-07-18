@@ -1,0 +1,128 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<button
+  nz-button
+  class="button-add-link mr-2"
+  nzType="primary"
+  (click)="openModal(null, false)"
+>
+<i class="fa-solid fa-plus mr-1"></i>
+  ADD LINK
+</button>
+<button
+  nz-button
+  class="button-add-header"
+  nzType="primary"
+  (click)="openModal(null, false)"
+>
+<i class="fa-solid fa-plus mr-1"></i>
+  ADD HEADER
+</button>
+<div *ngFor="let link of listLinks">
+  <nz-card nzHoverable class="links" (click)="openModal(link, true)">
+    <nz-card-meta
+      [nzTitle]="link.title"
+      [nzDescription]="descriptionTemplate"
+      [nzAvatar]="avatarTemplate"
+    ></nz-card-meta>
+    <ng-template #avatarTemplate>
+      <img alt="example" width="50" height="50" [src]="link.picture" />
+    </ng-template>
+    <ng-template #descriptionTemplate>
+      <div>{{link.url}}</div>
+      <div><i class="fa-solid fa-eye mr-1"></i>{{link.click_count}}</div>
+    </ng-template>
+  </nz-card>
+</div>
+
+<div class="socials">SOCIALS</div>
+<div nz-row [nzGutter]="16">
+  <div *ngFor="let social of listSocials">
+    <a
+      nz-icon
+      nz-col
+      class="gutter-row"
+      [nzSpan]="2"
+      [nzType]="social.icon"
+      nzTheme="outline"
+      [href]="'https://' + social.link"
+    ></a>
+  </div>
+</div>
+<div nz-row [nzGutter]="16">
+  <i
+    nz-icon
+    nz-col
+    nzSpan="2"
+    class="gutter-row"
+    nzType="plus"
+    nzTheme="outline"
+  ></i>
+</div>
+<nz-modal
+  [(nzVisible)]="isVisible"
+  [nzTitle]="title"
+  (nzOnCancel)="handleCancel()"
+  [nzContent]="nzModalContent"
+  [nzFooter]="footer"
+>
+</nz-modal>
+<ng-template #nzModalContent>
+  <form nz-form [formGroup]="modalForm">
+    <div nz-row>
+      <div nz-col nzSpan="18">
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input title!">
+              <input
+                type="text"
+                nz-input
+                formControlName="title"
+                placeholder="Title"
+              />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input url!">
+              <input
+                type="text"
+                nz-input
+                formControlName="url"
+                placeholder="Url"
+              />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div nz-col nzSpan="5" nzOffset="1">
+        <nz-upload
+          class="avatar-uploader"
+          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          nzName="avatar"
+          nzListType="picture-card"
+          [nzShowUploadList]="false"
+          [nzBeforeUpload]="beforeUpload"
+          (nzChange)="handleChange($event)"
+        >
+          <ng-container *ngIf="!avatarUrl">
+            <i
+              class="upload-icon"
+              nz-icon
+              [nzType]="loading ? 'loading' : 'plus'"
+            ></i>
+            <div class="ant-upload-text">Upload</div>
+          </ng-container>
+          <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+        </nz-upload>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<ng-template #footer>
+  <button
+    style="float: left"
+    *ngIf="mode == 'edit'"
+    nz-button
+    (click)="deleteLink()"
+  >
+    DELETE
+  </button>
+  <button nz-button nzType="primary" (click)="handleOk()">SAVE</button>
+</ng-template>
