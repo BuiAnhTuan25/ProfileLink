@@ -29,22 +29,10 @@ export class SocialService {
   }
 
   addSocial(social:any):Observable<any>{
-    const formdata = new FormData();
-    formdata.append('socialName',social.social_name);
-    formdata.append('socialIcon',social.social_icon);
-    formdata.append('links',social.links);
-    formdata.append('profileId',social.profile_id);
-    formdata.append('clickCount',social.click_count);
-    return this.http.post(this.BASE_PATH+'/add',formdata);
+    return this.http.post(this.BASE_PATH+'/add',social);
   }
 
   updateSocial(social:any,id:number):Observable<any>{
-    const formdata = new FormData();
-    formdata.append('socialName',social.social_name);
-    formdata.append('socialIcon',social.social_icon);
-    formdata.append('links',social.links);
-    formdata.append('profileId',social.profile_id);
-    formdata.append('clickCount',social.click_count);
-    return this.http.put(this.BASE_PATH+"/"+id,formdata);
+    return this.http.put(this.BASE_PATH+"/"+id,social);
   }
 }

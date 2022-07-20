@@ -18,6 +18,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgZorroAntdModule } from './ng-zorro-antd.module';
 import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
+import { SocialsComponent } from './socials/socials.component';
+import { ThemesComponent } from './themes/themes.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
     DemoComponent,
     SettingsComponent,
     HomeComponent,
+    SocialsComponent,
+    ThemesComponent,
   ],
   imports: [
     BrowserModule,
