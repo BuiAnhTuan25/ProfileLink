@@ -20,24 +20,24 @@ export class ThemesComponent implements OnInit {
     private msg: NzMessageService, 
     ) { }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.dataService.receiveDesign.subscribe(design=>{
       this.design=design;
     });
-    await this.getAllDesign();
+    this.getAllDesign();
   }
-  async getAllDesign(){
-    await this.designService.getAllDesign(0,999).toPromise().then((res)=>{
+  getAllDesign(){
+    this.designService.getAllDesign(0,999).subscribe((res)=>{
       if(res.success){
         this.listDesign=res.data;
       }
     })
   }
 
-  async onClickDesign(design:any){
+  onClickDesign(design:any){
     if(this.design!=design){
       this.profile.design_id=design.id;
-      await this.profileService.updateProfile(this.profile,this.profile.id).toPromise().then((res:any)=>{
+      this.profileService.updateProfile(this.profile,this.profile.id).subscribe((res:any)=>{
         if(res.success){
           this.msg.success('Change design success');
           this.dataService.sendDesign(design);

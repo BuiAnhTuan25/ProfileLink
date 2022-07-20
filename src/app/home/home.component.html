@@ -2,9 +2,9 @@
   <nz-affix>
   <nz-header class="header-background">
     <div class="float-right">
-      <a  [href]="'http://'+profile.profile_link">{{profile.profile_link}}</a>
+      <a  [href]="'http://'+profile?.profile_link">{{profile?.profile_link}}</a>
       <img nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="avatar" 
-        [src]="profile.avatar_link" />
+        [src]="profile?.avatar_link" />
     </div>
   </nz-header>
 </nz-affix>
@@ -15,7 +15,7 @@
       <div nz-col nzSpan="5">
         <nz-affix nzOffsetTop="64">
           <p class="phone">
-            <app-demo [profile]="profile" ></app-demo>
+            <app-demo *ngIf="profile" [profile]="profile" ></app-demo>
           </p>
         </nz-affix>
       </div>
@@ -23,7 +23,7 @@
       <div nz-col nzSpan="3"></div>
       <nz-tabset [(nzSelectedIndex)]="selectIndex" class="tabs" nz-col nzSpan="12">
         <nz-tab nzTitle="Links">
-          <app-links [profile]="profile"></app-links>
+          <app-links *ngIf="profile" [profile]="profile"></app-links>
         </nz-tab>
         <nz-tab nzTitle="Design">
           <app-design [profile]="profile" (sendProfile)="receverProfile($event)"></app-design>
@@ -37,8 +37,8 @@
 </nz-layout>
 <nz-dropdown-menu #menu="nzDropdownMenu">
   <ul nz-menu nzOverlayClassName="drop-down">
-    <li nz-menu-item>Dashboard</li>
+    <li nz-menu-item (click)="onClickDashboard()">Dashboard</li>
     <li nz-menu-divider></li>
-    <li nz-menu-item>Logout</li>
+    <li nz-menu-item (click)="onClickLogout()">Logout</li>
   </ul>
 </nz-dropdown-menu>
