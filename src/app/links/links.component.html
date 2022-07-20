@@ -81,6 +81,7 @@
             "
           > 
             <span *ngIf="modalForm.get('url')?.hasError('urlExist')">Please input url!</span>
+            <span *ngIf="modalForm.get('url')?.hasError('pattern')">Url malformed!</span>
           </div>
         </ng-template>
       </div>
@@ -104,6 +105,7 @@
           </ng-container>
           <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
         </nz-upload>
+        <div class="erorr">{{erorrPictire}}</div>
       </div>
     </div>
     <ng-template #tplElse>

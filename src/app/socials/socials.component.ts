@@ -65,12 +65,12 @@ export class SocialsComponent implements OnInit {
     private msg:NzMessageService,
     private data:DataService) { }
 
-  async ngOnInit(){
-    await this.getSocials(this.profile.id);
+  ngOnInit(){
+    this.getSocials(this.profile.id);
   }
 
-  async getSocials(profileId:number){
-    await this.socialService.getListSocial(profileId,0,999).toPromise().then((res:any)=>{
+  getSocials(profileId:number){
+    this.socialService.getListSocial(profileId,0,999).subscribe((res:any)=>{
       if(res.success){
         this.socials=res.data;
         this.data.sendSocials(this.socials);
@@ -120,8 +120,8 @@ export class SocialsComponent implements OnInit {
     this.selectedSocial=this.newSocials[0];
   }
 
-  async onDeleteSocial(){
-    await this.socialService.deleteSocial(this.socialForm.controls['id'].value).toPromise().then((res:any)=>{
+  onDeleteSocial(){
+    this.socialService.deleteSocial(this.socialForm.controls['id'].value).subscribe((res:any)=>{
       if(res.success){
         const i=this.socials.findIndex((x)=>
           x.id==res.data.id);

@@ -27,10 +27,8 @@ export class DesignComponent implements OnInit {
   constructor(
     private msg: NzMessageService, 
     private fb: FormBuilder,
-    private profileService: ProfileService,
-    private designService:DesignService,
-    private dataService:DataService) { }
-  async ngOnInit() {
+    private profileService: ProfileService,) { }
+  ngOnInit() {
     this.profileForm = this.fb.group({
       id: [null],
       fullname: [null, Validators.required],
@@ -45,8 +43,6 @@ export class DesignComponent implements OnInit {
       location: [null],
       click_count: [null],
     });
-    // this.user=JSON.parse(localStorage.getItem('auth-user')!);
-    // await this.getProfile(this.user.id);
     this.pathProfile(this.profile);
   }
   beforeUpload = (
@@ -97,25 +93,15 @@ export class DesignComponent implements OnInit {
     }
   }
 
-  // async getProfile(id: number) {
-  // await this.profileService.getProfile(id).toPromise().then((res:any)=>{
-  //   if(res.success){
-  //     this.profile=res.data;
-  //    this.profileForm.patchValue(res.data);
-  //    this.avatarUrl=res.data.avatar_link;
-  //    this.dataService.sendProfile(res.data);
-  //   }
-  // });
-  // }
   pathProfile(profile:any){
     this.profileForm.patchValue(profile);
     this.avatarUrl=profile.avatar_link;
   }
 
-  async updateProfile(){
+  updateProfile(){
     if(this.profile!=this.profileForm.value||this.file){
-    await this.profileService.updateProfile(this.profileForm.value,this.profileForm.controls['id'].value,this.file)
-    .toPromise().then((res:any)=>{
+    this.profileService.updateProfile(this.profileForm.value,this.profileForm.controls['id'].value,this.file)
+    .subscribe((res:any)=>{
       if(res.success){
         this.profileForm.patchValue(res.data);
         this.profile=res.data;
