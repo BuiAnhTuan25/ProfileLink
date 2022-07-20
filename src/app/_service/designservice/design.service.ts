@@ -9,7 +9,7 @@ export class DesignService {
   BASE_PATH = 'http://localhost:8080/api/v1.0/design';
   constructor(private http:HttpClient) { }
   getDesign(id:number):Observable<any>{
-    return this.http.get(this.BASE_PATH+"/"+id);
+    return this.http.get(this.BASE_PATH+"/get/"+id);
   }
 
   addDesign(design:any):Observable<any>{

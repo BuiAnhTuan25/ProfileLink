@@ -2,8 +2,8 @@
   <nz-affix>
   <nz-header class="header-background">
     <div class="float-right">
-      {{profile.profile_link}}
-      <img class="avatar"
+      <a  [href]="'http://'+profile.profile_link">{{profile.profile_link}}</a>
+      <img nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="avatar" 
         [src]="profile.avatar_link" />
     </div>
   </nz-header>
@@ -21,7 +21,7 @@
       </div>
       <!-- <app-demo nz-col nzSpan="5"></app-demo> -->
       <div nz-col nzSpan="3"></div>
-      <nz-tabset class="tabs" nz-col nzSpan="12">
+      <nz-tabset [(nzSelectedIndex)]="selectIndex" class="tabs" nz-col nzSpan="12">
         <nz-tab nzTitle="Links">
           <app-links [profile]="profile"></app-links>
         </nz-tab>
@@ -35,3 +35,10 @@
     </div>
   </nz-content>
 </nz-layout>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzOverlayClassName="drop-down">
+    <li nz-menu-item>Dashboard</li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item>Logout</li>
+  </ul>
+</nz-dropdown-menu>

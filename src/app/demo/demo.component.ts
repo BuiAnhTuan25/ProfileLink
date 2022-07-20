@@ -1,11 +1,13 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { NzButtonShape, NzButtonType } from 'ng-zorro-antd/button';
 import { DataService } from '../_service/data-service/data.service';
 import { DesignService } from '../_service/designservice/design.service';
 import { BUTTON_TYPE } from '../_model/button_type';
 import { LinksService } from '../_service/links-service/links.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ActivatedRoute } from '@angular/router';
+import { ProfileService } from '../_service/profile-service/profile.service';
 
 @Component({
   selector: 'app-demo',
@@ -19,6 +21,7 @@ export class DemoComponent implements OnInit {
   buttonType:NzButtonType='primary';
   buttonShape!:NzButtonShape;
   design:any;
+  shortBio:any;
 
   user:any;
 
@@ -28,16 +31,22 @@ export class DemoComponent implements OnInit {
     private designService:DesignService,
     private linksService:LinksService,
     private msg: NzMessageService, 
+    private route:ActivatedRoute,
+    private profileService:ProfileService,
     ) { }
 
   async ngOnInit() {
     this.data.dataFromChild.subscribe(listLinks => this.listLinks = listLinks);
-    await this.getDesign(this.profile.design_id);
     this.data.receiveDesign.subscribe(design=>{
       this.design=design;
       this.changeButton(this.design);
     });
-    
+    this.shortBio = this.route.snapshot.paramMap.get('short_bio');
+    if(this.shortBio){
+      await this.getProfleByShortBio(this.shortBio);
+      await this.getListLinks(this.profile.id);
+    }
+    await this.getDesign(this.profile.design_id);
   }
 
   async onClickLink(link:any){
@@ -60,6 +69,21 @@ export class DemoComponent implements OnInit {
         this.changeButton(res.data);
       }
     })
+  }
+  async getProfleByShortBio(shortBio:any){
+    await this.profileService.getProfileByShortBio(shortBio).toPromise().then((res:any)=>{
+    if(res.success){
+      this.profile=res.data;
+    }else this.msg.error('Get profile false');
+    })
+  }
+
+  async getListLinks(profileId:number){
+    await this.linksService.getListLinks(profileId, 0, 999).toPromise().then((res:any)=>{
+      if (res.success) {
+        this.listLinks = res.data;
+      }
+    }); 
   }
 
   changeButton(design:any){

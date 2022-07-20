@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   user:any;
   profile:any;
   constructor(private dataService:DataService,private profileService:ProfileService) { }
-
+  selectIndex:any=0;
   async ngOnInit(){
     this.user=JSON.parse(localStorage.getItem('auth-user')!);
     await this.getProfile();
@@ -36,4 +36,5 @@ export class HomeComponent implements OnInit {
   receverProfile(event:any){
     this.profile=event;
   }
+  
 }

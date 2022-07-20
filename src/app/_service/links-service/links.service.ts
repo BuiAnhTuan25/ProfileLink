@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 })
 export class LinksService {
   BASE_PATH = 'http://localhost:8080/api/v1.0/link';
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) { }
 
   getListLinks(profileId: number, page: number, pageSize: number): Observable<any> {
