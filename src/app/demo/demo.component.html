@@ -9,15 +9,20 @@
         </div>
     </div>
     <div *ngFor="let link of listLinks">
+        <div style="font-weight: bold" *ngIf="link.type=='HEADER'">
+        {{link.title}}
+        </div>
+    </div>
+    <div *ngFor="let link of listLinks">
     <div *ngIf="isPrimary;else elsePrimary">
-        <button style="background-color:{{design.button_color}};color:{{design.text_color}};" [nzType]="buttonType" [nzShape]="buttonShape" nz-button class="button-link mt1 title-link" (click)="onClickLink(link)">
+        <button *ngIf="link.type=='LINK'" style="background-color:{{design.button_color}};color:{{design.text_color}};" [nzType]="buttonType" [nzShape]="buttonShape" nz-button class="button-link mt1 title-link" (click)="onClickLink(link)">
             <img alt="example" class="avatar-link"
                 [src]="link.picture" />
             {{link.title}}
         </button>
     </div>
     <ng-template #elsePrimary>
-        <button style="background-color:{{design.background_color}}; border:2px solid {{design.button_color}};color:{{design.text_color}};" [nzType]="buttonType" [nzShape]="buttonShape" nz-button class="button-link mt1 title-link" (click)="onClickLink(link)">
+        <button *ngIf="link.type=='LINK'" style="background-color:{{design.background_color}}; border:2px solid {{design.button_color}};color:{{design.text_color}};" [nzType]="buttonType" [nzShape]="buttonShape" nz-button class="button-link mt1 title-link" (click)="onClickLink(link)">
             <img alt="example" class="avatar-link"
                 [src]="link.picture" />
                 {{link.title}}

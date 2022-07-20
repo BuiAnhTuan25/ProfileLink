@@ -6,6 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../_service/data-service/data.service';
+import { SocialService } from '../_service/social-service/social.service';
 
 
 @Component({
@@ -19,29 +20,66 @@ export class LinksComponent implements OnInit {
   loading = false;
   avatarUrl?: string;
   isVisible: boolean = false;
+  isVisibleHeader: boolean = false;
+  isVisibleSocial:boolean=false;
+  validForm:boolean=true;
   title: string = '';
+  titleSocial:string='';
+  type:string='';
   id:number=1;
   file!:NzUploadFile;
+  selectedSocial:any=null;
   listLinks: any[] = [];
+  socials:any[]=[];
 
   listSocials = [
     {
-      icon: 'facebook',
-      link: 'facebook.com',
+      name:'Facebook',
+      social_icon: 'facebook',
+      social_link: 'facebook.com',
     },
     {
-      icon: 'youtube',
-      link: 'youtube.com',
+      name:'Youtube',
+      social_icon: 'youtube',
+      social_link: 'youtube.com',
+    },
+    {
+      name:'Instagram',
+      social_icon: 'instagram',
+      social_link: 'instagram.com',
+    },
+    {
+      name:'Github',
+      social_icon: 'github',
+      social_link: 'github.com',
+    },
+    {
+      name:'Twitter',
+      social_icon: 'twitter',
+      social_link: 'twitter.com',
+    },
+    {
+      name:'Linkedin',
+      social_icon: 'linkedin',
+      social_link: 'linkedin.com',
     },
   ];
   modalForm: FormGroup = this.fb.group({
     id: [null],
     profile_id:[null],
     title: [null, Validators.required],
-    url: [null, Validators.required],
+    url: [null],
     picture: [null],
     click_count:[null],
     type:[TYPE_LINK.LINK],
+  });
+  socialForm: FormGroup = this.fb.group({
+    id: [null],
+    profile_id:[null],
+    social_name: [null],
+    links: [null,Validators.required],
+    social_icon: [null],
+    click_count:[null],
   });
 
   constructor(
@@ -49,40 +87,89 @@ export class LinksComponent implements OnInit {
     private msg: NzMessageService,
     private fb: FormBuilder,
     private data: DataService,
+    private socialService:SocialService,
   ) {}
 
   async ngOnInit() {
     // this.data.receiveProfile.subscribe(profile=>this.profile=profile);
     await this.getLinks(this.profile.id);
-    this.data.notifyCountValue(this.listLinks);
+    await this.getSocials(this.profile.id);
+    
+    
   }
 
   async getLinks(profileId: number) {
-    await this.linksService.getListLinks(profileId, 0, 10).toPromise().then((res:any)=>{
+    await this.linksService.getListLinks(profileId, 0, 999).toPromise().then((res:any)=>{
       if (res.success) {
         this.listLinks = res.data;
+        this.data.notifyCountValue(this.listLinks);
       }
+      else this.msg.error('Get list link false');
+
     }); 
+  }
+
+  async getSocials(profileId:number){
+    await this.socialService.getListSocial(profileId,0,999).toPromise().then((res:any)=>{
+      if(res.success){
+        this.socials=res.data;
+        //this.data.sendSocials(this.socials);
+      }
+      else this.msg.error('Get list social false');
+    })
   }
 
   handleCancel(): void {
     this.isVisible = false;
     this.modalForm.reset();
     this.avatarUrl = '';
+    this.mode='';
   }
 
-  openModal(data: any, edit: boolean) {
+  socialModalCancel(): void {
+    this.isVisibleSocial = false;
+    this.socialForm.reset();
+    this.selectedSocial=null;
+    this.mode='';
+  }
+
+  handleCancelHeader(): void {
+    this.isVisibleHeader = false;
+    this.modalForm.reset();
+    this.mode='';
+  }
+
+  openModal(data: any, edit: boolean,type:string) {
+    this.type=type;
     this.isVisible = true;
     this.modalForm.reset();
     this.avatarUrl='';
+    this.mode='';
     if (edit) {
       this.mode = 'edit';
-      this.title = 'EDIT';
+
+      if(type=='link') this.title = 'EDIT LINK';
+      if(type=='header') this.title = 'EDIT HEADER';
+      
       this.modalForm.patchValue(data);
       this.avatarUrl = data.picture;
     } else {
       this.mode = 'create';
-      this.title = 'ADD';
+      if(type=='link') this.title = 'CREATE LINK';
+      if(type=='header') this.title = 'CREATE HEADER';
+    }
+  }
+
+  openSocialModal(data:any,edit:boolean){
+    this.isVisibleSocial=true;
+    this.socialForm.reset();
+    if(edit){
+      this.mode='edit';
+      this.titleSocial='EDIT SOCIAL';
+      this.socialForm.patchValue(data);
+    }else {
+      this.mode='create';
+      this.titleSocial='CREATE SOCIAL';
     }
   }
 
@@ -91,15 +178,22 @@ export class LinksComponent implements OnInit {
       this.modalForm.controls[i].markAsDirty();
       this.modalForm.controls[i].updateValueAndValidity();
     }
-    if(this.modalForm.valid){
+    if(this.type == 'link' && this.modalForm.controls['url'].value==null){
+      this.validForm=false;
+      this.modalForm.controls['url'].setErrors({ urlExist: true });
+    } else this.validForm=true;
+    if(this.modalForm.valid && this.validForm){
       if(this.mode==='create'){
         this.modalForm.controls['profile_id'].setValue(this.id);
         this.modalForm.controls['click_count'].setValue(0);
-        this.modalForm.controls['type'].setValue(TYPE_LINK.LINK);
+
+        if(this.type == 'link') this.modalForm.controls['type'].setValue(TYPE_LINK.LINK);
+        if(this.type == 'header') this.modalForm.controls['type'].setValue(TYPE_LINK.HEADER);
+
         await this.linksService.addLink(this.modalForm.value,this.file).toPromise().then((res:any)=>{
           if(res.success){
             this.msg.success('Add success');
-            this.listLinks=[res.data,...this.listLinks];
+            this.listLinks.push(res.data);
             this.data.notifyCountValue(this.listLinks);
             this.handleCancel();
           }
@@ -124,6 +218,8 @@ export class LinksComponent implements OnInit {
       }
     }  
   }
+
+  
 
   beforeUpload = (
     file: NzUploadFile,
@@ -173,7 +269,7 @@ export class LinksComponent implements OnInit {
     }
   }
 
-  deleteLink() {
+  onDelete() {
     this.linksService.deleteLink(this.modalForm.controls['id'].value).toPromise().then((res:any)=>{
        if(res.success){
         const i=this.listLinks.findIndex((x)=>{
@@ -189,6 +285,10 @@ export class LinksComponent implements OnInit {
 
     });
     
+  }
+
+  socialChange(event:any){
+    this.socialChange=event;
   }
 }
 

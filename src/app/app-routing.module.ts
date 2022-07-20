@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'design', component: DesignComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
-  { path: 'demo', component: DemoComponent, canActivate: [AuthGuard] },
+  { path: 'demo/:short_bio', component: DemoComponent},
   { path: 'home', component: HomeComponent , canActivate: [AuthGuard]},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },

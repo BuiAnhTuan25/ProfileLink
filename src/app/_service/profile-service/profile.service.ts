@@ -13,6 +13,12 @@ export class ProfileService {
   getProfile(id:number){
     return this.http.get(this.BASE_PATH+"/"+id,{headers:this.headers});
   }
+  
+  getProfileByShortBio(shortBio:any){
+    let param=new HttpParams();
+    param=param.append('shortBio',shortBio);
+    return this.http.get(this.BASE_PATH+'/getbyshortbio',{params:param});
+  }
 
   addProfile(profile:any,file?:any){
     const formdata = new FormData();

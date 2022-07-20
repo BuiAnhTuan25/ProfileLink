@@ -1,6 +1,7 @@
 .header-background{
     background-color: white;
 }
+
 .phone{
     margin-top: 20px;
     width:90%;
@@ -8,6 +9,7 @@
     border-radius:25px;
     border:6px solid rgb(38, 38, 38);
 }
+
 .tabs{
     width:50%;
     float:right;
@@ -20,4 +22,9 @@
     width: 40px;
     height: 40px;
     border-radius:20px;
+}
+.drop-down{
+    width:100px;
+    font-weight: bold;
+    text-align: center;
 }
