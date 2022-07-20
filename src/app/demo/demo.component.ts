@@ -17,6 +17,7 @@ import { ProfileService } from '../_service/profile-service/profile.service';
 export class DemoComponent implements OnInit {
   @Input() profile:any;
   listLinks:any[]=[];
+  listSocial:any[]=[];
   isPrimary:boolean=true;
   buttonType:NzButtonType='primary';
   buttonShape!:NzButtonShape;
@@ -37,6 +38,7 @@ export class DemoComponent implements OnInit {
 
   async ngOnInit() {
     this.data.dataFromChild.subscribe(listLinks => this.listLinks = listLinks);
+    this.data.receiveSocials.subscribe(listSocial => this.listSocial = listSocial);
     this.data.receiveDesign.subscribe(design=>{
       this.design=design;
       this.changeButton(this.design);

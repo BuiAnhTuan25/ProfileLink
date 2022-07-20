@@ -3,9 +3,9 @@
     <div class="name">{{profile.fullname}}</div>
     <div class="mb1">
         <div nz-row [nzGutter]="16" class="social">
-            <i nz-icon nz-col nzSpan="3" class="gutter-row" nzType="facebook" nzTheme="outline"></i>
-            <i nz-icon nz-col nzSpan="3" class="gutter-row" nzType="youtube" nzTheme="outline"></i>
-            <i nz-icon nz-col nzSpan="3" class="gutter-row" nzType="instagram" nzTheme="outline"></i>
+            <div *ngFor="let social of listSocial">
+                <i nz-icon nz-col nzSpan="3" class="gutter-row" [nzType]="social.social_icon" nzTheme="outline"></i>
+            </div>
         </div>
     </div>
     <div *ngFor="let link of listLinks">

@@ -28,38 +28,39 @@ export class LinksComponent implements OnInit {
   type:string='';
   id:number=1;
   file!:NzUploadFile;
-  selectedSocial:any=null;
+  selectedSocial:any;
   listLinks: any[] = [];
   socials:any[]=[];
+  newSocials:any[]=[];
 
-  listSocials = [
+  listSocials:any[] = [
     {
-      name:'Facebook',
+      social_name:'Facebook',
       social_icon: 'facebook',
       social_link: 'facebook.com',
     },
     {
-      name:'Youtube',
+      social_name:'Youtube',
       social_icon: 'youtube',
       social_link: 'youtube.com',
     },
     {
-      name:'Instagram',
+      social_name:'Instagram',
       social_icon: 'instagram',
       social_link: 'instagram.com',
     },
     {
-      name:'Github',
+      social_name:'Github',
       social_icon: 'github',
       social_link: 'github.com',
     },
     {
-      name:'Twitter',
+      social_name:'Twitter',
       social_icon: 'twitter',
       social_link: 'twitter.com',
     },
     {
-      name:'Linkedin',
+      social_name:'Linkedin',
       social_icon: 'linkedin',
       social_link: 'linkedin.com',
     },
@@ -113,7 +114,9 @@ export class LinksComponent implements OnInit {
     await this.socialService.getListSocial(profileId,0,999).toPromise().then((res:any)=>{
       if(res.success){
         this.socials=res.data;
-        //this.data.sendSocials(this.socials);
+        this.data.sendSocials(this.socials);
+        this.filterSocial(this.socials);
+        
       }
       else this.msg.error('Get list social false');
     })
@@ -129,8 +132,8 @@ export class LinksComponent implements OnInit {
   socialModalCancel(): void {
     this.isVisibleSocial = false;
     this.socialForm.reset();
-    this.selectedSocial=null;
     this.mode='';
+    this.selectedSocial=this.newSocials[0];
   }
 
   handleCancelHeader(): void {
@@ -166,6 +169,7 @@ export class LinksComponent implements OnInit {
     if(edit){
       this.mode='edit';
       this.titleSocial='EDIT SOCIAL';
+      this.selectedSocial=data;
       this.socialForm.patchValue(data);
     }else {
       this.mode='create';
@@ -272,8 +276,8 @@ export class LinksComponent implements OnInit {
   onDelete() {
     this.linksService.deleteLink(this.modalForm.controls['id'].value).toPromise().then((res:any)=>{
        if(res.success){
-        const i=this.listLinks.findIndex((x)=>{
-          x.id==res.data.id});
+        const i=this.listLinks.findIndex((x)=>
+          x.id==res.data.id);
           this.listLinks.splice(i,1);
           this.data.notifyCountValue(this.listLinks);
           this.handleCancel();
@@ -288,7 +292,21 @@ export class LinksComponent implements OnInit {
   }
 
   socialChange(event:any){
-    this.socialChange=event;
+    this.selectedSocial=event;
+  }
+
+  filterSocial(socials:any[]){
+    this.newSocials=[...this.listSocials];
+    for(let i=0;i<this.listSocials.length;i++){
+      for(let j=0;j<socials.length;j++){
+        if(this.listSocials[i].social_name==socials[j].social_name){
+          this.newSocials.splice(i,1,null);
+          break;
+        }
+      }
+    }
+    this.newSocials=this.newSocials.filter((x)=>x!=null);
+    this.selectedSocial=this.newSocials[0];
   }
 }
 

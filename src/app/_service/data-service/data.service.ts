@@ -31,6 +31,6 @@ export class DataService {
   }
 
   public sendSocials (socials:any){
-   this.design.next(socials);
+   this.socials.next(socials);
   }
 }

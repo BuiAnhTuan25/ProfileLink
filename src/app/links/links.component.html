@@ -41,7 +41,9 @@
 <div class="socials">SOCIALS</div>
 <div nz-row [nzGutter]="16">
   <div *ngFor="let social of socials">
-    <i
+    <i (click)="openSocialModal(social,true)"
+      nz-tooltip 
+      [nzTooltipTitle]="social.social_name"
       nz-icon
       nz-col
       class="gutter-row"
@@ -52,7 +54,9 @@
   </div>
 </div>
 <div nz-row [nzGutter]="16">
-  <i
+  <i (click)="openSocialModal(null,false)"
+    nz-tooltip 
+    nzTooltipTitle="Add social"
     nz-icon
     nz-col
     nzSpan="2"
@@ -164,13 +168,15 @@
 >
 </nz-modal>
 <ng-template #socialContent>
+  <div *ngIf="mode=='create'" nz-row>
+    <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear nzPlaceHolder="Select a social" [(ngModel)]="selectedSocial" (ngModelChange)="socialChange($event)">
+      <nz-option *ngFor="let social of newSocials" [nzLabel]="social.social_name" [nzValue]="social"></nz-option>
+    </nz-select>
+  </div>
   <form nz-form [formGroup]="socialForm">
     <div nz-row>
       <div nz-col nzSpan="24">
-        <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Select a social" [(ngModel)]="selectedSocial" (ngModelChange)="socialChange($event)">
-          <nz-option *ngFor="let social of listSocials" [nzLabel]="social.name" [nzValue]="social"></nz-option>
-        </nz-select>
-        <nz-form-item >
+        <nz-form-item>
           <nz-form-control>
             <nz-input-group [nzPrefixIcon]="selectedSocial.social_icon">
               <input
