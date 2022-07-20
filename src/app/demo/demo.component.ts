@@ -68,10 +68,12 @@ export class DemoComponent implements OnInit {
     await this.designService.getDesign(id).toPromise().then((res:any)=>{
       if(res.success){
         this.design=res.data;
+        this.data.sendDesign(this.design);
         this.changeButton(res.data);
       }
     })
   }
+  
   async getProfleByShortBio(shortBio:any){
     await this.profileService.getProfileByShortBio(shortBio).toPromise().then((res:any)=>{
     if(res.success){

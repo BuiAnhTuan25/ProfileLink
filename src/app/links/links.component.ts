@@ -21,50 +21,15 @@ export class LinksComponent implements OnInit {
   avatarUrl?: string;
   isVisible: boolean = false;
   isVisibleHeader: boolean = false;
-  isVisibleSocial:boolean=false;
   validForm:boolean=true;
   title: string = '';
-  titleSocial:string='';
+  
   type:string='';
-  id:number=1;
+  //id:number=1;
   file!:NzUploadFile;
-  selectedSocial:any;
+  
   listLinks: any[] = [];
-  socials:any[]=[];
-  newSocials:any[]=[];
-
-  listSocials:any[] = [
-    {
-      social_name:'Facebook',
-      social_icon: 'facebook',
-      social_link: 'facebook.com',
-    },
-    {
-      social_name:'Youtube',
-      social_icon: 'youtube',
-      social_link: 'youtube.com',
-    },
-    {
-      social_name:'Instagram',
-      social_icon: 'instagram',
-      social_link: 'instagram.com',
-    },
-    {
-      social_name:'Github',
-      social_icon: 'github',
-      social_link: 'github.com',
-    },
-    {
-      social_name:'Twitter',
-      social_icon: 'twitter',
-      social_link: 'twitter.com',
-    },
-    {
-      social_name:'Linkedin',
-      social_icon: 'linkedin',
-      social_link: 'linkedin.com',
-    },
-  ];
+  
   modalForm: FormGroup = this.fb.group({
     id: [null],
     profile_id:[null],
@@ -74,27 +39,18 @@ export class LinksComponent implements OnInit {
     click_count:[null],
     type:[TYPE_LINK.LINK],
   });
-  socialForm: FormGroup = this.fb.group({
-    id: [null],
-    profile_id:[null],
-    social_name: [null],
-    links: [null,Validators.required],
-    social_icon: [null],
-    click_count:[null],
-  });
-
+  
   constructor(
     private linksService: LinksService,
     private msg: NzMessageService,
     private fb: FormBuilder,
     private data: DataService,
-    private socialService:SocialService,
   ) {}
 
   async ngOnInit() {
     // this.data.receiveProfile.subscribe(profile=>this.profile=profile);
     await this.getLinks(this.profile.id);
-    await this.getSocials(this.profile.id);
+    
     
     
   }
@@ -110,18 +66,7 @@ export class LinksComponent implements OnInit {
     }); 
   }
 
-  async getSocials(profileId:number){
-    await this.socialService.getListSocial(profileId,0,999).toPromise().then((res:any)=>{
-      if(res.success){
-        this.socials=res.data;
-        this.data.sendSocials(this.socials);
-        this.filterSocial(this.socials);
-        
-      }
-      else this.msg.error('Get list social false');
-    })
-  }
-
+  
   handleCancel(): void {
     this.isVisible = false;
     this.modalForm.reset();
@@ -129,12 +74,7 @@ export class LinksComponent implements OnInit {
     this.mode='';
   }
 
-  socialModalCancel(): void {
-    this.isVisibleSocial = false;
-    this.socialForm.reset();
-    this.mode='';
-    this.selectedSocial=this.newSocials[0];
-  }
+  
 
   handleCancelHeader(): void {
     this.isVisibleHeader = false;
@@ -163,19 +103,7 @@ export class LinksComponent implements OnInit {
     }
   }
 
-  openSocialModal(data:any,edit:boolean){
-    this.isVisibleSocial=true;
-    this.socialForm.reset();
-    if(edit){
-      this.mode='edit';
-      this.titleSocial='EDIT SOCIAL';
-      this.selectedSocial=data;
-      this.socialForm.patchValue(data);
-    }else {
-      this.mode='create';
-      this.titleSocial='CREATE SOCIAL';
-    }
-  }
+  
 
   async handleOk() {
     for (const i in this.modalForm.controls) {
@@ -188,7 +116,7 @@ export class LinksComponent implements OnInit {
     } else this.validForm=true;
     if(this.modalForm.valid && this.validForm){
       if(this.mode==='create'){
-        this.modalForm.controls['profile_id'].setValue(this.id);
+        this.modalForm.controls['profile_id'].setValue(this.profile.id);
         this.modalForm.controls['click_count'].setValue(0);
 
         if(this.type == 'link') this.modalForm.controls['type'].setValue(TYPE_LINK.LINK);
@@ -196,10 +124,10 @@ export class LinksComponent implements OnInit {
 
         await this.linksService.addLink(this.modalForm.value,this.file).toPromise().then((res:any)=>{
           if(res.success){
-            this.msg.success('Add success');
             this.listLinks.push(res.data);
             this.data.notifyCountValue(this.listLinks);
             this.handleCancel();
+            this.msg.success('Add success');
           }
           else{
             this.msg.error('Add false');
@@ -289,24 +217,6 @@ export class LinksComponent implements OnInit {
 
     });
     
-  }
-
-  socialChange(event:any){
-    this.selectedSocial=event;
-  }
-
-  filterSocial(socials:any[]){
-    this.newSocials=[...this.listSocials];
-    for(let i=0;i<this.listSocials.length;i++){
-      for(let j=0;j<socials.length;j++){
-        if(this.listSocials[i].social_name==socials[j].social_name){
-          this.newSocials.splice(i,1,null);
-          break;
-        }
-      }
-    }
-    this.newSocials=this.newSocials.filter((x)=>x!=null);
-    this.selectedSocial=this.newSocials[0];
   }
 }
 

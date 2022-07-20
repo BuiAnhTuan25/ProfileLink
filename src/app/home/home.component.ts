@@ -13,14 +13,9 @@ import { ProfileService } from '../_service/profile-service/profile.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  @ViewChild(DesignComponent) design!: DesignComponent;
-  @ViewChild(LinksComponent) links!: LinksComponent;
-  @ViewChild(DemoComponent) demo!: DemoComponent;
-  @ViewChild(SettingsComponent) settings!: SettingsComponent;
-  listLinks: any[] = [];
   user:any;
   profile:any;
-  constructor(private dataService:DataService,private profileService:ProfileService) { }
+  constructor(private profileService:ProfileService) { }
   selectIndex:any=0;
   async ngOnInit(){
     this.user=JSON.parse(localStorage.getItem('auth-user')!);
@@ -33,6 +28,7 @@ export class HomeComponent implements OnInit {
       }
     });
   }
+  
   receverProfile(event:any){
     this.profile=event;
   }

@@ -23,8 +23,6 @@ export class DesignComponent implements OnInit {
   file!:NzUploadFile;
   profileForm!: FormGroup;
   user:any;
-  design:any;
-  listDesign:any[]=[];
 
   constructor(
     private msg: NzMessageService, 
@@ -49,11 +47,7 @@ export class DesignComponent implements OnInit {
     });
     // this.user=JSON.parse(localStorage.getItem('auth-user')!);
     // await this.getProfile(this.user.id);
-    await this.getAllDesign();
     this.pathProfile(this.profile);
-    this.dataService.receiveDesign.subscribe(design=>{
-      this.design=design;
-    });
   }
   beforeUpload = (
     file: NzUploadFile,
@@ -136,24 +130,4 @@ export class DesignComponent implements OnInit {
   }
   }
 
-  async getAllDesign(){
-    await this.designService.getAllDesign(0,999).toPromise().then((res)=>{
-      if(res.success){
-        this.listDesign=res.data;
-      }
-    })
-  }
-
-  async onClickDesign(design:any){
-    if(this.design!=design){
-      this.profileForm.controls['design_id'].setValue(design.id);
-      await this.profileService.updateProfile(this.profileForm.value,this.profileForm.controls['id'].value).toPromise().then((res:any)=>{
-        if(res.success){
-          this.msg.success('Change design success');
-          this.dataService.sendDesign(design);
-        }
-        else this.msg.error('Change design false');
-      })
-    }
-  }
 }
