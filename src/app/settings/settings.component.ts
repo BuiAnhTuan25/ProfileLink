@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { EMAIL_REGEX } from '../_helpers/validator';
 import { AuthService } from '../_service/auth-service/auth.service';
+import { ProfileService } from '../_service/profile-service/profile.service';
 
 @Component({
   selector: 'app-settings',
@@ -20,7 +21,8 @@ export class SettingsComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private msg: NzMessageService,
-    private router: Router
+    private router: Router,
+    private profileService:ProfileService,
   ) {}
 
   ngOnInit(): void {
@@ -75,5 +77,14 @@ export class SettingsComponent implements OnInit {
           }
         });
     }
+  }
+
+  onDeleteUser(){
+    this.profileService.deleteUser(this.user.id).subscribe((res:any)=>{
+      if(res.success){
+        this.msg.success('Delete account success');
+        this.router.navigate(['/login']);
+      } else this.msg.error('Delete account false');
+    })
   }
 }
