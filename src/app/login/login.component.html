@@ -36,7 +36,7 @@
         >
           <p id="login2">Login</p>
           <nz-form-item>
-            <nz-form-control nzErrorTip="Please input your username!">
+            <nz-form-control [nzErrorTip]="errorUsername">
               <nz-input-group>
                 <input
                   class="username"
@@ -48,8 +48,24 @@
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
+          <ng-template #errorUsername let-control>
+            <div
+              *ngIf="
+                validateForm.controls['username'].invalid &&
+                (validateForm.controls['username'].dirty ||
+                  validateForm.controls['username'].touched)
+              "
+            >
+              <span *ngIf="validateForm.get('username')?.hasError('required')"
+                >Please input username!</span
+              >
+              <span *ngIf="validateForm.get('username')?.hasError('whitespace')"
+                >Username must not contain spaces!</span
+              >
+            </div>
+          </ng-template>
           <nz-form-item>
-            <nz-form-control nzErrorTip="Please input your Password!">
+            <nz-form-control [nzErrorTip]="errorPassword">
               <nz-input-group>
                 <input
                   class="password"
@@ -61,11 +77,28 @@
               </nz-input-group>
             </nz-form-control>
           </nz-form-item>
+          <ng-template #errorPassword let-control>
+            <div
+              *ngIf="
+                validateForm.controls['password'].invalid &&
+                (validateForm.controls['password'].dirty ||
+                  validateForm.controls['password'].touched)
+              "
+            >
+              <span *ngIf="validateForm.get('password')?.hasError('required')"
+                >Please input password!</span
+              >
+              <span *ngIf="validateForm.get('password')?.hasError('whitespace')"
+                >Password must not contain spaces!</span
+              >
+            </div>
+          </ng-template>
           <button
             nz-button
             id="button1"
             class="login-form-button login-form-margin"
             [nzType]="'primary'"
+            [nzLoading]="isLoading"
           >
             Log in
           </button>

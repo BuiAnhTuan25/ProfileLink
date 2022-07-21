@@ -6,7 +6,10 @@
     'font-family': design?.font
   }"
 >
-  <img class="avatar" [src]="profile.avatar_link" />
+  <img
+    class="avatar"
+    [src]="profileBio ? profileBio.avatar_link : profile?.avatar_link"
+  />
   <div class="name">{{ profile?.fullname }}</div>
   <div class="mb1">
     <div nz-row [nzGutter]="16" class="social">
@@ -48,7 +51,11 @@
     <ng-template #elsePrimary>
       <button
         *ngIf="link.type == 'LINK'"
-        [ngStyle]="{'background-color':design?.background_color,'border': '2px solid '+design?.button_color, 'color':design?.text_color}"
+        [ngStyle]="{
+          'background-color': design?.background_color,
+          border: '2px solid ' + design?.button_color,
+          color: design?.text_color
+        }"
         [nzType]="buttonType"
         [nzShape]="buttonShape"
         nz-button

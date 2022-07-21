@@ -1,9 +1,13 @@
 <nz-card nzTitle="THEMES" [nzHoverable]="true" class="card">
-    <div nz-row>
-      <div *ngFor="let design of listDesign" nz-col nzSpan="7" nzOffset="1">
-        <nz-card [nzTitle]="design.name" [nzHoverable]="true" (click)="onClickDesign(design)">
-          <img [src]="design.picture" />
-        </nz-card>
-      </div>
+  <div nz-row>
+    <div *ngFor="let design of listDesign" nz-col nzSpan="7" nzOffset="1">
+      <nz-card
+        [nzTitle]="design.name"
+        [nzHoverable]="true"
+        (click)="onClickDesign(design)"
+      >
+        <img [src]="design.picture" />
+      </nz-card>
     </div>
-  </nz-card>
+  </div>
+</nz-card>

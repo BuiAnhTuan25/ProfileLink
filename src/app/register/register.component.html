@@ -28,60 +28,99 @@
     </div>
     <div id="main">
       <div id="login1">
-        <form
-          nz-form
-          [formGroup]="validateForm"
-          class="login-form"
-          
-        >
+        <form nz-form [formGroup]="validateForm" class="login-form">
           <p id="login2">Sign up</p>
           <nz-form-item>
             <nz-form-control [nzErrorTip]="errorCode">
-                <input
-                  class="username"
-                  type="text"
-                  nz-input
-                  formControlName="mail"
-                  placeholder="Email"
-                />
+              <input
+                class="username"
+                type="text"
+                nz-input
+                formControlName="mail"
+                placeholder="Email"
+              />
             </nz-form-control>
           </nz-form-item>
           <ng-template #errorCode let-control>
             <div
               *ngIf="
-              validateForm.controls['mail'].invalid &&
-                (validateForm.controls['mail'].dirty || validateForm.controls['mail'].touched)
+                validateForm.controls['mail'].invalid &&
+                (validateForm.controls['mail'].dirty ||
+                  validateForm.controls['mail'].touched)
               "
-            > 
-              <span *ngIf="validateForm.get('mail')?.hasError('required')">Please input email!</span>
-              <span *ngIf="validateForm.get('mail')?.hasError('pattern')">Email malformed!</span>
+            >
+              <span *ngIf="validateForm.get('mail')?.hasError('required')"
+                >Please input email!</span
+              >
+              <span *ngIf="validateForm.get('mail')?.hasError('pattern')"
+                >Email invalidate!</span
+              >
             </div>
           </ng-template>
           <div id="biolink">
-            <div class="bio" >bio.link/</div>
-              <nz-form-item id="inputbio1">
-              <nz-form-control nzErrorTip="Please input your username!">
-                <input type="text" formControlName="username" placeholder="username" id="inputbio">
-                </nz-form-control>
-                </nz-form-item>
+            <div class="bio">bio.link/</div>
+            <nz-form-item id="inputbio1">
+              <nz-form-control [nzErrorTip]="errorUsername">
+                <input
+                  type="text"
+                  formControlName="username"
+                  placeholder="username"
+                  id="inputbio"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <ng-template #errorUsername let-control>
+              <div
+                *ngIf="
+                  validateForm.controls['username'].invalid &&
+                  (validateForm.controls['username'].dirty ||
+                    validateForm.controls['username'].touched)
+                "
+              >
+                <span *ngIf="validateForm.get('username')?.hasError('required')"
+                  >Please input username!</span
+                >
+                <span
+                  *ngIf="validateForm.get('username')?.hasError('whitespace')"
+                  >Username must not contain spaces!</span
+                >
+              </div>
+            </ng-template>
           </div>
           <nz-form-item>
-            <nz-form-control nzErrorTip="Please input your Password!">
-                <input
-                  class="password"
-                  type="password"
-                  nz-input
-                  formControlName="password"
-                  placeholder="Password"
-                />
+            <nz-form-control [nzErrorTip]="errorPassword">
+              <input
+                class="password"
+                type="password"
+                nz-input
+                formControlName="password"
+                placeholder="Password"
+              />
             </nz-form-control>
           </nz-form-item>
+          <ng-template #errorPassword let-control>
+            <div
+              *ngIf="
+                validateForm.controls['password'].invalid &&
+                (validateForm.controls['password'].dirty ||
+                  validateForm.controls['password'].touched)
+              "
+            >
+              <span *ngIf="validateForm.get('password')?.hasError('required')"
+                >Please input password!</span
+              >
+              <span *ngIf="validateForm.get('password')?.hasError('whitespace')"
+                >Password must not contain spaces!</span
+              >
+            </div>
+          </ng-template>
           <button
             nz-button
             id="button1"
             class="login-form-button login-form-margin"
             [nzType]="'primary'"
             (click)="register()"
+            [nzLoading]="isLoading"
           >
             Sign up with email
           </button>

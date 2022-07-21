@@ -20,6 +20,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { SocialsComponent } from './socials/socials.component';
 import { ThemesComponent } from './themes/themes.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ThemesComponent } from './themes/themes.component';
     HomeComponent,
     SocialsComponent,
     ThemesComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,8 +51,8 @@ import { ThemesComponent } from './themes/themes.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

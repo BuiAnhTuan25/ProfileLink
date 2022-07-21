@@ -4,11 +4,10 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
 import { ProfileService } from '../_service/profile-service/profile.service';
-import { GENDER} from '../_model/gender';
+import { GENDER } from '../_model/gender';
 import { formatDate } from '@angular/common';
 import { DesignService } from '../_service/designservice/design.service';
 import { DataService } from '../_service/data-service/data.service';
-
 
 @Component({
   selector: 'app-design',
@@ -16,18 +15,19 @@ import { DataService } from '../_service/data-service/data.service';
   styleUrls: ['./design.component.css'],
 })
 export class DesignComponent implements OnInit {
-  @Input() profile:any;
+  @Input() profile: any;
   @Output() sendProfile = new EventEmitter<any>();
   loading = false;
   avatarUrl?: string;
-  file!:NzUploadFile;
+  file!: NzUploadFile;
   profileForm!: FormGroup;
-  user:any;
+  user: any;
 
   constructor(
-    private msg: NzMessageService, 
+    private msg: NzMessageService,
     private fb: FormBuilder,
-    private profileService: ProfileService,) { }
+    private profileService: ProfileService
+  ) {}
   ngOnInit() {
     this.profileForm = this.fb.group({
       id: [null],
@@ -65,7 +65,7 @@ export class DesignComponent implements OnInit {
       }
       observer.next(isJpgOrPng && isLt2M);
       observer.complete();
-      this.file=file;
+      this.file = file;
     });
 
   private getBase64(img: File, callback: (img: string) => void): void {
@@ -93,27 +93,30 @@ export class DesignComponent implements OnInit {
     }
   }
 
-  pathProfile(profile:any){
+  pathProfile(profile: any) {
     this.profileForm.patchValue(profile);
-    this.avatarUrl=profile.avatar_link;
+    this.avatarUrl = profile.avatar_link;
   }
 
-  updateProfile(){
-    if(this.profile!=this.profileForm.value||this.file){
-    this.profileService.updateProfile(this.profileForm.value,this.profileForm.controls['id'].value,this.file)
-    .subscribe((res:any)=>{
-      if(res.success){
-        this.profileForm.patchValue(res.data);
-        this.profile=res.data;
-        this.avatarUrl=res.data.avatar_link;
-        this.sendProfile.emit(this.profile);
-        this.msg.success('Update success');
-      }
-      else{
-        this.msg.error('Update false');
-      }
-    })
+  updateProfile() {
+    if (this.profile != this.profileForm.value || this.file) {
+      this.profileService
+        .updateProfile(
+          this.profileForm.value,
+          this.profileForm.controls['id'].value,
+          this.file
+        )
+        .subscribe((res: any) => {
+          if (res.success) {
+            this.profileForm.patchValue(res.data);
+            this.profile = res.data;
+            this.avatarUrl = res.data.avatar_link;
+            this.sendProfile.emit(this.profile);
+            this.msg.success('Update success');
+          } else {
+            this.msg.error('Update false');
+          }
+        });
+    }
   }
-  }
-
 }

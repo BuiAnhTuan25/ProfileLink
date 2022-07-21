@@ -1,24 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-const AUTH_API = 'http://localhost:8080/test';
+const AUTH_API = 'http://localhost:8080';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient,private router:Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
   login(user: any): Observable<any> {
-    return this.http.post(
-      AUTH_API + '/login',
-      user
-    );
+    return this.http.post(AUTH_API + '/test/login', user);
   }
   register(user: any): Observable<any> {
-    return this.http.post(
-      AUTH_API + '/register',
-      user
-    );
+    return this.http.post(AUTH_API + '/test/register', user);
   }
   getToken() {
     return localStorage.getItem('auth-token');
@@ -32,5 +26,22 @@ export class AuthService {
     if (removeToken == null) {
       this.router.navigate(['/login']);
     }
+  }
+
+  sendEmailChangePassword(mail: string): Observable<any> {
+    let param = new HttpParams();
+    param = param.append('mail', mail);
+    return this.http.get(AUTH_API + '/update_password_token', {
+      params: param,
+    });
+  }
+
+  changePassword(code: string, newPass: string): Observable<any> {
+    let param = new HttpParams();
+    param = param.append('code', code);
+    param = param.append('password', newPass);
+    return this.http.post(AUTH_API + '/update_password_token', null, {
+      params: param,
+    });
   }
 }
