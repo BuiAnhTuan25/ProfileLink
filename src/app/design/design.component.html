@@ -4,64 +4,76 @@
       <div nz-col nzSpan="18">
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input fullname!">
-              <input
-                type="text"
-                nz-input
-                formControlName="fullname"
-                placeholder="Fullname"
-              />
+            <input
+              type="text"
+              nz-input
+              formControlName="fullname"
+              placeholder="Fullname"
+            />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input Short bio!">
-              <input
-                type="text"
-                nz-input
-                formControlName="short_bio"
-                placeholder="Short bio"
-              />
+            <input
+              type="text"
+              nz-input
+              formControlName="short_bio"
+              placeholder="Short bio"
+            />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control>
-              <input
-                type="text"
-                nz-input
-                formControlName="about"
-                placeholder="About"
-              />
+            <input
+              type="text"
+              nz-input
+              formControlName="about"
+              placeholder="About"
+            />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control>
-              <input
-                type="text"
-                nz-input
-                formControlName="location"
-                placeholder="Location"
-              />
+            <input
+              type="text"
+              nz-input
+              formControlName="location"
+              placeholder="Location"
+            />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item nz-row>
           <nz-form-control>
-              <input
-                nz-col
-                nzSpan="12"
-                nz-row
-                nz-input
-                type="date"
-                formControlName="birthday"
-                placeholder="Birthday"
-              />
-              <nz-select nz-col nzSpan="12" nzPlaceHolder="Gender" formControlName="gender">
-                <nz-option nzValue="MALE" nzLabel="MALE"></nz-option>
-                <nz-option nzValue="FEMALE" nzLabel="FEMALE"></nz-option>
-                <nz-option nzValue="OTHER" nzLabel="OTHER"></nz-option>
-              </nz-select>
+            <input
+              nz-col
+              nzSpan="12"
+              nz-row
+              nz-input
+              type="date"
+              formControlName="birthday"
+              placeholder="Birthday"
+            />
+            <nz-select
+              nz-col
+              nzSpan="12"
+              nzPlaceHolder="Gender"
+              formControlName="gender"
+            >
+              <nz-option nzValue="MALE" nzLabel="MALE"></nz-option>
+              <nz-option nzValue="FEMALE" nzLabel="FEMALE"></nz-option>
+              <nz-option nzValue="OTHER" nzLabel="OTHER"></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
         <div class="align-center">
-          <button nz-button nzType="primary" class="button-save" (click)="updateProfile()">CHANGE</button>
+          <button
+            nz-button
+            nzType="primary"
+            class="button-save"
+            (click)="updateProfile()"
+          >
+            CHANGE
+          </button>
         </div>
       </div>
       <div nz-col nzSpan="5" nzOffset="1">
@@ -82,12 +94,10 @@
             ></i>
             <div class="ant-upload-text">Upload</div>
           </ng-container>
-          <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%"/>
+          <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
         </nz-upload>
       </div>
     </div>
-    
   </form>
 </nz-card>
 <app-themes [profile]="profile"></app-themes>
-

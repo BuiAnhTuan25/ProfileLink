@@ -2,27 +2,37 @@
   nz-button
   class="button-add-link mr-2"
   nzType="primary"
-  (click)="openModal(null, false,'link')"
+  (click)="openModal(null, false, 'link')"
 >
-<i class="fa-solid fa-plus mr-1"></i>
+  <i class="fa-solid fa-plus mr-1"></i>
   ADD LINK
 </button>
 <button
   nz-button
   class="button-add-header"
   nzType="primary"
-  (click)="openModal(null, false,'header')"
+  (click)="openModal(null, false, 'header')"
 >
-<i class="fa-solid fa-plus mr-1"></i>
+  <i class="fa-solid fa-plus mr-1"></i>
   ADD HEADER
 </button>
 <div *ngFor="let link of listLinks">
-  <nz-card nzHoverable class="card-header"  (click)="openModal(link, true,'header')" *ngIf="link.type=='HEADER'">
-      {{link.title}}
+  <nz-card
+    nzHoverable
+    class="card-header"
+    (click)="openModal(link, true, 'header')"
+    *ngIf="link.type == 'HEADER'"
+  >
+    {{ link.title }}
   </nz-card>
 </div>
 <div *ngFor="let link of listLinks">
-  <nz-card nzHoverable class="links" (click)="openModal(link, true,'link')" *ngIf="link.type=='LINK'">
+  <nz-card
+    nzHoverable
+    class="links"
+    (click)="openModal(link, true, 'link')"
+    *ngIf="link.type == 'LINK'"
+  >
     <nz-card-meta
       [nzTitle]="link.title"
       [nzDescription]="descriptionTemplate"
@@ -32,8 +42,8 @@
       <img alt="example" width="50" height="50" [src]="link.picture" />
     </ng-template>
     <ng-template #descriptionTemplate>
-      <div>{{link.url}}</div>
-      <div><i class="fa-solid fa-eye mr-1"></i>{{link.click_count}}</div>
+      <div>{{ link.url }}</div>
+      <div><i class="fa-solid fa-eye mr-1"></i>{{ link.click_count }}</div>
     </ng-template>
   </nz-card>
 </div>
@@ -49,39 +59,44 @@
 </nz-modal>
 <ng-template #nzModalContent>
   <form nz-form [formGroup]="modalForm">
-    <div nz-row *ngIf="type=='link';else tplElse">
+    <div nz-row *ngIf="type == 'link'; else tplElse">
       <div nz-col nzSpan="18">
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input title!">
-              <input
-                type="text"
-                nz-input
-                required="true"
-                formControlName="title"
-                placeholder="Title"
-              />
+            <input
+              type="text"
+              nz-input
+              required="true"
+              formControlName="title"
+              placeholder="Title"
+            />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control [nzErrorTip]="errorCode">
-              <input
-                type="text"
-                nz-input
-                required="true"
-                formControlName="url"
-                placeholder="Url"
-              />
+            <input
+              type="text"
+              nz-input
+              required="true"
+              formControlName="url"
+              placeholder="Url"
+            />
           </nz-form-control>
         </nz-form-item>
         <ng-template #errorCode let-control>
           <div
             *ngIf="
-            modalForm.controls['url'].invalid &&
-              (modalForm.controls['url'].dirty || modalForm.controls['url'].touched)
+              modalForm.controls['url'].invalid &&
+              (modalForm.controls['url'].dirty ||
+                modalForm.controls['url'].touched)
             "
-          > 
-            <span *ngIf="modalForm.get('url')?.hasError('urlExist')">Please input url!</span>
-            <span *ngIf="modalForm.get('url')?.hasError('pattern')">Url malformed!</span>
+          >
+            <span *ngIf="modalForm.get('url')?.hasError('urlExist')"
+              >Please input url!</span
+            >
+            <span *ngIf="modalForm.get('url')?.hasError('pattern')"
+              >Url invalidate!</span
+            >
           </div>
         </ng-template>
       </div>
@@ -105,19 +120,19 @@
           </ng-container>
           <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
         </nz-upload>
-        <div class="erorr">{{erorrPictire}}</div>
+        <div class="erorr">{{ erorrPictire }}</div>
       </div>
     </div>
     <ng-template #tplElse>
       <div nz-row>
         <nz-form-item nz-col nzSpan="24">
           <nz-form-control nzErrorTip="Please input title!">
-              <input
-                type="text"
-                nz-input
-                formControlName="title"
-                placeholder="Title"
-              />
+            <input
+              type="text"
+              nz-input
+              formControlName="title"
+              placeholder="Title"
+            />
           </nz-form-control>
         </nz-form-item>
       </div>
