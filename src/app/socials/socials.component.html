@@ -79,7 +79,12 @@
     style="float: left"
     *ngIf="mode == 'edit'"
     nz-button
-    (click)="onDeleteSocial()"
+    nz-popconfirm
+    nzCancelText="Cancel"
+    nzOkText="OK"
+    nzPopconfirmTitle="Are you sure delete this social?"
+    nzPopconfirmPlacement="top"
+    (nzOnConfirm)="onDeleteSocial()"
   >
     DELETE
   </button>

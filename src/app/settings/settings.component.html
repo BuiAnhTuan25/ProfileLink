@@ -39,7 +39,18 @@
   </button>
 </nz-card>
 <div class="align-center">
-  <button nz-button class="button-delete">DELETE ACCOUNT</button>
+  <button
+    nz-popconfirm
+    nzCancelText="Cancel"
+    nzOkText="OK"
+    nzPopconfirmTitle="Are you sure delete this account?"
+    nzPopconfirmPlacement="top"
+    (nzOnConfirm)="onDeleteUser()"
+    nz-button
+    class="button-delete"
+  >
+    DELETE ACCOUNT
+  </button>
 </div>
 <nz-modal
   [(nzVisible)]="isVisible"
