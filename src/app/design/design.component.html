@@ -65,16 +65,7 @@
             </nz-select>
           </nz-form-control>
         </nz-form-item>
-        <div class="align-center">
-          <button
-            nz-button
-            nzType="primary"
-            class="button-save"
-            (click)="updateProfile()"
-          >
-            CHANGE
-          </button>
-        </div>
+        
       </div>
       <div nz-col nzSpan="5" nzOffset="1">
         <nz-upload
@@ -97,7 +88,18 @@
           <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
         </nz-upload>
       </div>
+      
+    </div>
+    <div class="align-center">
+      <button
+        nz-button
+        nzType="primary"
+        class="button-save"
+        (click)="updateProfile()"
+      >
+        CHANGE
+      </button>
     </div>
   </form>
 </nz-card>
-<app-themes [profile]="profile"></app-themes>
+<app-themes nzOffset="20" [profile]="profile"></app-themes>

@@ -5,9 +5,6 @@ import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { Observable, Observer } from 'rxjs';
 import { ProfileService } from '../_service/profile-service/profile.service';
 import { GENDER } from '../_model/gender';
-import { formatDate } from '@angular/common';
-import { DesignService } from '../_service/designservice/design.service';
-import { DataService } from '../_service/data-service/data.service';
 
 @Component({
   selector: 'app-design',
@@ -15,8 +12,9 @@ import { DataService } from '../_service/data-service/data.service';
   styleUrls: ['./design.component.css'],
 })
 export class DesignComponent implements OnInit {
-  @Input() profile: any;
   @Output() sendProfile = new EventEmitter<any>();
+  @Input() profile: any;
+  
   loading = false;
   avatarUrl?: string;
   file!: NzUploadFile;

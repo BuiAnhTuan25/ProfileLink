@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
 import { LinksService } from '../_service/links-service/links.service';
 import { TYPE_LINK } from '../_model/type-link';
@@ -104,12 +104,12 @@ export class LinksComponent implements OnInit {
       this.validForm = false;
       this.modalForm.controls['url'].setErrors({ urlExist: true });
     } else this.validForm = true;
-    if (this.mode === 'create' && this.file) {
-      this.validateFile = true;
-      this.erorrPictire = '';
-    } else {
+    if (this.mode === 'create' && this.type == 'link' && !this.file) {
       this.validateFile = false;
       this.erorrPictire = 'Please select picture!';
+    } else {
+      this.validateFile = true;
+      this.erorrPictire = '';
     }
     if (this.modalForm.valid && this.validForm && this.validateFile) {
       if (this.mode === 'create') {
