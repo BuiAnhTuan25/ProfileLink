@@ -163,7 +163,8 @@ body {
     height: 560px;
     max-height: 723px;
     transform-origin: 0 0;
-    background-color: #222;;
+    background-color: #222;
+    z-index: 50;
 }
 .demo{
   border-radius: 18px;
