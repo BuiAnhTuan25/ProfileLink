@@ -7,94 +7,134 @@ import { LinksService } from '../_service/links-service/links.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../_service/profile-service/profile.service';
+import { SocialService } from '../_service/social-service/social.service';
 
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.component.html',
-  styleUrls: ['./demo.component.css']
+  styleUrls: ['./demo.component.css'],
 })
 export class DemoComponent implements OnInit {
-  @Input() profile:any = {};
-  listLinks:any[]=[];
-  listSocial:any[]=[];
-  isPrimary:boolean=true;
-  buttonType:NzButtonType='primary';
-  buttonShape!:NzButtonShape;
-  design:any;
-  shortBio:any;
+  @Input() profile: any;
+  profileBio: any;
+  listLinks: any[] = [];
+  listSocial: any[] = [];
+  isPrimary: boolean = true;
+  buttonType: NzButtonType = 'primary';
+  buttonShape!: NzButtonShape;
+  design: any;
+  shortBio: any;
 
-  user:any;
+  user: any;
 
   constructor(
     private data: DataService,
-    private designService:DesignService,
-    private linksService:LinksService,
-    private msg: NzMessageService, 
-    private route:ActivatedRoute,
-    private profileService:ProfileService,
-    ) { }
+    private designService: DesignService,
+    private linksService: LinksService,
+    private msg: NzMessageService,
+    private route: ActivatedRoute,
+    private profileService: ProfileService,
+    private socialService: SocialService
+  ) {}
 
-  ngOnInit() {
-    this.data.dataFromChild.subscribe(listLinks => this.listLinks = listLinks);
-    this.data.receiveSocials.subscribe(listSocial => this.listSocial = listSocial);
-    this.data.receiveDesign.subscribe(design=>{
-      this.design=design;
+  async ngOnInit() {
+    this.data.dataFromChild.subscribe(
+      (listLinks) => (this.listLinks = listLinks)
+    );
+    this.data.receiveSocials.subscribe(
+      (listSocial) => (this.listSocial = listSocial)
+    );
+    this.data.receiveDesign.subscribe((design) => {
+      this.design = design;
       this.changeButton(this.design);
     });
     this.shortBio = this.route.snapshot.paramMap.get('short_bio');
-    if(this.shortBio){
-      this.getProfleByShortBio(this.shortBio);
-      this.getListLinks(this.profile.id);
-    }
-    this.getDesign(this.profile.design_id);
+    if (this.shortBio) {
+      await this.getProfleByShortBio(this.shortBio);
+      this.getListLinks(this.profileBio.id);
+      this.getSocials(this.profileBio.id);
+      this.getDesign(this.profileBio.design_id);
+    } else this.getDesign(this.profile.design_id);
   }
 
-   onClickLink(link:any){
-    this.linksService.getLink(link.id).subscribe((res:any)=>{
-      if(res.success){
-        const linkClick=res.data;
-        linkClick.click_count+=1;
-          this.linksService.updateLink(linkClick,linkClick.id).toPromise().then((res:any)=>{
-          if(res.success){
-            document.location.href ='https://'+linkClick.url;
-          }else this.msg.error('False');
-        });
-      }else this.msg.error('False');
-    })  
+  onClickLink(link: any) {
+    this.linksService.getLink(link.id).subscribe((res: any) => {
+      if (res.success) {
+        const linkClick = res.data;
+        linkClick.click_count += 1;
+        this.linksService
+          .updateLink(linkClick, linkClick.id)
+          .toPromise()
+          .then((res: any) => {
+            if (res.success) {
+              document.location.href = 'https://' + linkClick.url;
+            } else this.msg.error('False');
+          });
+      } else this.msg.error('False');
+    });
   }
 
-  getDesign(id:number){
-   this.designService.getDesign(id).subscribe((res:any)=>{
-      if(res.success){
-        this.design=res.data;
+  getDesign(id: number) {
+    this.designService.getDesign(id).subscribe((res: any) => {
+      if (res.success) {
+        this.design = res.data;
         this.data.sendDesign(this.design);
         this.changeButton(res.data);
       }
-    })
-  }
-  
-  getProfleByShortBio(shortBio:any){
-    this.profileService.getProfileByShortBio(shortBio).subscribe((res:any)=>{
-    if(res.success){
-      this.profile=res.data;
-    }else this.msg.error('Get profile false');
-    })
+    });
   }
 
- getListLinks(profileId:number){
-    this.linksService.getListLinks(profileId, 0, 999).subscribe((res:any)=>{
+  async getProfleByShortBio(shortBio: any) {
+    await this.profileService
+      .getProfileByShortBio(shortBio)
+      .toPromise()
+      .then((res: any) => {
+        if (res.success) {
+          this.profileBio = res.data;
+        } else this.msg.error('Get profile false');
+      });
+  }
+
+  getListLinks(profileId: number) {
+    this.linksService.getListLinks(profileId, 0, 999).subscribe((res: any) => {
       if (res.success) {
         this.listLinks = res.data;
-      }
-    }); 
+      } else this.msg.error('Get list link false');
+    });
   }
 
-  changeButton(design:any){
-    switch(design.button_type){
-      case(BUTTON_TYPE.CIRCLE_SOLID): this.isPrimary=true;this.buttonType='primary';this.buttonShape='round';break;
-      case(BUTTON_TYPE.CIRCLE_REGULAR): this.isPrimary=false;this.buttonType='default';this.buttonShape='round';break;
-      case(BUTTON_TYPE.RECTANGLE_SOLID): this.isPrimary=true;this.buttonType='primary';this.buttonShape=null;break;
-      case(BUTTON_TYPE.RECTANGLE_REGULAR): this.isPrimary=false;this.buttonType='default';this.buttonShape=null;break;
+  getSocials(profileId: number) {
+    this.socialService
+      .getListSocial(profileId, 0, 999)
+      .subscribe((res: any) => {
+        if (res.success) {
+          this.listSocial = res.data;
+        } else this.msg.error('Get list social false');
+      });
+  }
+
+  changeButton(design: any) {
+    switch (design.button_type) {
+      case BUTTON_TYPE.CIRCLE_SOLID:
+        this.isPrimary = true;
+        this.buttonType = 'primary';
+        this.buttonShape = 'round';
+        break;
+      case BUTTON_TYPE.CIRCLE_REGULAR:
+        this.isPrimary = false;
+        this.buttonType = 'default';
+        this.buttonShape = 'round';
+        break;
+      case BUTTON_TYPE.RECTANGLE_SOLID:
+        this.isPrimary = true;
+        this.buttonType = 'primary';
+        this.buttonShape = null;
+        break;
+      case BUTTON_TYPE.RECTANGLE_REGULAR:
+        this.isPrimary = false;
+        this.buttonType = 'default';
+        this.buttonShape = null;
+        break;
     }
   }
 }

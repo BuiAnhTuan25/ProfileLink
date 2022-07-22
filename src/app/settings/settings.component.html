@@ -2,32 +2,35 @@
   <form nz-form [formGroup]="settingForm">
     <nz-form-item>
       <nz-form-control>
-          <input
-            type="text"
-            nz-input
-            formControlName="username"
-            placeholder="Username"
-          />
+        <input
+          type="text"
+          nz-input
+          formControlName="username"
+          placeholder="Username"
+          readonly
+        />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-          <input
-            type="text"
-            nz-input
-            formControlName="mail"
-            placeholder="email"
-          />
+        <input
+          type="text"
+          nz-input
+          formControlName="mail"
+          placeholder="email"
+          readonly
+        />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-          <input
-            type="text"
-            nz-input
-            formControlName="role"
-            placeholder="role"
-          />
+        <input
+          type="text"
+          nz-input
+          formControlName="role"
+          placeholder="role"
+          readonly
+        />
       </nz-form-control>
     </nz-form-item>
   </form>
@@ -50,27 +53,40 @@
 <ng-template #nzModalContent>
   <form nz-form [formGroup]="modalForm">
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input new password!">
-          <input
-            type="password"
-            nz-input
-            formControlName="newPassword"
-            placeholder="New Password"
-          />
+      <nz-form-control [nzErrorTip]="errorCode">
+        <input
+          type="text"
+          nz-input
+          formControlName="mail"
+          placeholder="Your email"
+        />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please input confirm password!">
-          <input
-            type="password"
-            nz-input
-            formControlName="confirmPassword"
-            placeholder="Confirm password"
-          />
-      </nz-form-control>
-    </nz-form-item>
+    <ng-template #errorCode let-control>
+      <div
+        *ngIf="
+          modalForm.controls['mail'].invalid &&
+          (modalForm.controls['mail'].dirty ||
+            modalForm.controls['mail'].touched)
+        "
+      >
+        <span *ngIf="modalForm.get('mail')?.hasError('required')"
+          >Please input your email!</span
+        >
+        <span *ngIf="modalForm.get('mail')?.hasError('pattern')"
+          >Email invalidate!</span
+        >
+      </div>
+    </ng-template>
   </form>
 </ng-template>
 <ng-template #footer>
-  <button nz-button nzType="primary" (click)="handleOk()">CHANGE</button>
+  <button
+    [nzLoading]="isLoading"
+    nz-button
+    nzType="primary"
+    (click)="handleOk()"
+  >
+    SEND
+  </button>
 </ng-template>

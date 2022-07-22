@@ -1,8 +1,9 @@
 <div class="socials">SOCIALS</div>
 <div class="socials-add" nz-row [nzGutter]="16">
   <div *ngFor="let social of socials">
-    <i (click)="openSocialModal(social,true)"
-      nz-tooltip 
+    <i
+      (click)="openSocialModal(social, true)"
+      nz-tooltip
       [nzTooltipTitle]="social.social_name"
       nz-icon
       nz-col
@@ -25,9 +26,6 @@
     ></i>
   </div>
 </div>
-
-
-
 <nz-modal
   [(nzVisible)]="isVisibleSocial"
   [nzTitle]="titleSocial"
@@ -37,9 +35,21 @@
 >
 </nz-modal>
 <ng-template #socialContent>
-  <div *ngIf="mode=='create'" nz-row>
-    <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear nzPlaceHolder="Select a social" [(ngModel)]="selectedSocial" (ngModelChange)="socialChange($event)">
-      <nz-option *ngFor="let social of newSocials" [nzLabel]="social.social_name" [nzValue]="social"></nz-option>
+  <div *ngIf="mode == 'create'" nz-row>
+    <nz-select
+      nz-col
+      nzSpan="24"
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="Select a social"
+      [(ngModel)]="selectedSocial"
+      (ngModelChange)="socialChange($event)"
+    >
+      <nz-option
+        *ngFor="let social of newSocials"
+        [nzLabel]="social.social_name"
+        [nzValue]="social"
+      ></nz-option>
     </nz-select>
   </div>
   <form nz-form [formGroup]="socialForm">
@@ -53,7 +63,7 @@
                 nz-input
                 required="true"
                 formControlName="links"
-                [placeholder]="selectedSocial.social_link+'/username'"
+                [placeholder]="selectedSocial.social_link + '/username'"
               />
             </nz-input-group>
           </nz-form-control>

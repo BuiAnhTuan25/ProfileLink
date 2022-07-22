@@ -6,7 +6,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from '../_service/data-service/data.service';
-import { SocialService } from '../_service/social-service/social.service';
 import { URL_REGEX } from '../_helpers/validator';
 
 @Component({
@@ -50,7 +49,7 @@ export class LinksComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-      this.getLinks(this.profile.id);
+    this.getLinks(this.profile.id);
   }
 
   getLinks(profileId: number) {
