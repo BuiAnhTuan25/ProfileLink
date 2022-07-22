@@ -22,3 +22,6 @@
   display: flex;
   flex-wrap: wrap;
 }
+.gutter-row{
+ font-size:32px;
+}
