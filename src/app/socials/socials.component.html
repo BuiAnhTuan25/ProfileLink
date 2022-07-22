@@ -1,5 +1,5 @@
 <div class="socials">SOCIALS</div>
-<div nz-row [nzGutter]="16">
+<div class="socials-add" nz-row [nzGutter]="16">
   <div *ngFor="let social of socials">
     <i
       (click)="openSocialModal(social, true)"
@@ -13,21 +13,19 @@
       nzTheme="outline"
     ></i>
   </div>
+  <div nz-row [nzGutter]="16">
+    <i (click)="openSocialModal(null,false)"
+      nz-tooltip 
+      nzTooltipTitle="Add social"
+      nz-icon
+      nz-col
+      nzSpan="2"
+      class="gutter-row"
+      nzType="plus"
+      nzTheme="outline"
+    ></i>
+  </div>
 </div>
-<div nz-row [nzGutter]="16">
-  <i
-    (click)="openSocialModal(null, false)"
-    nz-tooltip
-    nzTooltipTitle="Add social"
-    nz-icon
-    nz-col
-    nzSpan="2"
-    class="gutter-row"
-    nzType="plus"
-    nzTheme="outline"
-  ></i>
-</div>
-
 <nz-modal
   [(nzVisible)]="isVisibleSocial"
   [nzTitle]="titleSocial"
