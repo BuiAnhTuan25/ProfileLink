@@ -23,16 +23,12 @@ export class DesignComponent implements OnInit {
   file!:NzUploadFile;
   profileForm!: FormGroup;
   user:any;
-  design:any;
-  listDesign:any[]=[];
 
   constructor(
     private msg: NzMessageService, 
     private fb: FormBuilder,
-    private profileService: ProfileService,
-    private designService:DesignService,
-    private dataService:DataService) { }
-  async ngOnInit() {
+    private profileService: ProfileService,) { }
+  ngOnInit() {
     this.profileForm = this.fb.group({
       id: [null],
       fullname: [null, Validators.required],
@@ -47,13 +43,7 @@ export class DesignComponent implements OnInit {
       location: [null],
       click_count: [null],
     });
-    // this.user=JSON.parse(localStorage.getItem('auth-user')!);
-    // await this.getProfile(this.user.id);
-    await this.getAllDesign();
     this.pathProfile(this.profile);
-    this.dataService.receiveDesign.subscribe(design=>{
-      this.design=design;
-    });
   }
   beforeUpload = (
     file: NzUploadFile,
@@ -103,25 +93,15 @@ export class DesignComponent implements OnInit {
     }
   }
 
-  // async getProfile(id: number) {
-  // await this.profileService.getProfile(id).toPromise().then((res:any)=>{
-  //   if(res.success){
-  //     this.profile=res.data;
-  //    this.profileForm.patchValue(res.data);
-  //    this.avatarUrl=res.data.avatar_link;
-  //    this.dataService.sendProfile(res.data);
-  //   }
-  // });
-  // }
   pathProfile(profile:any){
     this.profileForm.patchValue(profile);
     this.avatarUrl=profile.avatar_link;
   }
 
-  async updateProfile(){
+  updateProfile(){
     if(this.profile!=this.profileForm.value||this.file){
-    await this.profileService.updateProfile(this.profileForm.value,this.profileForm.controls['id'].value,this.file)
-    .toPromise().then((res:any)=>{
+    this.profileService.updateProfile(this.profileForm.value,this.profileForm.controls['id'].value,this.file)
+    .subscribe((res:any)=>{
       if(res.success){
         this.profileForm.patchValue(res.data);
         this.profile=res.data;
@@ -136,24 +116,4 @@ export class DesignComponent implements OnInit {
   }
   }
 
-  async getAllDesign(){
-    await this.designService.getAllDesign(0,999).toPromise().then((res)=>{
-      if(res.success){
-        this.listDesign=res.data;
-      }
-    })
-  }
-
-  async onClickDesign(design:any){
-    if(this.design!=design){
-      this.profileForm.controls['design_id'].setValue(design.id);
-      await this.profileService.updateProfile(this.profileForm.value,this.profileForm.controls['id'].value).toPromise().then((res:any)=>{
-        if(res.success){
-          this.msg.success('Change design success');
-          this.dataService.sendDesign(design);
-        }
-        else this.msg.error('Change design false');
-      })
-    }
-  }
 }

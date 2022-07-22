@@ -1,9 +1,8 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.1/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 <button
   nz-button
   class="button-add-link mr-2"
   nzType="primary"
-  (click)="openModal(null, false)"
+  (click)="openModal(null, false,'link')"
 >
 <i class="fa-solid fa-plus mr-1"></i>
   ADD LINK
@@ -12,13 +11,18 @@
   nz-button
   class="button-add-header"
   nzType="primary"
-  (click)="openModal(null, false)"
+  (click)="openModal(null, false,'header')"
 >
 <i class="fa-solid fa-plus mr-1"></i>
   ADD HEADER
 </button>
 <div *ngFor="let link of listLinks">
-  <nz-card nzHoverable class="links" (click)="openModal(link, true)">
+  <nz-card nzHoverable class="card-header"  (click)="openModal(link, true,'header')" *ngIf="link.type=='HEADER'">
+      {{link.title}}
+  </nz-card>
+</div>
+<div *ngFor="let link of listLinks">
+  <nz-card nzHoverable class="links" (click)="openModal(link, true,'link')" *ngIf="link.type=='LINK'">
     <nz-card-meta
       [nzTitle]="link.title"
       [nzDescription]="descriptionTemplate"
@@ -33,31 +37,8 @@
     </ng-template>
   </nz-card>
 </div>
+<app-socials [profile]="profile"></app-socials>
 
-<div class="socials">SOCIALS</div>
-<div nz-row [nzGutter]="16">
-  <div *ngFor="let social of listSocials">
-    <a
-      nz-icon
-      nz-col
-      class="gutter-row"
-      [nzSpan]="2"
-      [nzType]="social.icon"
-      nzTheme="outline"
-      [href]="'https://' + social.link"
-    ></a>
-  </div>
-</div>
-<div nz-row [nzGutter]="16">
-  <i
-    nz-icon
-    nz-col
-    nzSpan="2"
-    class="gutter-row"
-    nzType="plus"
-    nzTheme="outline"
-  ></i>
-</div>
 <nz-modal
   [(nzVisible)]="isVisible"
   [nzTitle]="title"
@@ -68,28 +49,41 @@
 </nz-modal>
 <ng-template #nzModalContent>
   <form nz-form [formGroup]="modalForm">
-    <div nz-row>
+    <div nz-row *ngIf="type=='link';else tplElse">
       <div nz-col nzSpan="18">
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input title!">
               <input
                 type="text"
                 nz-input
+                required="true"
                 formControlName="title"
                 placeholder="Title"
               />
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control nzErrorTip="Please input url!">
+          <nz-form-control [nzErrorTip]="errorCode">
               <input
                 type="text"
                 nz-input
+                required="true"
                 formControlName="url"
                 placeholder="Url"
               />
           </nz-form-control>
         </nz-form-item>
+        <ng-template #errorCode let-control>
+          <div
+            *ngIf="
+            modalForm.controls['url'].invalid &&
+              (modalForm.controls['url'].dirty || modalForm.controls['url'].touched)
+            "
+          > 
+            <span *ngIf="modalForm.get('url')?.hasError('urlExist')">Please input url!</span>
+            <span *ngIf="modalForm.get('url')?.hasError('pattern')">Url malformed!</span>
+          </div>
+        </ng-template>
       </div>
       <div nz-col nzSpan="5" nzOffset="1">
         <nz-upload
@@ -111,8 +105,23 @@
           </ng-container>
           <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
         </nz-upload>
+        <div class="erorr">{{erorrPictire}}</div>
       </div>
     </div>
+    <ng-template #tplElse>
+      <div nz-row>
+        <nz-form-item nz-col nzSpan="24">
+          <nz-form-control nzErrorTip="Please input title!">
+              <input
+                type="text"
+                nz-input
+                formControlName="title"
+                placeholder="Title"
+              />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </ng-template>
   </form>
 </ng-template>
 <ng-template #footer>
@@ -120,7 +129,7 @@
     style="float: left"
     *ngIf="mode == 'edit'"
     nz-button
-    (click)="deleteLink()"
+    (click)="onDelete()"
   >
     DELETE
   </button>

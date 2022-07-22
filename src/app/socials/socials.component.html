@@ -1,0 +1,75 @@
+<div class="socials">SOCIALS</div>
+<div class="socials-add" nz-row [nzGutter]="16">
+  <div *ngFor="let social of socials">
+    <i (click)="openSocialModal(social,true)"
+      nz-tooltip 
+      [nzTooltipTitle]="social.social_name"
+      nz-icon
+      nz-col
+      class="gutter-row"
+      [nzSpan]="2"
+      [nzType]="social.social_icon"
+      nzTheme="outline"
+    ></i>
+  </div>
+  <div nz-row [nzGutter]="16">
+    <i (click)="openSocialModal(null,false)"
+      nz-tooltip 
+      nzTooltipTitle="Add social"
+      nz-icon
+      nz-col
+      nzSpan="2"
+      class="gutter-row"
+      nzType="plus"
+      nzTheme="outline"
+    ></i>
+  </div>
+</div>
+
+
+
+<nz-modal
+  [(nzVisible)]="isVisibleSocial"
+  [nzTitle]="titleSocial"
+  (nzOnCancel)="socialModalCancel()"
+  [nzContent]="socialContent"
+  [nzFooter]="footerSocial"
+>
+</nz-modal>
+<ng-template #socialContent>
+  <div *ngIf="mode=='create'" nz-row>
+    <nz-select nz-col nzSpan="24" nzShowSearch nzAllowClear nzPlaceHolder="Select a social" [(ngModel)]="selectedSocial" (ngModelChange)="socialChange($event)">
+      <nz-option *ngFor="let social of newSocials" [nzLabel]="social.social_name" [nzValue]="social"></nz-option>
+    </nz-select>
+  </div>
+  <form nz-form [formGroup]="socialForm">
+    <div nz-row>
+      <div nz-col nzSpan="24">
+        <nz-form-item>
+          <nz-form-control>
+            <nz-input-group [nzPrefixIcon]="selectedSocial.social_icon">
+              <input
+                type="text"
+                nz-input
+                required="true"
+                formControlName="links"
+                [placeholder]="selectedSocial.social_link+'/username'"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<ng-template #footerSocial>
+  <button
+    style="float: left"
+    *ngIf="mode == 'edit'"
+    nz-button
+    (click)="onDeleteSocial()"
+  >
+    DELETE
+  </button>
+  <button nz-button nzType="primary" (click)="saveSocial()">SAVE</button>
+</ng-template>

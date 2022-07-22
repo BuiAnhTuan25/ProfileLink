@@ -8,7 +8,7 @@ export class DataService {
 
   private listData: Subject<any> = new Subject<any>();
   private design:Subject<any> = new Subject<any>();
-  private profile:Subject<any> = new Subject<any>();
+  private socials:Subject<any> = new Subject<any>();
  
   public get dataFromChild() {
       return this.listData;
@@ -26,11 +26,11 @@ export class DataService {
    this.design.next(design);
   }
 
-  public get receiveProfile (){
-    return this.profile;
+  public get receiveSocials (){
+    return this.socials;
   }
 
-  public sendProfile (profile:any){
-   this.design.next(profile);
+  public sendSocials (socials:any){
+   this.socials.next(socials);
   }
 }

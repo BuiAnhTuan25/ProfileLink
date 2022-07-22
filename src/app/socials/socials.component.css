@@ -1,0 +1,24 @@
+[nz-icon] {
+  margin-right: 6px;
+  font-size: 32px;
+}
+.socials {
+  color: #6e6d7a;
+  letter-spacing: 1px;
+  font-weight: 700;
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+  margin-bottom: 16px;
+  margin-top: 48px;
+}
+
+.mr-1 {
+  margin-right: 10px;
+}
+.mr-2 {
+  margin-right: 20px;
+}
+.social-add {
+  display: flex;
+  flex-wrap: wrap;
+}
