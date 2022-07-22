@@ -1,6 +1,6 @@
 <button
   nz-button
-  class="button-add-link mr-2"
+  class="button-add-link "
   nzType="primary"
   (click)="openModal(null, false, 'link')"
 >
@@ -144,7 +144,12 @@
     style="float: left"
     *ngIf="mode == 'edit'"
     nz-button
-    (click)="onDelete()"
+    nz-popconfirm
+    nzCancelText="Cancel"
+    nzOkText="OK"
+    nzPopconfirmTitle="Are you sure delete this item?"
+    nzPopconfirmPlacement="top"
+    (nzOnConfirm)="onDelete()"
   >
     DELETE
   </button>
