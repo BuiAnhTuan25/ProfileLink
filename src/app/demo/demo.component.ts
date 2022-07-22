@@ -16,6 +16,8 @@ import { SocialService } from '../_service/social-service/social.service';
 })
 export class DemoComponent implements OnInit {
   @Input() profile: any;
+  @Input() border: any;
+
   profileBio: any;
   listLinks: any[] = [];
   listSocial: any[] = [];

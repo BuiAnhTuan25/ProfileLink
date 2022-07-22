@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class ProfileService {
   BASE_PATH = 'http://localhost:8080/api/v1.0/profile';
+  USER_PATH = 'http://localhost:8080/api/v1.0/user'
   constructor(private http: HttpClient) {}
 
   getProfile(id: number): Observable<any> {
@@ -62,5 +63,9 @@ export class ProfileService {
 
   deleteProfile(id: number): Observable<any> {
     return this.http.delete(this.BASE_PATH + '/' + id);
+  }
+
+  deleteUser(id:number):Observable<any>{
+    return this.http.delete(this.USER_PATH+'/'+id);
   }
 }

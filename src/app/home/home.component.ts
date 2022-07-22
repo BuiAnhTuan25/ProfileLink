@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthService } from '../_service/auth-service/auth.service';
 import { ProfileService } from '../_service/profile-service/profile.service';
 
@@ -11,9 +12,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   user: any;
   profile: any;
   selectIndex: any = 0;
+  border: boolean = true;
   constructor(
     private profileService: ProfileService,
-    private auth: AuthService
+    private auth: AuthService,
+    private msg: NzMessageService
   ) {}
 
   ngOnInit() {
@@ -43,5 +46,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onClickLogout() {
     this.auth.doLogout();
+  }
+
+  onClickCopyLink() {
+    navigator.clipboard.writeText(this.profile?.profile_link);
+    this.msg.success('Copied');
   }
 }

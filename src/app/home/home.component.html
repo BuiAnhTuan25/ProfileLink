@@ -21,7 +21,10 @@
               <div class="nav4-1">
                 <a  [href]="'http://'+profile?.profile_link">{{profile?.profile_link}}</a>
               </div>
-              <div class="nav4-2">
+
+            <button nz-button class="button-copy" (click)="onClickCopyLink()">Copy</button>
+
+              <!-- <div class="nav4-2">
                 <div class="share">
                   <div>Share</div>
                   <div class="overflow"></div>
@@ -319,7 +322,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
+              
               <img nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" class="avatar" [src]="profile?.avatar_link" />
             </div>
           </div>
@@ -330,16 +334,16 @@
       <nz-layout>
         <nz-content>
           <div nz-row>
-            <div class="background-phone" nz-col nzSpan="4"></div>
+            <div class="background-phone" nz-col nzSpan="3"></div>
             <div class="background-phone" nz-col nzSpan="5">
-              <nz-affix nzOffsetTop="64">
-                <p class="phone">
-                  <app-demo *ngIf="profile" [profile]="profile" ></app-demo>
-                </p>
+              <nz-affix nzOffsetTop="60">
+                <div class="phone">
+                    <app-demo *ngIf="profile" [border]="border" [profile]="profile" ></app-demo>
+                </div>
               </nz-affix>
             </div>
             <div class="background-phone" nz-col nzSpan="3"></div>
-            <nz-tabset [(nzSelectedIndex)]="selectIndex" class="tabs" nz-col nzSpan="12">
+            <nz-tabset [(nzSelectedIndex)]="selectIndex" class="tabs" nz-col nzSpan="13">
               <nz-tab  nzTitle="Links">
                 <app-links *ngIf="profile" [profile]="profile"></app-links>
               </nz-tab>

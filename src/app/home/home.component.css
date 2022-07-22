@@ -136,8 +136,7 @@ body {
   position: absolute;
   right: 16px;
 }
-.share {
-}
+
 #img img {
   height: 34px;
   width: 32px;
@@ -155,8 +154,7 @@ body {
     height: 50%;
 }
 .phone {
-    margin-left: 40px;
-    margin-top:32px;
+    margin-top:20px;
     margin-bottom:32px;
     width: 271px;
     max-width: 350px;
@@ -168,6 +166,10 @@ body {
     background-color: #222;
     z-index: 50;
 }
+.demo{
+  border-radius: 18px;
+}
+
 .background-phone {
     background-color: #FFFFFF;
 }
@@ -176,7 +178,8 @@ body {
   float: right;
   padding-left: 32px;
   padding-top: 32px;
-  padding-right: 100px;
+  padding-right: 50px;
+  padding-bottom: 100px;
   
 }
 
@@ -188,4 +191,11 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 20px;
+}
+
+.button-copy{
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: auto;
+  margin-bottom: auto;
 }
