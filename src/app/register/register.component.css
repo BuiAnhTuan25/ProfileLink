@@ -76,6 +76,12 @@ body {
     height: 40px;
     border-radius: 0;
 }
+.cssform:focus{
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  border: 0px solid transparent;
+  height: 40px;
+  border-radius: 0;
+}
 .password:focus{
     background-color: rgba(255,255,255,var(--tw-bg-opacity));
 
@@ -109,7 +115,7 @@ body {
 }
 #inputbio{
     padding-right: 32px;
-    padding-left: 66px;
+    /* padding-left: 16px; */
     background-color: rgba(13,12,34,.05);
     border: 1px solid transparent;
     height: 40px;
@@ -117,12 +123,12 @@ body {
     font-weight: 400;
     font-size: 14px;
     font-family: Inter,sans-serif;
-    /* padding: 16px; */
+    padding: 16px;
     width: 100%;
     /* line-height: inherit;
     color: inherit; */
 }
-.password {
+.cssform {
   background-color: rgba(13, 12, 34, 0.05);
   border: 1px solid transparent;
   height: 40px;
@@ -260,4 +266,9 @@ body {
 
 .login-form-button {
   width: 100%;
+}
+.title1{
+  font-size: 16px;
+  font-family: Inter, sans-serif;
+  font-weight: 500;
 }

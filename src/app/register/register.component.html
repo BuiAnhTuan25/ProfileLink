@@ -30,6 +30,7 @@
       <div id="login1">
         <form nz-form [formGroup]="validateForm" class="login-form">
           <p id="login2">Sign up</p>
+          <p class="title1">Account</p>
           <nz-form-item>
             <nz-form-control [nzErrorTip]="errorCode">
               <input
@@ -57,14 +58,14 @@
               >
             </div>
           </ng-template>
-          <div id="biolink">
-            <div class="bio">bio.link/</div>
+          
+            <!-- <div class="bio">bio.link/</div> -->
             <nz-form-item id="inputbio1">
               <nz-form-control [nzErrorTip]="errorUsername">
                 <input
                   type="text"
                   formControlName="username"
-                  placeholder="username"
+                  placeholder="Username"
                   id="inputbio"
                 />
               </nz-form-control>
@@ -86,11 +87,10 @@
                 >
               </div>
             </ng-template>
-          </div>
           <nz-form-item>
             <nz-form-control [nzErrorTip]="errorPassword">
               <input
-                class="password"
+                class="cssform"
                 type="password"
                 nz-input
                 formControlName="password"
@@ -114,6 +114,82 @@
               >
             </div>
           </ng-template>
+          <p class="title1">Profile</p>
+        </form>
+        <form nz-form [formGroup]="profileForm">
+          <div>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input fullname!">
+                <input
+                  class="cssform"
+                  type="text"
+                  nz-input
+                  formControlName="fullname"
+                  placeholder="Fullname"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div>
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please input Short bio!">
+                <input
+                  class="cssform"
+                  type="text"
+                  nz-input
+                  formControlName="short_bio"
+                  placeholder="Short bio"
+                />
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+          <div>
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  class="cssform"
+                  type="text"
+                  nz-input
+                  formControlName="about"
+                  placeholder="About"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-control>
+                <input
+                  class="cssform"
+                  type="text"
+                  nz-input
+                  formControlName="location"
+                  placeholder="Location"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+              <nz-form-control>
+                <input
+                  nz-col
+                  nzSpan="12"
+                  nz-row
+                  nz-input
+                  type="date"
+                  formControlName="birthday"
+                  placeholder="Birthday"
+                />
+                <nz-select
+                  nz-col
+                  nzSpan="12"
+                  nzPlaceHolder="Gender"
+                  formControlName="gender"
+                >
+                  <nz-option nzValue="MALE" nzLabel="MALE"></nz-option>
+                  <nz-option nzValue="FEMALE" nzLabel="FEMALE"></nz-option>
+                  <nz-option nzValue="OTHER" nzLabel="OTHER"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+          </div>
           <button
             nz-button
             id="button1"

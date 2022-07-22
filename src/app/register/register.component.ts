@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { EMAIL_REGEX, NoSpace } from '../_helpers/validator';
+import { GENDER } from '../_model/gender';
 import { AuthService } from '../_service/auth-service/auth.service';
 
 @Component({
@@ -18,6 +19,7 @@ import { AuthService } from '../_service/auth-service/auth.service';
 export class RegisterComponent implements OnInit {
   validateForm!: FormGroup;
   isLoading: boolean = false;
+  profileForm!:FormGroup;
   constructor(
     private fb: FormBuilder,
     private auth: AuthService,
@@ -33,6 +35,20 @@ export class RegisterComponent implements OnInit {
       ],
       username: [null, [Validators.required, NoSpace]],
       password: [null, [Validators.required, NoSpace]],
+    });
+    this.profileForm = this.fb.group({
+      id: [null],
+      fullname: [null, Validators.required],
+      short_bio: [null, Validators.required],
+      about: [null],
+      birthday: [null, Validators.required],
+      gender: [GENDER.MALE, Validators.required],
+      avatar_link: [null],
+      user_id: [null],
+      design_id: [null],
+      profile_link: [null],
+      location: [null],
+      click_count: [null],
     });
   }
 
