@@ -22,7 +22,7 @@
                 <a  [href]="'http://'+profile?.profile_link">{{profile?.profile_link}}</a>
               </div>
 
-            <button nz-button class="button-copy" (click)="onClickCopyLink()">Copy</button>
+            <button nz-button class="button-copy" nz-dropdown nzTrigger="click" [nzDropdownMenu]="menuShare">Share</button>
 
               <!-- <div class="nav4-2">
                 <div class="share">
@@ -359,21 +359,205 @@
       </nz-layout>
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu nzOverlayClassName="drop-down">
-          <li nz-menu-item (click)="onClickDashboard()">Dashboard</li>
+          <li nz-menu-item (click)="onClickDashboard()"><i class="fa-solid fa-house icon-fontawesome"></i>Dashboard</li>
           <li nz-menu-divider></li>
-          <li nz-menu-item (click)="onClickLogout()">Logout</li>
+          <li nz-menu-item (click)="onClickLogout()"><i class="fa-solid fa-right-from-bracket icon-fontawesome"></i>Logout</li>
         </ul>
       </nz-dropdown-menu>
+
+      <nz-dropdown-menu #menuShare="nzDropdownMenu">
+        <ul nz-menu nzOverlayClassName="drop-down">
+          <li nz-menu-item (click)="onClickCopyLink()"><i class="fa-solid fa-copy icon-fontawesome"></i>Copy</li>
+          <li nz-menu-divider></li>
+          <li nz-menu-item (click)="onClickQrCode()"><div>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon"
+            >
+              <path
+                d="M3 11H11V3H3V11ZM5 5H9V9H5V5Z"
+                fill="url(#paint0_linear_405_4869)"
+              ></path>
+              <path
+                d="M3 21H11V13H3V21ZM5 15H9V19H5V15Z"
+                fill="url(#paint1_linear_405_4869)"
+              ></path>
+              <path
+                d="M13 3V11H21V3H13ZM19 9H15V5H19V9Z"
+                fill="url(#paint2_linear_405_4869)"
+              ></path>
+              <path
+                d="M21 19H19V21H21V19Z"
+                fill="url(#paint3_linear_405_4869)"
+              ></path>
+              <path
+                d="M15 13H13V15H15V13Z"
+                fill="url(#paint4_linear_405_4869)"
+              ></path>
+              <path
+                d="M17 15H15V17H17V15Z"
+                fill="url(#paint5_linear_405_4869)"
+              ></path>
+              <path
+                d="M15 17H13V19H15V17Z"
+                fill="url(#paint6_linear_405_4869)"
+              ></path>
+              <path
+                d="M17 19H15V21H17V19Z"
+                fill="url(#paint7_linear_405_4869)"
+              ></path>
+              <path
+                d="M19 17H17V19H19V17Z"
+                fill="url(#paint8_linear_405_4869)"
+              ></path>
+              <path
+                d="M19 13H17V15H19V13Z"
+                fill="url(#paint9_linear_405_4869)"
+              ></path>
+              <path
+                d="M21 15H19V17H21V15Z"
+                fill="url(#paint10_linear_405_4869)"
+              ></path>
+              <defs>
+                <linearGradient
+                  id="paint0_linear_405_4869"
+                  x1="3.34783"
+                  y1="7"
+                  x2="8.30993"
+                  y2="10.6535"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint1_linear_405_4869"
+                  x1="3.34783"
+                  y1="17"
+                  x2="8.30993"
+                  y2="20.6535"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint2_linear_405_4869"
+                  x1="13.3478"
+                  y1="7"
+                  x2="18.3099"
+                  y2="10.6535"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint3_linear_405_4869"
+                  x1="19.087"
+                  y1="20"
+                  x2="20.3275"
+                  y2="20.9134"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint4_linear_405_4869"
+                  x1="13.087"
+                  y1="14"
+                  x2="14.3275"
+                  y2="14.9134"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint5_linear_405_4869"
+                  x1="15.087"
+                  y1="16"
+                  x2="16.3275"
+                  y2="16.9134"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint6_linear_405_4869"
+                  x1="13.087"
+                  y1="18"
+                  x2="14.3275"
+                  y2="18.9134"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint7_linear_405_4869"
+                  x1="15.087"
+                  y1="20"
+                  x2="16.3275"
+                  y2="20.9134"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint8_linear_405_4869"
+                  x1="17.087"
+                  y1="18"
+                  x2="18.3275"
+                  y2="18.9134"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint9_linear_405_4869"
+                  x1="17.087"
+                  y1="14"
+                  x2="18.3275"
+                  y2="14.9134"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+                <linearGradient
+                  id="paint10_linear_405_4869"
+                  x1="19.087"
+                  y1="16"
+                  x2="20.3275"
+                  y2="16.9134"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#FF5858"></stop>
+                  <stop offset="1" stop-color="#C058FF"></stop>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>QR Code</li>
+        </ul>
+      </nz-dropdown-menu>
+      <nz-modal [nzWidth]="400" [nzVisible]="isVisible" nzTitle="QR CODE" [nzFooter]="footer" (nzOnCancel)="onCloseModal()">
+        <ng-container *nzModalContent>
+          <qrcode [qrdata]="dataQr" [width]="256" class="qr-code"></qrcode>
+        </ng-container>
+      </nz-modal>
+      <ng-template #footer>
+
+      </ng-template>
     </div>
   </body>
   
 </html>
-<!-- <script>
-  const button = document.querySelector(".nav4-2");
-  const popup = document.querySelector(".popup");
-  if (button) {
-    button.addEventListener("click", function (e) {
-      popup.style.display = "block";
-    });
-  }
-</script> -->

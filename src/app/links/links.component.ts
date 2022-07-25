@@ -104,13 +104,9 @@ export class LinksComponent implements OnInit {
       this.validForm = false;
       this.modalForm.controls['url'].setErrors({ urlExist: true });
     } else this.validForm = true;
-    if (this.mode === 'create' && this.type == 'link' && !this.file) {
-      this.validateFile = false;
-      this.erorrPictire = 'Please select picture!';
-    } else {
-      this.validateFile = true;
-      this.erorrPictire = '';
-    }
+    
+    this.checkFile(); 
+
     if (this.modalForm.valid && this.validForm && this.validateFile) {
       if (this.mode === 'create') {
         this.modalForm.controls['profile_id'].setValue(this.profile.id);
@@ -176,6 +172,7 @@ export class LinksComponent implements OnInit {
       observer.next(isJpgOrPng && isLt2M);
       observer.complete();
       this.file = file;
+      this.checkFile();
     });
 
   private getBase64(img: File, callback: (img: string) => void): void {
@@ -218,5 +215,15 @@ export class LinksComponent implements OnInit {
           this.msg.success('Delete success');
         }
       });
+  }
+
+  checkFile(){
+    if (this.mode === 'create' && this.type == 'link' && !this.file) {
+      this.validateFile = false;
+      this.erorrPictire = 'Please select picture!';
+    } else {
+      this.validateFile = true;
+      this.erorrPictire = '';
+    }
   }
 }
