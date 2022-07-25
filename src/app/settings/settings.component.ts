@@ -48,6 +48,8 @@ export class SettingsComponent implements OnInit {
   }
   openModal() {
     this.isVisible = true;
+    this.modalForm.reset();
+
   }
   handleCancel() {
     this.modalForm.reset();
