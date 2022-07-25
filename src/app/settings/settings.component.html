@@ -3,6 +3,7 @@
     <nz-form-item>
       <nz-form-control>
         <input
+          class="input"
           type="text"
           nz-input
           formControlName="username"
@@ -14,6 +15,7 @@
     <nz-form-item>
       <nz-form-control>
         <input
+          class="input"
           type="text"
           nz-input
           formControlName="mail"
@@ -25,6 +27,7 @@
     <nz-form-item>
       <nz-form-control>
         <input
+          class="input"
           type="text"
           nz-input
           formControlName="role"
@@ -34,11 +37,13 @@
       </nz-form-control>
     </nz-form-item>
   </form>
-  <button nz-button nzType="primary" (click)="openModal()">
-    Change password
-  </button>
+  <div class="align-center">
+    <button class="button-save" nz-button nzType="primary" (click)="openModal()">
+      Change password
+    </button>
+  </div>
 </nz-card>
-<div class="align-center">
+<div class="align-center delete">
   <button
     nz-popconfirm
     nzCancelText="Cancel"

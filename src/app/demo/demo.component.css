@@ -16,6 +16,7 @@
 }
 
 .name {
+    margin-top: 10px;
     font-size: 18px;
     font-weight: bold;
 }
@@ -36,7 +37,7 @@
 
 .button-link {
     width: 80%;
-    height: 30px;
+    height: 40px;
     border:none;
     font-size: 12px;
 }
