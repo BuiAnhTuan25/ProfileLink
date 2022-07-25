@@ -10,8 +10,34 @@ import { ProfileService } from '../_service/profile-service/profile.service';
   styleUrls: ['./themes.component.css'],
 })
 export class ThemesComponent implements OnInit {
-  design: any;
   @Input() profile: any;
+  design: any;
+  fonts:any[]=[
+    {
+      name:'Georgia',
+    },
+    {
+      name:'Cursive',
+    },
+    {
+      name:'Monaco',
+    },
+    {
+      name:'Courier New',
+    },
+    {
+      name:'Verdana',
+    },
+    {
+      name:'Papyrus',
+    },
+    {
+      name:'Lucida Console',
+    },
+    {
+      name:'Brush Script MT',
+    },
+  ]
   listDesign: any[] = [];
   constructor(
     private designService: DesignService,

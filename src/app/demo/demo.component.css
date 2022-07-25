@@ -9,6 +9,12 @@
 .demo{
     height: 100%;
 }
+.backgrond-img{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
 
 .center {
     text-align: center;

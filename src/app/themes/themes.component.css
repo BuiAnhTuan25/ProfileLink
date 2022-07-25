@@ -1,4 +1,77 @@
 
 .card {
   border-radius: 10px;
+  margin-top: 20px;
+}
+#nzTitle{
+  font-size: 25px;
+}
+.avatar-theme{
+  height:200px;
+  width: 150px;
+  object-fit: cover;
+}
+.color{
+  width: 100px;
+  height:40px;
+}
+.button-default-primary{
+  width:200px;
+  height: 40px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: black;
+  border: none;
+  cursor: pointer;
+}
+
+.button-default-primary::before::after{
+border:2px solid #0095f6;
+box-sizing: border-box;
+--tw-border-opacity: 1;
+    border-color: rgba(229,231,235,var(--tw-border-opacity));
+}
+.button-default-default{
+  width:200px;
+  height: 40px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border:2px solid black;
+  cursor: pointer;
+}
+
+.button-round-primary{
+  width:200px;
+  height: 40px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: black;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.button-round-default{
+  width:200px;
+  height: 40px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border:2px solid black;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.font{
+  width:180px;
+  height: 40px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  border:2px solid black;
+  cursor: pointer;
+  text-align: center;
+  font-size:18px;
+}
+
+.label{
+  text-align: left;
 }
