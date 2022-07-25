@@ -17,6 +17,7 @@
   font-weight: 700;
   background: linear-gradient(112.44deg, #ff5858 2.09%, #c058ff 75.22%);
   letter-spacing: 2px;
+  border: none;
 }
 .button-save:hover {
   background: linear-gradient(0.351turn, #ff5858 23.71%, #c058ff 78.8%);
