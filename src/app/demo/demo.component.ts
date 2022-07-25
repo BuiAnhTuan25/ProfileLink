@@ -22,10 +22,14 @@ export class DemoComponent implements OnInit {
   listLinks: any[] = [];
   listSocial: any[] = [];
   isPrimary: boolean = true;
+  isBackgroundImage:boolean=false;
+  isContent:boolean=false;
   buttonType: NzButtonType = 'primary';
   buttonShape!: NzButtonShape;
   design: any;
   shortBio: any;
+  styleColor:any="{'background-color': design?.background_color,'color': design?.text_color,'font-family': design?.font,'border-radius': border?'18px':'none'}";
+  styleImage:any="{'background-image': design?.background_image,'color': design?.text_color,'font-family': design?.font,'border-radius': border?'18px':'none'}";
 
   user: any;
 
@@ -116,6 +120,10 @@ export class DemoComponent implements OnInit {
   }
 
   changeButton(design: any) {
+    if(this.design.background_type=='IMAGE'){
+      this.isBackgroundImage=true;
+    } else this.isBackgroundImage=false;
+
     switch (design.button_type) {
       case BUTTON_TYPE.CIRCLE_SOLID:
         this.isPrimary = true;

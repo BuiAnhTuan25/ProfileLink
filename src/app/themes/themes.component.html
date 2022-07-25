@@ -10,5 +10,53 @@
         <img class="avatar-theme" [src]="design.picture" />
       </nz-card>
     </div>
+    <div nz-col nzSpan="7" nzOffset="1">
+      <nz-card class="card" nzTitle="Create" [nzHoverable]="true">
+        <img
+          class="avatar-theme"
+          src="https://res.cloudinary.com/anhtuanbui/image/upload/v1658639791/xkppra8sr095o8spjt6f.png"
+        />
+      </nz-card>
+    </div>
   </div>
 </nz-card>
+<nz-card nzTitle="DESIGN" [nzHoverable]="true">
+  <form>
+  <nz-form-item>
+    <nz-form-label class="label" [nzSpan]="6">Background color</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input class="color" formControlName="background-color"  type="color" />
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+      <nz-form-label class="label" [nzSpan]="6">Button Type</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <div nz-row>
+        <div nz-col nzSpan="10" class="button-default-primary"></div>
+        <div nz-col nzSpan="10" class="button-default-default"></div>
+        <div nz-col nzSpan="10" class="button-round-primary"></div>
+        <div nz-col nzSpan="10" class="button-round-default"></div>
+      </div>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label class="label" [nzSpan]="6">Button color</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <input nz-input class="color" formControlName="button-color"  type="color" />
+    </nz-form-control>
+  </nz-form-item >
+  <nz-form-item>
+    <nz-form-label class="label" [nzSpan]="6">Font</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <div nz-row >
+        <div *ngFor="let font of fonts" nz-col nzSpan="11">
+      <div class="font" [ngStyle]="{'font-family':font.name}">{{font.name}}</div>
+    </div>
+    </div>
+  </nz-form-control>
+  </nz-form-item>
+</form>
+</nz-card>
+  
+
+  

@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   profile: any;
   selectIndex: any = 0;
   border: boolean = true;
+  isVisible:boolean=false;
+  dataQr:string='';
   constructor(
     private profileService: ProfileService,
     private auth: AuthService,
@@ -51,5 +53,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   onClickCopyLink() {
     navigator.clipboard.writeText(this.profile?.profile_link);
     this.msg.success('Copied');
+  }
+
+  onClickQrCode(){
+   this.isVisible=true;
+   this.dataQr=this.profile?.profile_link;
+  }
+  onCloseModal(){
+    this.isVisible=false;
+    this.dataQr='';
   }
 }

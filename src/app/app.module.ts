@@ -2,6 +2,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -46,6 +47,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     FormsModule,
     BrowserAnimationsModule,
     NgZorroAntdModule,
+    QRCodeModule,
   ],
   providers: [
     {
