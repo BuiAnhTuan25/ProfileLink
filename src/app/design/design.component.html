@@ -5,6 +5,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input fullname!">
             <input
+              class="input"
               type="text"
               nz-input
               formControlName="fullname"
@@ -15,6 +16,7 @@
         <nz-form-item>
           <nz-form-control nzErrorTip="Please input Short bio!">
             <input
+              class="input"
               type="text"
               nz-input
               formControlName="short_bio"
@@ -25,6 +27,7 @@
         <nz-form-item>
           <nz-form-control>
             <input
+              class="input"
               type="text"
               nz-input
               formControlName="about"
@@ -35,6 +38,7 @@
         <nz-form-item>
           <nz-form-control>
             <input
+              class="input"
               type="text"
               nz-input
               formControlName="location"
@@ -65,7 +69,6 @@
             </nz-select>
           </nz-form-control>
         </nz-form-item>
-        
       </div>
       <div nz-col nzSpan="5" nzOffset="1">
         <nz-upload
@@ -88,7 +91,6 @@
           <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
         </nz-upload>
       </div>
-      
     </div>
     <div class="align-center">
       <button

@@ -1,13 +1,59 @@
 .card {
-    background: #eff0f1;
-  }
-  .button-delete{
-    width:40%;
-    color: white;
-    background-color: #ff4949;
-    border-radius:8px;
-    border:none;
-  }
-  .align-center{
-    text-align:center;
-  }
+  background: white;
+  margin-top:20px;
+  border-radius:2px;
+  
+}
+.button-delete {
+  width: 40%;
+  color: white;
+  background-color: #ff4949;
+  border-radius: 8px;
+  border: none;
+}
+.align-center {
+  text-align: center;
+}
+.input:focus{
+  background-color: rgba(255,255,255,var(--tw-bg-opacity));
+  border: 0px solid transparent;
+  height: 40px;
+  border-radius: 8px;
+}
+.input {
+  background-color: rgba(13, 12, 34, 0.05);
+  border: 1px solid transparent;
+  height: 40px;
+  border-radius: 6px;
+  font-weight: 400;
+  font-size: 14px;
+  font-family: Inter, sans-serif;
+  padding: 16px;
+  width: 100%;
+}
+.button-save {
+  height: 35px;
+  width: 40%;
+  border-radius: 8px;
+  font-family: Inter, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  background: linear-gradient(112.44deg, #ff5858 2.09%, #c058ff 75.22%);
+  letter-spacing: 2px;
+  text-align: center;
+}
+.button-save:hover {
+  background: linear-gradient(0.351turn, #ff5858 23.71%, #c058ff 78.8%);
+  background-size: 165%;
+  animation-name: bg-anim;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+}
+.align-center {
+  text-align: center;
+}
+.delete{
+  margin-top:20px;
+  height: 40px;
+}
