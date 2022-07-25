@@ -104,7 +104,7 @@
           </button>
         </form>
         <div id="forgot">
-          <a href="">Forgot password?</a>
+          <a (click)="openModal()">Forgot password?</a>
         </div>
         <div class="or">
           <div class="or1"></div>
@@ -169,5 +169,56 @@
         </div>
       </div>
     </div>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="FORGOT PASSWORD"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzContent]="nzModalContent"
+  [nzFooter]="footer"
+  [nzAutofocus]="null"
+>
+</nz-modal>
+<ng-template #nzModalContent>
+  <form nz-form [formGroup]="modalForm">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="errorCode">
+        <input
+          type="text"
+          nz-input
+          formControlName="mail"
+          placeholder="Your email"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <ng-template #errorCode let-control>
+      <div
+        *ngIf="
+          modalForm.controls['mail'].invalid &&
+          (modalForm.controls['mail'].dirty ||
+            modalForm.controls['mail'].touched)
+        "
+      >
+        <span *ngIf="modalForm.get('mail')?.hasError('required')"
+          >Please input your email!</span
+        >
+        <span *ngIf="modalForm.get('mail')?.hasError('pattern')"
+          >Email invalidate!</span
+        >
+      </div>
+    </ng-template>
+  </form>
+</ng-template>
+<ng-template #footer>
+  <button
+    [nzLoading]="isLoadingSend"
+    nz-button
+    nzType="primary"
+    (click)="handleOk()"
+  >
+    SEND
+  </button>
+</ng-template>
   </body>
 </html>

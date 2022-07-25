@@ -44,4 +44,12 @@ export class AuthService {
       params: param,
     });
   }
+
+  sendEmailForgotPassword(mail: string): Observable<any> {
+    let param = new HttpParams();
+    param = param.append('mail', mail);
+    return this.http.get(AUTH_API + '/test/forgot_password', {
+      params: param,
+    });
+  }
 }
