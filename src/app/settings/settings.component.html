@@ -1,4 +1,4 @@
-<nz-card nzTitle="ACCOUNT" class="card">
+<nz-card [nzTitle]="title" class="card">
   <form nz-form [formGroup]="settingForm">
     <nz-form-item>
       <nz-form-control>
@@ -42,6 +42,7 @@
       Change password
     </button>
   </div>
+  <ng-template #title><div class="title">Account</div></ng-template>
 </nz-card>
 <div class="align-center delete">
   <button

@@ -58,3 +58,9 @@
   margin-top:20px;
   height: 40px;
 }
+
+.title{
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Inter,sans-serif;
+}

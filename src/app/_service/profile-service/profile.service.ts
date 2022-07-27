@@ -24,6 +24,7 @@ export class ProfileService {
   addProfile(profile: any, file?: any): Observable<any> {
     const formdata = new FormData();
     formdata.append('file', file);
+    formdata.append('id', profile.id);
     formdata.append('fullname', profile.fullname);
     formdata.append('shortBio', profile.short_bio);
     formdata.append('about', profile.about);
@@ -33,10 +34,8 @@ export class ProfileService {
     );
     formdata.append('gender', profile.gender);
     formdata.append('location', profile.location);
-    formdata.append('profileLink', profile.profile_link);
     formdata.append('avatarLink', profile.avatar_link);
     formdata.append('clickCount', profile.click_count);
-    formdata.append('userId', profile.user_id);
     formdata.append('designId', profile.design_id);
     return this.http.post(this.BASE_PATH, formdata);
   }
@@ -44,6 +43,7 @@ export class ProfileService {
   updateProfile(profile: any, id: number, file?: any): Observable<any> {
     const formdata = new FormData();
     formdata.append('file', file);
+    formdata.append('id', profile.id);
     formdata.append('fullname', profile.fullname);
     formdata.append('shortBio', profile.short_bio);
     formdata.append('about', profile.about);
@@ -53,10 +53,8 @@ export class ProfileService {
     );
     formdata.append('gender', profile.gender);
     formdata.append('location', profile.location);
-    formdata.append('profileLink', profile.profile_link);
     formdata.append('avatarLink', profile.avatar_link);
     formdata.append('clickCount', profile.click_count);
-    formdata.append('userId', profile.user_id);
     formdata.append('designId', profile.design_id);
     return this.http.put(this.BASE_PATH + '/' + id, formdata);
   }

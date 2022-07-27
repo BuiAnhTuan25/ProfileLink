@@ -199,17 +199,26 @@ body {
   margin-top: auto;
   margin-bottom: auto;
 }
+
 .icon{
   font-size: 16px;
   margin-right: 10px;
   
 }
+
 .icon-fontawesome{
   margin-left:3px;
   font-size: 16px;
   margin-right: 10px;
   
+
  }
  .qr-code{
   text-align: center;
  }
+
+ .title{
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Inter,sans-serif;
+}

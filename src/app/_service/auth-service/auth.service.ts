@@ -40,7 +40,7 @@ export class AuthService {
     let param = new HttpParams();
     param = param.append('code', code);
     param = param.append('password', newPass);
-    return this.http.post(AUTH_API + '/update_password_token', null, {
+    return this.http.post(AUTH_API + '/test/update_password_token', null, {
       params: param,
     });
   }
