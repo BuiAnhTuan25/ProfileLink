@@ -23,14 +23,10 @@ export class DemoComponent implements OnInit {
   listSocial: any[] = [];
   isPrimary: boolean = true;
   isBackgroundImage:boolean=false;
-  isContent:boolean=false;
   buttonType: NzButtonType = 'primary';
   buttonShape!: NzButtonShape;
   design: any;
   shortBio: any;
-  styleColor:any="{'background-color': design?.background_color,'color': design?.text_color,'font-family': design?.font,'border-radius': border?'18px':'none'}";
-  styleImage:any="{'background-image': design?.background_image,'color': design?.text_color,'font-family': design?.font,'border-radius': border?'18px':'none'}";
-
   user: any;
 
   constructor(

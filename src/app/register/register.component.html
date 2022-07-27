@@ -58,35 +58,34 @@
               >
             </div>
           </ng-template>
-          
-            <!-- <div class="bio">bio.link/</div> -->
-            <nz-form-item id="inputbio1">
-              <nz-form-control [nzErrorTip]="errorUsername">
-                <input
-                  type="text"
-                  formControlName="username"
-                  placeholder="Username"
-                  id="inputbio"
-                />
-              </nz-form-control>
-            </nz-form-item>
-            <ng-template #errorUsername let-control>
-              <div
-                *ngIf="
-                  validateForm.controls['username'].invalid &&
-                  (validateForm.controls['username'].dirty ||
-                    validateForm.controls['username'].touched)
-                "
+
+          <!-- <div class="bio">bio.link/</div> -->
+          <nz-form-item id="inputbio1">
+            <nz-form-control [nzErrorTip]="errorUsername">
+              <input
+                type="text"
+                formControlName="username"
+                placeholder="Username"
+                id="inputbio"
+              />
+            </nz-form-control>
+          </nz-form-item>
+          <ng-template #errorUsername let-control>
+            <div
+              *ngIf="
+                validateForm.controls['username'].invalid &&
+                (validateForm.controls['username'].dirty ||
+                  validateForm.controls['username'].touched)
+              "
+            >
+              <span *ngIf="validateForm.get('username')?.hasError('required')"
+                >Please input username!</span
               >
-                <span *ngIf="validateForm.get('username')?.hasError('required')"
-                  >Please input username!</span
-                >
-                <span
-                  *ngIf="validateForm.get('username')?.hasError('whitespace')"
-                  >Username must not contain spaces!</span
-                >
-              </div>
-            </ng-template>
+              <span *ngIf="validateForm.get('username')?.hasError('whitespace')"
+                >Username must not contain spaces!</span
+              >
+            </div>
+          </ng-template>
           <nz-form-item>
             <nz-form-control [nzErrorTip]="errorPassword">
               <input
@@ -132,7 +131,7 @@
           </div>
           <div>
             <nz-form-item>
-              <nz-form-control nzErrorTip="Please input Short bio!">
+              <nz-form-control [nzErrorTip]="errorShortbio">
                 <input
                   class="cssform"
                   type="text"
@@ -142,6 +141,23 @@
                 />
               </nz-form-control>
             </nz-form-item>
+            <ng-template #errorShortbio let-control>
+              <div
+                *ngIf="
+                  profileForm.controls['short_bio'].invalid &&
+                  (profileForm.controls['short_bio'].dirty ||
+                    profileForm.controls['short_bio'].touched)
+                "
+              >
+                <span *ngIf="profileForm.get('short_bio')?.hasError('required')"
+                  >Please input short bio!</span
+                >
+                <span
+                  *ngIf="profileForm.get('short_bio')?.hasError('whitespace')"
+                  >Short bio must not contain spaces!</span
+                >
+              </div>
+            </ng-template>
           </div>
           <div>
             <nz-form-item>
@@ -150,8 +166,8 @@
                   class="cssform"
                   type="text"
                   nz-input
-                  formControlName="about"
-                  placeholder="About"
+                  formControlName="location"
+                  placeholder="Location"
                 />
               </nz-form-control>
             </nz-form-item>
@@ -161,8 +177,8 @@
                   class="cssform"
                   type="text"
                   nz-input
-                  formControlName="location"
-                  placeholder="Location"
+                  formControlName="about"
+                  placeholder="About"
                 />
               </nz-form-control>
             </nz-form-item>

@@ -1,6 +1,6 @@
 .avatar {
-    height: 96px;
-    width: 96px;
+    height: 80px;
+    width: 80px;
     border-radius: 50%;
     object-fit: cover;
     margin: auto;
@@ -61,3 +61,12 @@
     display: flex;
     justify-content: center;
 }
+
+.overflow-y{
+    height: 100%; 
+    overflow: hidden auto;
+}
+.overflow-y::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+  }

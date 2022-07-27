@@ -13,12 +13,36 @@ export class DesignService {
     return this.http.get(this.BASE_PATH + '/get/' + id);
   }
 
-  addDesign(design: any): Observable<any> {
-    return this.http.post(this.BASE_PATH, design);
+  addDesign(design: any,file?:any): Observable<any> {
+    const formdata = new FormData();
+    formdata.append('file', file);
+    formdata.append('name', design.name);
+    formdata.append('type', design.type);
+    formdata.append('backgroundColor', design.background_color);
+    formdata.append('backgroundImage', design.background_image);
+    formdata.append('backgroundType', design.background_type);
+    formdata.append('buttonType', design.button_type);
+    formdata.append('buttonColor', design.button_color);
+    formdata.append('textColor', design.text_color);
+    formdata.append('font', design.font);
+
+    return this.http.post(this.BASE_PATH, formdata);
   }
 
-  updateDesign(design: any, id: number): Observable<any> {
-    return this.http.put(this.BASE_PATH + '/' + id, design);
+  updateDesign(design: any, id: number,file?:any): Observable<any> {
+    const formdata = new FormData();
+    formdata.append('file', file);
+    formdata.append('name', design.name);
+    formdata.append('type', design.type);
+    formdata.append('backgroundColor', design.background_color);
+    formdata.append('backgroundType', design.background_type);
+    formdata.append('backgroundImage', design.background_image);
+    formdata.append('buttonType', design.button_type);
+    formdata.append('buttonColor', design.button_color);
+    formdata.append('textColor', design.text_color);
+    formdata.append('font', design.font);
+    
+    return this.http.put(this.BASE_PATH + '/' + id, formdata);
   }
 
   deleteDesign(id: number): Observable<any> {
@@ -28,5 +52,9 @@ export class DesignService {
     return this.http.get(
       this.BASE_PATH + '?page=' + page + '&page_size=' + pageSize
     );
+  }
+
+  getByNameDesign(name:string){
+    return this.http.get(this.BASE_PATH+'/get-by-name/'+name);
   }
 }

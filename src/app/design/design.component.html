@@ -1,4 +1,4 @@
-<nz-card nzTitle="Profile" [nzHoverable]="true" class="card">
+<nz-card [nzTitle]="title" [nzHoverable]="true" class="card">
   <form nz-form [formGroup]="profileForm">
     <div nz-row>
       <div nz-col nzSpan="18">
@@ -103,5 +103,6 @@
       </button>
     </div>
   </form>
+  <ng-template #title><div class="title">Profile</div></ng-template>
 </nz-card>
 <app-themes nzOffset="20" [profile]="profile"></app-themes>
