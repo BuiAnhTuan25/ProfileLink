@@ -1,3 +1,4 @@
+<div class="overflow-y">
 <div
 *ngIf="isBackgroundImage;else elseColor"
   class="center demo backgrond-img"
@@ -35,6 +36,7 @@
     </div>
   </div>
 </div>
+
 <div *ngFor="let link of listLinks">
   <div style="font-weight: bold; margin-top:24px;" *ngIf="link.type == 'HEADER'">
     {{ link.title }}
@@ -77,4 +79,6 @@
     </button>
   </ng-template>
 </div>
+
 </ng-template>
+</div>

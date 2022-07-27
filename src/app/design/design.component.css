@@ -4,6 +4,13 @@
   height: 120px;
   border-radius: 60px;
 }
+
+.title{
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Inter,sans-serif;
+}
+
 .card {
   margin-bottom: 35px;
   margin-top: 20px;

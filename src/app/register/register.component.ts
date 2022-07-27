@@ -9,6 +9,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { EMAIL_REGEX, NoSpace } from '../_helpers/validator';
 import { GENDER } from '../_model/gender';
 import { AuthService } from '../_service/auth-service/auth.service';
+import { ProfileService } from '../_service/profile-service/profile.service';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private auth: AuthService,
     private msg: NzMessageService,
-    private router: Router
+    private router: Router,
+    private profileService: ProfileService,
   ) {}
 
   ngOnInit(): void {
@@ -38,16 +40,14 @@ export class RegisterComponent implements OnInit {
     this.profileForm = this.fb.group({
       id: [null],
       fullname: [null, Validators.required],
-      short_bio: [null, Validators.required],
-      about: [null],
+      short_bio: [null, [Validators.required, NoSpace]],
+      about: [''],
       birthday: [null, Validators.required],
       gender: [GENDER.MALE, Validators.required],
-      avatar_link: [null],
-      user_id: [null],
-      design_id: [null],
-      profile_link: [null],
+      avatar_link: [''],
+      design_id: [2],
       location: [null],
-      click_count: [null],
+      click_count: [0],
     });
   }
 
@@ -61,9 +61,18 @@ export class RegisterComponent implements OnInit {
       this.auth.register(this.validateForm.value).subscribe((res: any) => {
         if (res.success) {
           this.isLoading = false;
+          this.profileForm.controls['id'].setValue(res.data.id);
+          this.profileService.addProfile(this.profileForm.value).subscribe((res:any)=>{
+            if(res.success){
+
+            }
+          });
           this.msg.success('Register success,please confirm in your email!');
           this.router.navigate(['/login']);
-        } else this.msg.error('Register false');
+        } else {
+          this.msg.error(res.message);
+          this.isLoading=false;
+        }
       });
     }
   }
