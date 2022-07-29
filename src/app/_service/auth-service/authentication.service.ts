@@ -6,7 +6,7 @@ const AUTH_API = 'http://localhost:8080';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) {}
   login(user: any): Observable<any> {
     return this.http.post(AUTH_API + '/test/login', user);

@@ -46,29 +46,27 @@
             />
           </nz-form-control>
         </nz-form-item>
-        <nz-form-item nz-row>
-          <nz-form-control>
-            <input
-              nz-col
-              nzSpan="12"
-              nz-row
-              nz-input
-              type="date"
-              formControlName="birthday"
-              placeholder="Birthday"
-            />
-            <nz-select
-              nz-col
-              nzSpan="12"
-              nzPlaceHolder="Gender"
-              formControlName="gender"
-            >
-              <nz-option nzValue="MALE" nzLabel="MALE"></nz-option>
-              <nz-option nzValue="FEMALE" nzLabel="FEMALE"></nz-option>
-              <nz-option nzValue="OTHER" nzLabel="OTHER"></nz-option>
-            </nz-select>
-          </nz-form-control>
-        </nz-form-item>
+        <div nz-row>
+          <nz-form-item nz-col nzSpan="12">
+            <nz-form-control>
+              <input
+                nz-input
+                type="date"
+                formControlName="birthday"
+                placeholder="Birthday"
+              />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item nz-col nzSpan="12">
+            <nz-form-control>
+              <nz-select nzPlaceHolder="Gender" formControlName="gender">
+                <nz-option nzValue="MALE" nzLabel="MALE"></nz-option>
+                <nz-option nzValue="FEMALE" nzLabel="FEMALE"></nz-option>
+                <nz-option nzValue="OTHER" nzLabel="OTHER"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
       </div>
       <div nz-col nzSpan="5" nzOffset="1">
         <nz-upload

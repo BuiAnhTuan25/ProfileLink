@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { DemoComponent } from './demo/demo.component';
 import { DesignComponent } from './design/design.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'design', component: DesignComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
+  { path: 'create-profile', component: CreateProfileComponent },
   { path: 'update_password_token', component: ChangePasswordComponent },
   { path: 'demo/:short_bio', component: DemoComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
