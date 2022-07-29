@@ -7,9 +7,15 @@ import {
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { EMAIL_REGEX, NoSpace } from '../_helpers/validator';
-import { GENDER } from '../_model/gender';
-import { AuthService } from '../_service/auth-service/auth.service';
-import { ProfileService } from '../_service/profile-service/profile.service';
+import { AuthenticationService } from '../_service/auth-service/authentication.service';
+import {
+  SocialAuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialUser,
+} from 'angularx-social-login';
+import { OauthService } from '../_service/oauth-service/oauth.service';
+import { TokenStorageService } from '../_service/token-storage-service/token-storage.service';
 
 @Component({
   selector: 'app-register',
@@ -19,13 +25,22 @@ import { ProfileService } from '../_service/profile-service/profile.service';
 export class RegisterComponent implements OnInit {
   validateForm!: FormGroup;
   isLoading: boolean = false;
-  profileForm!:FormGroup;
+  isVisible: boolean = false;
+  isLoadingSend: boolean = false;
+  modalForm!: FormGroup;
+  socialUser!:SocialUser;
+  errorMessage = '';
+  roles: string[] = [];
+  isLoggedIn = false;
+  isLoginFailed = false;
   constructor(
+    private tokenStorage: TokenStorageService,
     private fb: FormBuilder,
-    private auth: AuthService,
+    private auth: AuthenticationService,
     private msg: NzMessageService,
     private router: Router,
-    private profileService: ProfileService,
+    private socialAuthService: SocialAuthService,
+    private oauthService:OauthService,
   ) {}
 
   ngOnInit(): void {
@@ -37,17 +52,14 @@ export class RegisterComponent implements OnInit {
       username: [null, [Validators.required, NoSpace]],
       password: [null, [Validators.required, NoSpace]],
     });
-    this.profileForm = this.fb.group({
-      id: [null],
-      fullname: [null, Validators.required],
-      short_bio: [null, [Validators.required, NoSpace]],
-      about: [''],
-      birthday: [null, Validators.required],
-      gender: [GENDER.MALE, Validators.required],
-      avatar_link: [''],
-      design_id: [2],
-      location: [null],
-      click_count: [0],
+
+    this.modalForm = this.fb.group({
+      mail: [null, [Validators.required, Validators.pattern(EMAIL_REGEX)]],
+    });
+    
+    this.socialAuthService.authState.subscribe((user) => {
+      this.socialUser = user;
+      this.isLoggedIn = user != null;
     });
   }
 
@@ -61,12 +73,6 @@ export class RegisterComponent implements OnInit {
       this.auth.register(this.validateForm.value).subscribe((res: any) => {
         if (res.success) {
           this.isLoading = false;
-          this.profileForm.controls['id'].setValue(res.data.id);
-          this.profileService.addProfile(this.profileForm.value).subscribe((res:any)=>{
-            if(res.success){
-
-            }
-          });
           this.msg.success('Register success,please confirm in your email!');
           this.router.navigate(['/login']);
         } else {
@@ -76,4 +82,68 @@ export class RegisterComponent implements OnInit {
       });
     }
   }
+
+  loginWithGoogle() {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+      (data) => {
+        debugger
+        this.socialUser = data;
+        const tokenGoogle = this.socialUser.authToken;
+        this.oauthService.google(tokenGoogle).subscribe(
+          res => {
+            this.tokenStorage.saveToken(res.data.jwt);
+          this.tokenStorage.saveUser(res.data.user);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.roles = this.tokenStorage.getUser().roles;
+          if(res.data.user.is_profile){
+            this.router.navigate(['/home']);
+          } else this.router.navigate(['/create-profile']);
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
+          this.isLoading = false;
+          this.msg.error('Login with google false!')
+        }
+      );
+    }
+  );
+}
+
+openModal() {
+  this.isVisible = true;
+  this.modalForm.reset();
+
+}
+handleCancel() {
+  this.modalForm.reset();
+  this.isVisible = false;
+}
+handleOk() {
+  for (const i in this.modalForm.controls) {
+    this.modalForm.controls[i].markAsDirty();
+    this.modalForm.controls[i].updateValueAndValidity();
+  }
+  if (this.modalForm.valid) {
+    this.isLoadingSend = true;
+    this.auth
+      .sendEmailForgotPassword(this.modalForm.controls['mail'].value)
+      .subscribe((res: any) => {
+        if (res.success) {
+          this.isLoadingSend = false;
+          this.msg.success(
+            'Send email forgot password success. Please access your email to check password!'
+          );
+          this.handleCancel();
+          this.router.navigate(['/login']);
+        } else {
+          this.isLoadingSend = false;
+          this.msg.error(res.message);
+          this.handleCancel();
+        }
+      });
+  }
+}
+
 }

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { AuthService } from '../_service/auth-service/auth.service';
+import { AuthenticationService } from '../_service/auth-service/authentication.service';
 import { ProfileService } from '../_service/profile-service/profile.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   dataQr:string='';
   constructor(
     private profileService: ProfileService,
-    private auth: AuthService,
+    private auth: AuthenticationService,
     private msg: NzMessageService
   ) {}
 

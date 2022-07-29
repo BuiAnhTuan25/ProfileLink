@@ -66,4 +66,8 @@ export class ProfileService {
   deleteUser(id:number):Observable<any>{
     return this.http.delete(this.USER_PATH+'/'+id);
   }
+
+  updateUser(user:any,id:number):Observable<any>{
+    return this.http.put(this.USER_PATH+"/"+id,user);
+  }
 }

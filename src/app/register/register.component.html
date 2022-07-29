@@ -30,7 +30,6 @@
       <div id="login1">
         <form nz-form [formGroup]="validateForm" class="login-form">
           <p id="login2">Sign up</p>
-          <p class="title1">Account</p>
           <nz-form-item>
             <nz-form-control [nzErrorTip]="errorCode">
               <input
@@ -113,112 +112,10 @@
               >
             </div>
           </ng-template>
-          <p class="title1">Profile</p>
         </form>
-        <form nz-form [formGroup]="profileForm">
-          <div>
-            <nz-form-item>
-              <nz-form-control nzErrorTip="Please input fullname!">
-                <input
-                  class="cssform"
-                  type="text"
-                  nz-input
-                  formControlName="fullname"
-                  placeholder="Fullname"
-                />
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <div>
-            <nz-form-item>
-              <nz-form-control [nzErrorTip]="errorShortbio">
-                <input
-                  class="cssform"
-                  type="text"
-                  nz-input
-                  formControlName="short_bio"
-                  placeholder="Short bio"
-                />
-              </nz-form-control>
-            </nz-form-item>
-            <ng-template #errorShortbio let-control>
-              <div
-                *ngIf="
-                  profileForm.controls['short_bio'].invalid &&
-                  (profileForm.controls['short_bio'].dirty ||
-                    profileForm.controls['short_bio'].touched)
-                "
-              >
-                <span *ngIf="profileForm.get('short_bio')?.hasError('required')"
-                  >Please input short bio!</span
-                >
-                <span
-                  *ngIf="profileForm.get('short_bio')?.hasError('whitespace')"
-                  >Short bio must not contain spaces!</span
-                >
-              </div>
-            </ng-template>
-          </div>
-          <div>
-            <nz-form-item>
-              <nz-form-control>
-                <input
-                  class="cssform"
-                  type="text"
-                  nz-input
-                  formControlName="location"
-                  placeholder="Location"
-                />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-control>
-                <input
-                  class="cssform"
-                  type="text"
-                  nz-input
-                  formControlName="about"
-                  placeholder="About"
-                />
-              </nz-form-control>
-            </nz-form-item>
-            <nz-form-item nz-row>
-              <nz-form-control>
-                <input
-                  nz-col
-                  nzSpan="12"
-                  nz-row
-                  nz-input
-                  type="date"
-                  formControlName="birthday"
-                  placeholder="Birthday"
-                />
-                <nz-select
-                  nz-col
-                  nzSpan="12"
-                  nzPlaceHolder="Gender"
-                  formControlName="gender"
-                >
-                  <nz-option nzValue="MALE" nzLabel="MALE"></nz-option>
-                  <nz-option nzValue="FEMALE" nzLabel="FEMALE"></nz-option>
-                  <nz-option nzValue="OTHER" nzLabel="OTHER"></nz-option>
-                </nz-select>
-              </nz-form-control>
-            </nz-form-item>
-          </div>
-          <button
-            nz-button
-            id="button1"
-            class="login-form-button login-form-margin"
-            [nzType]="'primary'"
-            (click)="register()"
-            [nzLoading]="isLoading"
-          >
-            Sign up with email
-          </button>
-        </form>
+        
         <div id="forgot">
-          <a href="">Forgot password?</a>
+          <a (click)="openModal()">Forgot password?</a>
         </div>
         <div class="or">
           <div class="or1"></div>
@@ -226,8 +123,7 @@
           <div class="or1"></div>
         </div>
         <div class="social">
-          <a href="">
-            <button class="social1">
+            <button class="social1" (click)="loginWithGoogle()">
               <span class="social2">
                 <svg
                   class="logo2"
@@ -257,10 +153,8 @@
               </span>
               <span class="social3">Continue with Google</span>
             </button>
-          </a>
         </div>
         <div class="social0">
-          <a href="">
             <button class="social1">
               <span class="social2">
                 <svg
@@ -279,9 +173,58 @@
               </span>
               <span class="social3">Continue with Facebook</span>
             </button>
-          </a>
         </div>
       </div>
     </div>
+    <nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="FORGOT PASSWORD"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+  [nzContent]="nzModalContent"
+  [nzFooter]="footer"
+  [nzAutofocus]="null"
+>
+</nz-modal>
+<ng-template #nzModalContent>
+  <form nz-form [formGroup]="modalForm">
+    <nz-form-item>
+      <nz-form-control [nzErrorTip]="errorCode">
+        <input
+          type="text"
+          nz-input
+          formControlName="mail"
+          placeholder="Your email"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <ng-template #errorCode let-control>
+      <div
+        *ngIf="
+          modalForm.controls['mail'].invalid &&
+          (modalForm.controls['mail'].dirty ||
+            modalForm.controls['mail'].touched)
+        "
+      >
+        <span *ngIf="modalForm.get('mail')?.hasError('required')"
+          >Please input your email!</span
+        >
+        <span *ngIf="modalForm.get('mail')?.hasError('pattern')"
+          >Email invalidate!</span
+        >
+      </div>
+    </ng-template>
+  </form>
+</ng-template>
+<ng-template #footer>
+  <button
+    [nzLoading]="isLoadingSend"
+    nz-button
+    nzType="primary"
+    (click)="handleOk()"
+  >
+    SEND
+  </button>
+</ng-template>
   </body>
 </html>
