@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.user = JSON.parse(localStorage.getItem('auth-user')!);
-    setTimeout(() => this.getProfile(), 500);
+    this.getProfile();
   }
 
   ngOnDestroy() {
@@ -51,7 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onClickCopyLink() {
-    navigator.clipboard.writeText(this.profile?.profile_link);
+    navigator.clipboard.writeText('http://localhost:4200/demo/'+this.profile?.short_bio);
     this.msg.success('Copied');
   }
 

@@ -35,7 +35,6 @@ export class DesignComponent implements OnInit {
       birthday: [null, Validators.required],
       gender: [GENDER.MALE, Validators.required],
       avatar_link: [null],
-      user_id: [null],
       design_id: [null],
       profile_link: [null],
       location: [null],
