@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NoSpace } from '../_helpers/validator';
-import { AuthService } from '../_service/auth-service/auth.service';
+import { AuthenticationService } from '../_service/auth-service/authentication.service';
 
 @Component({
   selector: 'app-change-password',
@@ -18,7 +18,7 @@ export class ChangePasswordComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private msg: NzMessageService,
-    private auth: AuthService,
+    private auth: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router
   ) {}

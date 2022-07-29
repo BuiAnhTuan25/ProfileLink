@@ -4,8 +4,15 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NoSpace } from '../_helpers/validator';
 import { EMAIL_REGEX } from '../_helpers/validator';
-import { AuthService } from '../_service/auth-service/auth.service';
+import { AuthenticationService } from '../_service/auth-service/authentication.service';
 import { TokenStorageService } from '../_service/token-storage-service/token-storage.service';
+import {
+  SocialAuthService,
+  FacebookLoginProvider,
+  GoogleLoginProvider,
+  SocialUser,
+} from 'angularx-social-login';
+import { OauthService } from '../_service/oauth-service/oauth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,16 +27,18 @@ export class LoginComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   isLoading: boolean = false;
+  socialUser!:SocialUser;
   errorMessage = '';
   roles: string[] = [];
 
   constructor(
-    private authService: AuthService,
     private tokenStorage: TokenStorageService,
-    private auth: AuthService,
+    private auth: AuthenticationService,
     private msg: NzMessageService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private socialAuthService: SocialAuthService,
+    private oauthService:OauthService,
   ) {}
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
@@ -43,6 +52,11 @@ export class LoginComponent implements OnInit {
     this.modalForm = this.fb.group({
       mail: [null, [Validators.required, Validators.pattern(EMAIL_REGEX)]],
     });
+
+    this.socialAuthService.authState.subscribe((user) => {
+      this.socialUser = user;
+      this.isLoggedIn = user != null;
+    });
   }
 
   submitForm(): void {
@@ -52,7 +66,7 @@ export class LoginComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       this.isLoading = true;
-      this.authService.login(this.validateForm.value).subscribe(
+      this.auth.login(this.validateForm.value).subscribe(
         (data) => {
           this.isLoading = false;
           this.tokenStorage.saveToken(data.data.jwt);
@@ -60,8 +74,9 @@ export class LoginComponent implements OnInit {
           this.isLoginFailed = false;
           this.isLoggedIn = true;
           this.roles = this.tokenStorage.getUser().roles;
-          //this.reloadPage();
-          this.router.navigate(['/home']);
+          if(data.data.user.is_profile){
+            this.router.navigate(['/home']);
+          } else this.router.navigate(['/create-profile']);
         },
         (err) => {
           this.errorMessage = err.error.message;
@@ -109,5 +124,63 @@ export class LoginComponent implements OnInit {
           }
         });
     }
+  }
+
+  loginWithFacebook() {
+    this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+      (data) => {
+        this.socialUser = data;
+        const tokenFacebook = this.socialUser.authToken;
+        this.oauthService.facebook(tokenFacebook).subscribe(
+          res => {
+            this.tokenStorage.saveToken(res.data.jwt);
+          this.tokenStorage.saveUser(res.data.user);
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+          this.roles = this.tokenStorage.getUser().roles;
+          if(res.data.user.is_profile){
+            this.router.navigate(['/home']);
+          } else this.router.navigate(['/create-profile']);
+          
+          },
+          err => {
+            this.errorMessage = err.error.message;
+            this.isLoginFailed = true;
+            this.isLoading = false;
+            this.msg.error('Login with facebook false!')
+          }
+        );
+      }
+    );
+  }
+  loginWithGoogle() {
+      this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+        (data) => {
+          debugger
+          this.socialUser = data;
+          const tokenGoogle = this.socialUser.authToken;
+          this.oauthService.google(tokenGoogle).subscribe(
+            res => {
+              this.tokenStorage.saveToken(res.data.jwt);
+            this.tokenStorage.saveUser(res.data.user);
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            this.roles = this.tokenStorage.getUser().roles;
+            if(res.data.user.is_profile){
+              this.router.navigate(['/home']);
+            } else this.router.navigate(['/create-profile']);
+          },
+          err => {
+            this.errorMessage = err.error.message;
+            this.isLoginFailed = true;
+            this.isLoading = false;
+            this.msg.error('Login with google false!')
+          }
+        );
+      }
+    );
+  }
+  signOut(): void {
+    this.socialAuthService.signOut();
   }
 }

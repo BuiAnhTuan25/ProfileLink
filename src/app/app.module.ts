@@ -4,6 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { QRCodeModule } from 'angularx-qrcode';
 
+import {
+  FacebookLoginProvider,
+  SocialLoginModule,
+  SocialAuthServiceConfig,
+  GoogleLoginProvider,
+} from 'angularx-social-login';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -22,6 +29,7 @@ import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { SocialsComponent } from './socials/socials.component';
 import { ThemesComponent } from './themes/themes.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CreateProfileComponent } from './create-profile/create-profile.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +45,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     SocialsComponent,
     ThemesComponent,
     ChangePasswordComponent,
+    CreateProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,12 +57,29 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     BrowserAnimationsModule,
     NgZorroAntdModule,
     QRCodeModule,
+    SocialLoginModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
+    }, 
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('744716950059120'),
+          },
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('1023106974808-auqrkk783n18ara30arda6h5ltv80thf.apps.googleusercontent.com'),
+          },
+        ],
+      } as SocialAuthServiceConfig,
     },
   ],
   bootstrap: [AppComponent],

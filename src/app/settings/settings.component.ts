@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { EMAIL_REGEX } from '../_helpers/validator';
-import { AuthService } from '../_service/auth-service/auth.service';
+import { AuthenticationService } from '../_service/auth-service/authentication.service';
 import { ProfileService } from '../_service/profile-service/profile.service';
 
 @Component({
@@ -19,7 +19,7 @@ export class SettingsComponent implements OnInit {
   user: any;
   constructor(
     private fb: FormBuilder,
-    private auth: AuthService,
+    private auth: AuthenticationService,
     private msg: NzMessageService,
     private router: Router,
     private profileService:ProfileService,
