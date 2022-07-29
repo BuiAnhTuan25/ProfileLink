@@ -1,4 +1,3 @@
-<div class="overflow-y">
 <div
 *ngIf="isBackgroundImage;else elseColor"
   class="center demo backgrond-img"
@@ -17,6 +16,7 @@
 </ng-template>
 
 <ng-template #content>
+  <div class="overflow-y">
   <img
   class="avatar"
   [src]="profileBio ? profileBio.avatar_link : profile?.avatar_link"
@@ -36,7 +36,7 @@
     </div>
   </div>
 </div>
-
+<div style="margin-bottom:50px">
 <div *ngFor="let link of listLinks">
   <div style="font-weight: bold; margin-top:24px;" *ngIf="link.type == 'HEADER'">
     {{ link.title }}
@@ -79,6 +79,7 @@
     </button>
   </ng-template>
 </div>
-
-</ng-template>
 </div>
+</div>
+</ng-template>
+
