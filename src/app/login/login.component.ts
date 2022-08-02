@@ -156,9 +156,8 @@ export class LoginComponent implements OnInit {
   loginWithGoogle() {
       this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
         (data) => {
-          debugger
           this.socialUser = data;
-          const tokenGoogle = this.socialUser.authToken;
+          const tokenGoogle = this.socialUser.idToken;
           this.oauthService.google(tokenGoogle).subscribe(
             res => {
               this.tokenStorage.saveToken(res.data.jwt);

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { QRCodeModule } from 'angularx-qrcode';
+import { AgmCoreModule } from '@agm/core';
 
 import {
   FacebookLoginProvider,
@@ -30,6 +31,7 @@ import { SocialsComponent } from './socials/socials.component';
 import { ThemesComponent } from './themes/themes.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
+import { StatisticComponent } from './statistic/statistic.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
     ThemesComponent,
     ChangePasswordComponent,
     CreateProfileComponent,
+    StatisticComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +61,10 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
     NgZorroAntdModule,
     QRCodeModule,
     SocialLoginModule,
+    AgmCoreModule.forRoot({
+      apiKey: "AIzaSyDWTx7bREpM5B6JKdbzOvMW-RRlhkukmVE",
+      libraries: ["places", "geometry"]
+  }),
   ],
   providers: [
     {
@@ -76,7 +83,11 @@ import { CreateProfileComponent } from './create-profile/create-profile.componen
           },
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('1023106974808-auqrkk783n18ara30arda6h5ltv80thf.apps.googleusercontent.com'),
+            provider: new GoogleLoginProvider('716469277461-al1ds3lmgi6r7s9lm5ggs2idaqfpjp6r.apps.googleusercontent.com',
+            {
+              scope:'email',
+              plugin_name:'google'
+             })
           },
         ],
       } as SocialAuthServiceConfig,

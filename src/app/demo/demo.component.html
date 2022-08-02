@@ -62,6 +62,7 @@
   </div>
   <ng-template #elsePrimary>
     <button
+    [nzGhost]="true"
       *ngIf="link.type == 'LINK'"
       [ngStyle]="{
         'background-color': design?.background_color,

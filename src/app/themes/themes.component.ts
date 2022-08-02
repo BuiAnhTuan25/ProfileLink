@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { DataService } from '../_service/data-service/data.service';
-import { DesignService } from '../_service/designservice/design.service';
+import { DesignService } from '../_service/design-service/design.service';
 import { ProfileService } from '../_service/profile-service/profile.service';
 
 @Component({
