@@ -18,7 +18,7 @@ export class ProfileService {
   getProfileByShortBio(shortBio: any): Observable<any> {
     let param = new HttpParams();
     param = param.append('shortBio', shortBio);
-    return this.http.get(this.BASE_PATH + '/getbyshortbio', { params: param });
+    return this.http.get(this.BASE_PATH + '/shortbio', { params: param });
   }
 
   addProfile(profile: any, file?: any): Observable<any> {
