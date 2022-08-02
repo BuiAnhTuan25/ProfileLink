@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onClickQrCode(){
    this.isVisible=true;
-   this.dataQr=this.profile?.profile_link;
+   this.dataQr='http://localhost:4200/demo/'+this.profile?.short_bio;
   }
   onCloseModal(){
     this.isVisible=false;

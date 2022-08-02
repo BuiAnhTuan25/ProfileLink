@@ -50,14 +50,19 @@
               <nz-tab [nzTitle]="titleDesign">
                 <app-design *ngIf="profile" [profile]="profile" (sendProfile)="receverProfile($event)"></app-design>
               </nz-tab>
-              <nz-tab [nzTitle]="titleSettngs">
+              <nz-tab [nzTitle]="titleStatistic">
+                <app-statistic ></app-statistic>
+              </nz-tab>
+              <nz-tab [nzTitle]="titleSettings">
                 <app-settings ></app-settings>
               </nz-tab>
             </nz-tabset>
           </div>
           <ng-template #titleLinks><div class="title">Links</div></ng-template>
           <ng-template #titleDesign><div class="title">Design</div></ng-template>
-          <ng-template #titleSettngs><div class="title">Settings</div></ng-template>
+          <ng-template #titleSettings><div class="title">Settings</div></ng-template>
+          <ng-template #titleStatistic><div class="title">Statistic</div></ng-template>
+
 
         </nz-content>
       </nz-layout>

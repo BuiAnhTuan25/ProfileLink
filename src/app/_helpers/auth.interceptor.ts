@@ -17,13 +17,20 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     let authReq = req;
     const token = this.token.getToken();
-    if (token != null) {
+    if (token != null && this.isHeaderNeeded(req.url)) {
       authReq = req.clone({
         headers: req.headers.set(TOKEN_HEADER_KEY, token),
       });
     }
     return next.handle(authReq);
   }
+  isHeaderNeeded(url: string) {
+    if (url === "http://api.ipify.org/?format=json") {
+        return false;
+    } else {
+        return true;
+    }
+}
 }
 export const authInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

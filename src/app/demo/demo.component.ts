@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { NzButtonShape, NzButtonType } from 'ng-zorro-antd/button';
 import { DataService } from '../_service/data-service/data.service';
-import { DesignService } from '../_service/designservice/design.service';
+import { DesignService } from '../_service/design-service/design.service';
 import { BUTTON_TYPE } from '../_model/button_type';
 import { LinksService } from '../_service/links-service/links.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
