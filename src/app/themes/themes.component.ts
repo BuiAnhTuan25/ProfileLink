@@ -78,7 +78,10 @@ export class ThemesComponent implements OnInit {
 
     this.dataService.receiveDesign.subscribe((design) => {
       this.design = design;
+      if(this.design.type=='USER_CREATE') this.isVisibleDesign=true;
+      else this.isVisibleDesign=false;
     });
+
     this.designForm = this.fb.group({
       id: [null],
       background_color: ['#FFFFFF'],

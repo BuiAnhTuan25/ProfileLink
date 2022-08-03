@@ -50,11 +50,11 @@ export class DesignService {
   }
   getAllDesign(page: number, pageSize: number): Observable<any> {
     return this.http.get(
-      this.BASE_PATH + '?page=' + page + '&page_size=' + pageSize
+      this.BASE_PATH + '?page=' + page + '&page-size=' + pageSize
     );
   }
 
   getByNameDesign(name:string){
-    return this.http.get(this.BASE_PATH+'/get-by-name/'+name);
+    return this.http.get(this.BASE_PATH+'/name/'+name);
   }
 }

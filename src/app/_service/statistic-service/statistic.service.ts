@@ -15,7 +15,7 @@ export class StatisticService {
     return this.http.get(this.STATISTIC_PATH+'/top-month'
     +'?page=' +
     page +
-    '&page_size=' +
+    '&page-size=' +
     pageSize);
   }
 
@@ -23,7 +23,7 @@ export class StatisticService {
     return this.http.get(this.PROFILE_PATH+'/top'
     +'?page=' +
     page +
-    '&page_size=' +
+    '&page-size=' +
     pageSize);
   }
 
