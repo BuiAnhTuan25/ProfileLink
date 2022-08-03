@@ -20,7 +20,7 @@ export class SocialService {
         profileId +
         '?page=' +
         page +
-        '&page_size=' +
+        '&page-size=' +
         pageSize
     );
   }
