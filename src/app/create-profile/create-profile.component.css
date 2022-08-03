@@ -273,6 +273,11 @@ body {
     font-weight: 500;
   }
 
+  #p1{
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
   .erorr {
     color: red;
   }

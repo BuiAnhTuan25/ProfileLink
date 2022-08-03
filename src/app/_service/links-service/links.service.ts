@@ -21,7 +21,7 @@ export class LinksService {
         profileId +
         '?page=' +
         page +
-        '&page_size=' +
+        '&page-size=' +
         pageSize
     );
   }

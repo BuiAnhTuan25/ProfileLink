@@ -31,7 +31,7 @@ export class AuthenticationService {
   sendEmailChangePassword(mail: string): Observable<any> {
     let param = new HttpParams();
     param = param.append('mail', mail);
-    return this.http.get(AUTH_API + '/update_password_token', {
+    return this.http.get(AUTH_API + '/update-password-token', {
       params: param,
     });
   }
@@ -40,7 +40,7 @@ export class AuthenticationService {
     let param = new HttpParams();
     param = param.append('code', code);
     param = param.append('password', newPass);
-    return this.http.post(AUTH_API + '/test/update_password_token', null, {
+    return this.http.post(AUTH_API + '/test/update-password-token', null, {
       params: param,
     });
   }
@@ -48,7 +48,7 @@ export class AuthenticationService {
   sendEmailForgotPassword(mail: string): Observable<any> {
     let param = new HttpParams();
     param = param.append('mail', mail);
-    return this.http.get(AUTH_API + '/test/forgot_password', {
+    return this.http.get(AUTH_API + '/test/forgot-password', {
       params: param,
     });
   }
