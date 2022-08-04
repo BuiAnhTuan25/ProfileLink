@@ -78,7 +78,10 @@ export class ThemesComponent implements OnInit {
 
     this.dataService.receiveDesign.subscribe((design) => {
       this.design = design;
-      if(this.design.type=='USER_CREATE') this.isVisibleDesign=true;
+      if(this.design.type=='USER_CREATE'){
+        this.isVisibleDesign=true;
+        this.designForm.patchValue(design);
+      } 
       else this.isVisibleDesign=false;
     });
 
