@@ -8,6 +8,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileService } from '../_service/profile-service/profile.service';
 import { SocialService } from '../_service/social-service/social.service';
+import { WebsocketService } from '../_service/websocket-service/websocket.service';
 
 @Component({
   selector: 'app-demo',
@@ -36,7 +37,8 @@ export class DemoComponent implements OnInit {
     private msg: NzMessageService,
     private route: ActivatedRoute,
     private profileService: ProfileService,
-    private socialService: SocialService
+    private socialService: SocialService,
+    //private websocket:WebsocketService
   ) {}
 
   async ngOnInit() {
@@ -56,6 +58,8 @@ export class DemoComponent implements OnInit {
       this.getListLinks(this.profileBio.id);
       this.getSocials(this.profileBio.id);
       this.getDesign(this.profileBio.design_id);
+      // this.websocket._connect(this.profileBio.id);
+      // setTimeout(()=>this.websocket._send({to:this.profileBio.id,from:"someone",text:"Someone is viewing your profile"}), 1000)
     } else this.getDesign(this.profile.design_id);
   }
 
