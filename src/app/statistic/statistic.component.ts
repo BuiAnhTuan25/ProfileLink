@@ -47,7 +47,7 @@ export class StatisticComponent implements OnInit {
 
   getIp(){
     this.statisticService.getIp().subscribe((res:any)=>{
-      console.log(res.ip)
+
     })
   }
 
@@ -58,7 +58,6 @@ export class StatisticComponent implements OnInit {
     // })
     navigator.geolocation.getCurrentPosition((res)=>{
       this.location=res.coords;
-      console.log(res)
     })
   }
 
