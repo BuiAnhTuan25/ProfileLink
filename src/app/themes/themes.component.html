@@ -11,7 +11,13 @@
       </nz-card>
     </div>
     <div nz-col nzSpan="7" nzOffset="1">
-      <nz-card *ngIf="role=='ADMIN' || role=='USER_VIP'" class="card" nzTitle="Create" [nzHoverable]="true" (click)="onCreateDesign()">
+      <nz-card
+        *ngIf="role == 'ADMIN' || role == 'USER_VIP'"
+        class="card"
+        nzTitle="Create"
+        [nzHoverable]="true"
+        (click)="onCreateDesign()"
+      >
         <img
           class="avatar-theme"
           src="https://res.cloudinary.com/anhtuanbui/image/upload/v1658639791/xkppra8sr095o8spjt6f.png"
@@ -21,7 +27,12 @@
   </div>
   <ng-template #titleThemes><div class="title">Themes</div></ng-template>
 </nz-card>
-<nz-card *ngIf="isVisibleDesign" style="margin-top: 30px" [nzTitle]="titleDesign" [nzHoverable]="true">
+<nz-card
+  *ngIf="isVisibleDesign"
+  style="margin-top: 30px"
+  [nzTitle]="titleDesign"
+  [nzHoverable]="true"
+>
   <form nz-form [formGroup]="designForm">
     <nz-form-item>
       <nz-form-label class="label" [nzSpan]="6">Background color</nz-form-label>
@@ -32,7 +43,6 @@
           formControlName="background_color"
           type="color"
           (blur)="onUpdateDesign()"
-
         />
       </nz-form-control>
     </nz-form-item>
@@ -40,14 +50,20 @@
     <nz-form-item>
       <nz-form-label class="label" [nzSpan]="6">Button Type</nz-form-label>
       <nz-form-control [nzSpan]="18">
-          <div *ngFor="let buttonType of buttonTypes;index as i">
-          <div
-                (click)="onSelectButton(buttonType.value)"
-                [ngClass]="buttonType.class"
-          ></div>
-
+        <div *ngFor="let buttonType of buttonTypes; index as i">
+          <div *ngIf="buttonType.type == 'round'" class="wrap-button-round">
+            <div
+              (click)="onSelectButton(buttonType.value)"
+              [ngClass]="buttonType.class"
+            ></div>
           </div>
-          
+          <div *ngIf="buttonType.type == 'default'" class="wrap-button-default">
+            <div
+              (click)="onSelectButton(buttonType.value)"
+              [ngClass]="buttonType.class"
+            ></div>
+          </div>
+        </div>
       </nz-form-control>
     </nz-form-item>
 
@@ -60,7 +76,6 @@
           formControlName="button_color"
           type="color"
           (blur)="onUpdateDesign()"
-
         />
       </nz-form-control>
     </nz-form-item>
@@ -83,12 +98,14 @@
       <nz-form-control [nzSpan]="18">
         <div nz-row>
           <div *ngFor="let font of fonts" nz-col nzSpan="11">
-            <div
-            (click)="onSelectFont(font.name)"
-              class="font"
-              [ngStyle]="{ 'font-family': font.name }"
-            >
-              {{ font.name }}
+            <div class="wrap-font">
+              <div
+                (click)="onSelectFont(font.name)"
+                class="font"
+                [ngStyle]="{ 'font-family': font.name }"
+              >
+                {{ font.name }}
+              </div>
             </div>
           </div>
         </div>

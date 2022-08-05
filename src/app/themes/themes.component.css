@@ -19,6 +19,23 @@
   width: 100px;
   height:40px;
 }
+.wrap-button-default{
+  width: 210px;
+  height:50px;
+  border: solid 2px #0095f6;
+  margin-top:10px;
+  
+}
+
+.wrap-button-round{
+  width: 210px;
+  height:50px;
+  border: solid 2px #0095f6;
+  border-radius: 25px;
+  margin-top:10px;
+  
+}
+
 .button-default-primary{
   width:200px;
   height: 40px;
@@ -27,6 +44,8 @@
   background-color: black;
   /* border: none; */
   cursor: pointer;
+  margin: auto;
+  margin-top:3px;
 }
 
 .button-default-default{
@@ -36,6 +55,8 @@
   margin-bottom: 20px;
   border:2px solid black;
   cursor: pointer;
+  margin: auto;
+  margin-top:3px;
 }
 
 .button-round-primary{
@@ -47,6 +68,8 @@
   border: none;
   border-radius: 20px;
   cursor: pointer;
+  margin: auto;
+  margin-top:3px;
 }
 
 .button-round-default{
@@ -57,8 +80,15 @@
   border:2px solid black;
   border-radius: 20px;
   cursor: pointer;
+  margin: auto;
+  margin-top:3px;
 }
-
+.wrap-font{
+  margin-top:5px;
+  border: solid 2px #0095f6;
+  height: 50px;
+  width: 190px;
+}
 .font{
   width:180px;
   height: 40px;
@@ -68,6 +98,8 @@
   cursor: pointer;
   text-align: center;
   font-size:18px;
+  margin: auto;
+  margin-top:3px;
 }
 
 .label{
@@ -97,4 +129,8 @@
 
 .align-center {
   text-align: center;
+}
+
+.ng-star-inserted{
+  /* width: 215px; */
 }
