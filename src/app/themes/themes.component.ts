@@ -48,18 +48,22 @@ export class ThemesComponent implements OnInit {
     {
       class: 'button-default-primary',
       value: 'RECTANGLE_SOLID',
+      type:'default'
     },
     {
       class: 'button-default-default',
       value: 'RECTANGLE_REGULAR',
+      type:'default'
     },
     {
       class: 'button-round-primary',
       value: 'CIRCLE_SOLID',
+      type: 'round'
     },
     {
       class: 'button-round-default',
       value: 'CIRCLE_REGULAR',
+      type: 'round'
     },
   ];
   listDesign: any[] = [];
