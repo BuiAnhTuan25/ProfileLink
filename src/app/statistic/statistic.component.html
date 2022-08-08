@@ -5,44 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css"
+    />
   </head>
   <body>
     <nz-card [nzTitle]="titleTopMonth" [nzHoverable]="true">
       <div class="wrap-table">
         <table id="column-example-4" class="charts-css column">
-          <caption> Column Example #4 </caption>
+          <caption>
+            Column Example #4
+          </caption>
           <tbody class="tbody-table">
-            <tr class="tr-1">
-              <td style="--size:0.2;"></td>
+            <tr class="tr-1" *ngFor="let month of topMonth;index as i">
+              <td
+                (click)="onClickProfile(month.short_bio)"
+                [ngStyle]="{ '--size': month.click_count / max ,'position':'relative'}"
+              >
+              <img class="avatar" [src]="month.avatar_link" alt="" />
+              <img
+                class="rank"
+                [src]="ranks[i].src"
+                alt=""
+              />
+            </td>
             </tr>
-            <tr class="tr-1"> 
-              <td style="--size:0.4;"></td>
-            </tr>
-            <tr class="tr-1">
-              <td style="--size:0.6;"></td>
-            </tr>
-            <tr class="tr-1">
-              <td style="--size:0.8;"></td>
-            </tr>
-            <tr class="tr-1">
-              <td style="--size:1;"> </td>
-            </tr>
-            
           </tbody>
-          <tr class="tr-2">
-            <td class="tr-21"><img class="img-table" src="https://cdn-icons-png.flaticon.com/512/6431/6431247.png" alt=""></td>
-
-            <td class="tr-22"><img class="img-table" src="https://cdn-icons-png.flaticon.com/512/4020/4020064.png" alt=""></td>
-
-            <td class="tr-23"><img class="img-table" src="https://cdn-icons-png.flaticon.com/512/8030/8030185.png" alt=""></td>
- 
-            <td class="tr-24"><img class="img-table" src="https://cdn-icons.flaticon.com/png/512/5040/premium/5040801.png?token=exp=1659926970~hmac=1d347e78f94f2f040a549a09b0f8b1c3" alt=""></td>
-
-            <td class="tr-25"><img class="img-table" src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979440.png?token=exp=1659927006~hmac=2d557fc642d5022dd060f7861e82bb35" alt=""></td>
-          </tr>
+          
         </table>
       </div>
+      <!-- <div *ngFor="let month of topMonth">
+        <tr class="tr-1" (click)="onClickProfile(month.short_bio)">
+          <td [ngStyle]="{'--size':month.size}"></td>
+        </tr>
+      </div> -->
       <!-- <div *ngFor="let month of topMonth">
         
         <nz-card
