@@ -1,5 +1,50 @@
-<nz-card [nzTitle]="titleTopMonth" [nzHoverable]="true">
-    <div *ngFor="let month of topMonth">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+  </head>
+  <body>
+    <nz-card [nzTitle]="titleTopMonth" [nzHoverable]="true">
+      <div class="wrap-table">
+        <table id="column-example-4" class="charts-css column">
+          <caption> Column Example #4 </caption>
+          <tbody class="tbody-table">
+            <tr class="tr-1">
+              <td style="--size:0.2;"></td>
+            </tr>
+            <tr class="tr-1"> 
+              <td style="--size:0.4;"></td>
+            </tr>
+            <tr class="tr-1">
+              <td style="--size:0.6;"></td>
+            </tr>
+            <tr class="tr-1">
+              <td style="--size:0.8;"></td>
+            </tr>
+            <tr class="tr-1">
+              <td style="--size:1;"> </td>
+            </tr>
+            
+          </tbody>
+          <tr class="tr-2">
+            <td class="tr-21"><img class="img-table" src="https://cdn-icons-png.flaticon.com/512/6431/6431247.png" alt=""></td>
+
+            <td class="tr-22"><img class="img-table" src="https://cdn-icons-png.flaticon.com/512/4020/4020064.png" alt=""></td>
+
+            <td class="tr-23"><img class="img-table" src="https://cdn-icons-png.flaticon.com/512/8030/8030185.png" alt=""></td>
+ 
+            <td class="tr-24"><img class="img-table" src="https://cdn-icons.flaticon.com/png/512/5040/premium/5040801.png?token=exp=1659926970~hmac=1d347e78f94f2f040a549a09b0f8b1c3" alt=""></td>
+
+            <td class="tr-25"><img class="img-table" src="https://cdn-icons.flaticon.com/png/512/1979/premium/1979440.png?token=exp=1659927006~hmac=2d557fc642d5022dd060f7861e82bb35" alt=""></td>
+          </tr>
+        </table>
+      </div>
+      <!-- <div *ngFor="let month of topMonth">
+        
         <nz-card
           nzHoverable
           class="statistic"
@@ -11,23 +56,31 @@
             [nzAvatar]="avatarTemplate"
           ></nz-card-meta>
           <ng-template #avatarTemplate>
-            <img alt="example" width="50" height="50" [src]="month.avatar_link" />
+            <img
+              alt="example"
+              width="50"
+              height="50"
+              [src]="month.avatar_link"
+            />
           </ng-template>
           <ng-template #descriptionTemplate>
             <div>localhost:4200/demo/{{ month.short_bio }}</div>
-            <div><i class="fa-solid fa-eye mr-1"></i>{{ month.click_count }}</div>
+            <div>
+              <i class="fa-solid fa-eye mr-1"></i>{{ month.click_count }}
+            </div>
           </ng-template>
         </nz-card>
-      </div>
-</nz-card>
-<ng-template #titleTopMonth><div class="title">Top profile of the month</div></ng-template>
-<nz-card class="mt-3" [nzTitle]="titleTopProfile" [nzHoverable]="true">
-    <div *ngFor="let profile of topProfile">
+      </div> -->
+    </nz-card>
+    <ng-template #titleTopMonth
+      ><div class="title">Top profile of the month</div></ng-template
+    >
+    <nz-card class="mt-3" [nzTitle]="titleTopProfile" [nzHoverable]="true">
+      <div *ngFor="let profile of topProfile">
         <nz-card
           nzHoverable
           class="statistic"
           (click)="onClickProfile(profile.short_bio)"
-
         >
           <nz-card-meta
             [nzTitle]="profile.fullname"
@@ -35,25 +88,36 @@
             [nzAvatar]="avatarTemplate"
           ></nz-card-meta>
           <ng-template #avatarTemplate>
-            <img alt="example" width="50" height="50" [src]="profile.avatar_link" />
+            <img
+              alt="example"
+              width="50"
+              height="50"
+              [src]="profile.avatar_link"
+            />
           </ng-template>
           <ng-template #descriptionTemplate>
             <div>localhost:4200/demo/{{ profile.short_bio }}</div>
-            <div><i class="fa-solid fa-eye mr-1"></i>{{ profile.click_count }}</div>
+            <div>
+              <i class="fa-solid fa-eye mr-1"></i>{{ profile.click_count }}
+            </div>
           </ng-template>
         </nz-card>
       </div>
-      
-</nz-card>
-<ng-template #titleTopProfile><div class="title">Top profile</div></ng-template>
-<div class="mt-3">
-  <agm-map [latitude]="location?.latitude" [longitude]="location?.longitude">
-    <agm-marker 
-    [latitude]="location?.latitude" 
-    [longitude]="location?.longitude">    
-</agm-marker>
-  </agm-map>
-
-</div>
-  
-
+    </nz-card>
+    <ng-template #titleTopProfile
+      ><div class="title">Top profile</div></ng-template
+    >
+    <div class="mt-3">
+      <agm-map
+        [latitude]="location?.latitude"
+        [longitude]="location?.longitude"
+      >
+        <agm-marker
+          [latitude]="location?.latitude"
+          [longitude]="location?.longitude"
+        >
+        </agm-marker>
+      </agm-map>
+    </div>
+  </body>
+</html>
