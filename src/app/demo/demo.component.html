@@ -26,10 +26,11 @@
   <div nz-row [nzGutter]="16" class="social">
     <div *ngFor="let social of listSocial">
       <i
+      (click)="onClickSocial(social)"
         nz-icon
         nz-col
         nzSpan="3"
-        class="gutter-row"
+        style="cursor:pointer"
         [nzType]="social?.social_icon"
         nzTheme="outline"
       ></i>
