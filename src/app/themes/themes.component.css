@@ -19,12 +19,16 @@
   width: 100px;
   height:40px;
 }
+
+.button-type{
+  height: 60px;
+}
+
 .wrap-button-default{
   width: 210px;
   height:50px;
   border: solid 2px #0095f6;
-  margin-top:10px;
-  
+
 }
 
 .wrap-button-round{
@@ -32,8 +36,7 @@
   height:50px;
   border: solid 2px #0095f6;
   border-radius: 25px;
-  margin-top:10px;
-  
+
 }
 
 .button-default-primary{
@@ -83,12 +86,18 @@
   margin: auto;
   margin-top:3px;
 }
+
+.button-font{
+  height: 60px;
+  width: 200px;
+}
+
 .wrap-font{
-  margin-top:5px;
   border: solid 2px #0095f6;
   height: 50px;
   width: 190px;
 }
+
 .font{
   width:180px;
   height: 40px;

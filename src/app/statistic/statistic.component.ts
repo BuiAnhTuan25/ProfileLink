@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { StatisticService } from '../_service/statistic-service/statistic.service';
 
@@ -13,6 +12,24 @@ export class StatisticComponent implements OnInit {
   topMonth:any[]=[];
   location:any;
   mapType:string= "satelite";
+  max!:number;
+  ranks:any[]=[
+    {
+      src:'https://cdn-icons-png.flaticon.com/512/6431/6431247.png'
+    },
+    {
+      src:'https://cdn-icons-png.flaticon.com/512/4020/4020064.png'
+    },
+        {
+      src:'https://cdn-icons-png.flaticon.com/512/8030/8030185.png'
+    },
+    {
+      src:'https://cdn-icons.flaticon.com/png/512/5040/premium/5040801.png?token=exp=1659926970~hmac=1d347e78f94f2f040a549a09b0f8b1c3'
+    },    
+    {
+      src:'https://cdn-icons.flaticon.com/png/512/1979/premium/1979440.png?token=exp=1659927006~hmac=2d557fc642d5022dd060f7861e82bb35'
+    },
+  ]
 
   constructor(private statisticService:StatisticService,private msg:NzMessageService) { }
 
@@ -37,6 +54,8 @@ export class StatisticComponent implements OnInit {
     this.statisticService.getTopProfileOfMonth(0,5).subscribe((res:any)=>{
       if(res.success){
         this.topMonth=res.data;
+        this.max=res.data[0].click_count;
+        this.topMonth.reverse();
       } else this.msg.error(res.message);
     });
   }
