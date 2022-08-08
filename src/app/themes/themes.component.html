@@ -49,19 +49,15 @@
 
     <nz-form-item>
       <nz-form-label class="label" [nzSpan]="6">Button Type</nz-form-label>
-      <nz-form-control [nzSpan]="18">
-        <div *ngFor="let buttonType of buttonTypes; index as i">
-          <div *ngIf="buttonType.type == 'round'" class="wrap-button-round">
+      <nz-form-control [nzSpan]="8">
+        <div *ngFor="let buttonType of buttonTypes; index as i" class="button-type">
+          <div [class]="buttonType.type == 'round'&& i==indexButton?'wrap-button-round':''">
+          <div [class]="buttonType.type == 'default'&& i==indexButton?'wrap-button-default':''">
             <div
-              (click)="onSelectButton(buttonType.value)"
+              (click)="onSelectButton(buttonType.value,i)"
               [ngClass]="buttonType.class"
             ></div>
           </div>
-          <div *ngIf="buttonType.type == 'default'" class="wrap-button-default">
-            <div
-              (click)="onSelectButton(buttonType.value)"
-              [ngClass]="buttonType.class"
-            ></div>
           </div>
         </div>
       </nz-form-control>
@@ -97,10 +93,10 @@
       <nz-form-label class="label" [nzSpan]="6">Font</nz-form-label>
       <nz-form-control [nzSpan]="18">
         <div nz-row>
-          <div *ngFor="let font of fonts" nz-col nzSpan="11">
-            <div class="wrap-font">
+          <div *ngFor="let font of fonts;index as i" nz-col nzSpan="10" class="button-font">
+            <div [class]="indexFont==i?'wrap-font':''">
               <div
-                (click)="onSelectFont(font.name)"
+                (click)="onSelectFont(font.name,i)"
                 class="font"
                 [ngStyle]="{ 'font-family': font.name }"
               >

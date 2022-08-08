@@ -1,5 +1,47 @@
-<nz-card [nzTitle]="titleTopMonth" [nzHoverable]="true">
-    <div *ngFor="let month of topMonth">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css"
+    />
+  </head>
+  <body>
+    <nz-card [nzTitle]="titleTopMonth" [nzHoverable]="true">
+      <div class="wrap-table">
+        <table id="column-example-4" class="charts-css column">
+          <caption>
+            Column Example #4
+          </caption>
+          <tbody class="tbody-table">
+            <tr class="tr-1" *ngFor="let month of topMonth;index as i">
+              <td
+                (click)="onClickProfile(month.short_bio)"
+                [ngStyle]="{ '--size': month.click_count / max ,'position':'relative'}"
+              >
+              <img class="avatar" [src]="month.avatar_link" alt="" />
+              <img
+                class="rank"
+                [src]="ranks[i].src"
+                alt=""
+              />
+            </td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+      <!-- <div *ngFor="let month of topMonth">
+        <tr class="tr-1" (click)="onClickProfile(month.short_bio)">
+          <td [ngStyle]="{'--size':month.size}"></td>
+        </tr>
+      </div> -->
+      <!-- <div *ngFor="let month of topMonth">
+        
         <nz-card
           nzHoverable
           class="statistic"
@@ -11,23 +53,31 @@
             [nzAvatar]="avatarTemplate"
           ></nz-card-meta>
           <ng-template #avatarTemplate>
-            <img alt="example" width="50" height="50" [src]="month.avatar_link" />
+            <img
+              alt="example"
+              width="50"
+              height="50"
+              [src]="month.avatar_link"
+            />
           </ng-template>
           <ng-template #descriptionTemplate>
             <div>localhost:4200/demo/{{ month.short_bio }}</div>
-            <div><i class="fa-solid fa-eye mr-1"></i>{{ month.click_count }}</div>
+            <div>
+              <i class="fa-solid fa-eye mr-1"></i>{{ month.click_count }}
+            </div>
           </ng-template>
         </nz-card>
-      </div>
-</nz-card>
-<ng-template #titleTopMonth><div class="title">Top profile of the month</div></ng-template>
-<nz-card class="mt-3" [nzTitle]="titleTopProfile" [nzHoverable]="true">
-    <div *ngFor="let profile of topProfile">
+      </div> -->
+    </nz-card>
+    <ng-template #titleTopMonth
+      ><div class="title">Top profile of the month</div></ng-template
+    >
+    <nz-card class="mt-3" [nzTitle]="titleTopProfile" [nzHoverable]="true">
+      <div *ngFor="let profile of topProfile">
         <nz-card
           nzHoverable
           class="statistic"
           (click)="onClickProfile(profile.short_bio)"
-
         >
           <nz-card-meta
             [nzTitle]="profile.fullname"
@@ -35,25 +85,36 @@
             [nzAvatar]="avatarTemplate"
           ></nz-card-meta>
           <ng-template #avatarTemplate>
-            <img alt="example" width="50" height="50" [src]="profile.avatar_link" />
+            <img
+              alt="example"
+              width="50"
+              height="50"
+              [src]="profile.avatar_link"
+            />
           </ng-template>
           <ng-template #descriptionTemplate>
             <div>localhost:4200/demo/{{ profile.short_bio }}</div>
-            <div><i class="fa-solid fa-eye mr-1"></i>{{ profile.click_count }}</div>
+            <div>
+              <i class="fa-solid fa-eye mr-1"></i>{{ profile.click_count }}
+            </div>
           </ng-template>
         </nz-card>
       </div>
-      
-</nz-card>
-<ng-template #titleTopProfile><div class="title">Top profile</div></ng-template>
-<div class="mt-3">
-  <agm-map [latitude]="location?.latitude" [longitude]="location?.longitude">
-    <agm-marker 
-    [latitude]="location?.latitude" 
-    [longitude]="location?.longitude">    
-</agm-marker>
-  </agm-map>
-
-</div>
-  
-
+    </nz-card>
+    <ng-template #titleTopProfile
+      ><div class="title">Top profile</div></ng-template
+    >
+    <div class="mt-3">
+      <agm-map
+        [latitude]="location?.latitude"
+        [longitude]="location?.longitude"
+      >
+        <agm-marker
+          [latitude]="location?.latitude"
+          [longitude]="location?.longitude"
+        >
+        </agm-marker>
+      </agm-map>
+    </div>
+  </body>
+</html>

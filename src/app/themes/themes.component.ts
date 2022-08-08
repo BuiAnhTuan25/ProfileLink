@@ -18,6 +18,8 @@ export class ThemesComponent implements OnInit {
   username: string = '';
   role:string='';
   isVisibleDesign: boolean = false;
+  indexButton!:number;
+  indexFont!:number;
   fonts: any[] = [
     {
       name: 'Georgia',
@@ -85,6 +87,8 @@ export class ThemesComponent implements OnInit {
       if(this.design.type=='USER_CREATE'){
         this.isVisibleDesign=true;
         this.designForm.patchValue(design);
+        this.setButtonIndex(design);
+        this.setFontIndex(design);
       } 
       else this.isVisibleDesign=false;
     });
@@ -162,14 +166,34 @@ export class ThemesComponent implements OnInit {
       });
   }
 
-  onSelectButton(buttonType: any) {
+  onSelectButton(buttonType: any,index:number) {
     this.designForm.controls['button_type'].setValue(buttonType);
+    this.indexButton=index;
     this.onUpdateDesign();
   }
 
-  onSelectFont(font: string) {
+  onSelectFont(font: string,index:number) {
     this.designForm.controls['font'].setValue(font);
+    this.indexFont=index;
     this.onUpdateDesign();
+  }
+
+  setButtonIndex(design:any){
+   for(let i=0;i<this.buttonTypes.length;i++){
+    if(this.buttonTypes[i].value==design.button_type){
+      this.indexButton=i;
+      break;
+    }
+   }
+  }
+
+  setFontIndex(design:any){
+    for(let i=0;i<this.fonts.length;i++){
+      if(this.fonts[i].name==design.font){
+        this.indexFont=i;
+        break;
+      }
+     }
   }
 
 }
