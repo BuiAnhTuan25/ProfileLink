@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { Observable, Observer } from 'rxjs';
 import { DataService } from '../_service/data-service/data.service';
 import { DesignService } from '../_service/design-service/design.service';
 import { ProfileService } from '../_service/profile-service/profile.service';
@@ -20,6 +22,9 @@ export class ThemesComponent implements OnInit {
   isVisibleDesign: boolean = false;
   indexButton!:number;
   indexFont!:number;
+  file:any;
+  loading:boolean=false;
+  backgroundUrl:string='';
   fonts: any[] = [
     {
       name: 'Georgia',
@@ -87,6 +92,7 @@ export class ThemesComponent implements OnInit {
       if(this.design.type=='USER_CREATE'){
         this.isVisibleDesign=true;
         this.designForm.patchValue(design);
+        this.backgroundUrl=design.background_image;
         this.setButtonIndex(design);
         this.setFontIndex(design);
       } 
@@ -134,6 +140,7 @@ export class ThemesComponent implements OnInit {
     this.designService.getByNameDesign(this.username).subscribe((res: any) => {
       if (res.data) {
         this.designForm.patchValue(res.data);
+        this.backgroundUrl=res.data.background_image;
         this.userDesign = res.data;
         this.onClickDesign(this.userDesign);
         this.isVisibleDesign = true;
@@ -154,7 +161,19 @@ export class ThemesComponent implements OnInit {
       });
   }
 
-  onUpdateDesign() {
+  onUpdateDesign(backgroundType?:string,file?:any) {
+    if(backgroundType) this.designForm.controls['background_type'].setValue(backgroundType);
+    if(file){
+      this.designService
+      .updateDesign(this.designForm.value, this.designForm.controls['id'].value,file)
+      .subscribe((res: any) => {
+        if (res.success) {
+          this.designForm.patchValue(res.data);
+          this.userDesign = res.data;
+          this.dataService.sendDesign(this.userDesign);
+        } else this.msg.error(res.message);
+      });
+    } else
     this.designService
       .updateDesign(this.designForm.value, this.designForm.controls['id'].value)
       .subscribe((res: any) => {
@@ -196,4 +215,57 @@ export class ThemesComponent implements OnInit {
      }
   }
 
+  beforeUpload = (
+    file: NzUploadFile,
+    _fileList: NzUploadFile[]
+  ): Observable<boolean> =>
+    new Observable((observer: Observer<boolean>) => {
+      const isJpgOrPng =
+        file.type === 'image/jpeg' || file.type === 'image/png';
+      if (!isJpgOrPng) {
+        this.msg.error('You can only upload JPG file!');
+        observer.complete();
+        return;
+      }
+      const isLt2M = file.size! / 1024 / 1024 < 2;
+      if (!isLt2M) {
+        this.msg.error('Image must smaller than 2MB!');
+        observer.complete();
+        return;
+      }
+      observer.next(isJpgOrPng && isLt2M);
+      observer.complete();
+      this.file = file;
+      this.onUpdateDesign('IMAGE',this.file);
+    });
+
+  private getBase64(img: File, callback: (img: string) => void): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => callback(reader.result!.toString()));
+    reader.readAsDataURL(img);
+  }
+
+  handleChange(info: { file: NzUploadFile }): void {
+    switch (info.file.status) {
+      case 'uploading':
+        this.loading = true;
+        break;
+      case 'done':
+        // Get this url from response in real world.
+        this.getBase64(info.file!.originFileObj!, (img: string) => {
+          this.loading = false;
+          this.backgroundUrl = img;
+        });
+        break;
+      case 'error':
+        this.msg.error('Network error');
+        this.loading = false;
+        break;
+    }
+  }
+
+  changeBackgroundType(backgroundType:string){
+    this.designForm.controls['background_type'].setValue(backgroundType);
+    this.onUpdateDesign();
+  }
 }

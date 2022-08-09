@@ -57,3 +57,8 @@
 .erorr {
   color: red;
 }
+
+:host ::ng-deep .avatar-uploader > .ant-upload {
+  width: 100px;
+  height: 100px;
+}

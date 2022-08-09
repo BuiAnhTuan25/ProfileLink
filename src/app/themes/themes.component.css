@@ -25,66 +25,58 @@
 }
 
 .wrap-button-default{
-  width: 210px;
-  height:50px;
+  width: 215px;
+  height:55px;
+  padding:5px;
   border: solid 2px #0095f6;
 
 }
 
 .wrap-button-round{
-  width: 210px;
-  height:50px;
+  width: 215px;
+  height:55px;
+  padding:5px;
   border: solid 2px #0095f6;
   border-radius: 25px;
 
 }
 
+.wrap-button{
+  width: 215px;
+  height:55px;
+  padding:7px;
+}
+
 .button-default-primary{
   width:200px;
   height: 40px;
-  margin-right: 20px;
-  margin-bottom: 20px;
   background-color: black;
   /* border: none; */
   cursor: pointer;
-  margin: auto;
-  margin-top:3px;
 }
 
 .button-default-default{
   width:200px;
   height: 40px;
-  margin-right: 20px;
-  margin-bottom: 20px;
   border:2px solid black;
   cursor: pointer;
-  margin: auto;
-  margin-top:3px;
 }
 
 .button-round-primary{
   width:200px;
   height: 40px;
-  margin-right: 20px;
-  margin-bottom: 20px;
   background-color: black;
   border: none;
   border-radius: 20px;
   cursor: pointer;
-  margin: auto;
-  margin-top:3px;
 }
 
 .button-round-default{
   width:200px;
   height: 40px;
-  margin-right: 20px;
-  margin-bottom: 20px;
   border:2px solid black;
   border-radius: 20px;
   cursor: pointer;
-  margin: auto;
-  margin-top:3px;
 }
 
 .button-font{
@@ -94,8 +86,15 @@
 
 .wrap-font{
   border: solid 2px #0095f6;
-  height: 50px;
-  width: 190px;
+  height: 55px;
+  width: 195px;
+  padding: 5px;
+}
+
+.wrap-font-default{
+  height: 55px;
+  width: 195px;
+  padding: 7px;
 }
 
 .font{
@@ -108,7 +107,6 @@
   text-align: center;
   font-size:18px;
   margin: auto;
-  margin-top:3px;
 }
 
 .label{
@@ -140,6 +138,40 @@
   text-align: center;
 }
 
-.ng-star-inserted{
-  /* width: 215px; */
+:host ::ng-deep .background-uploader > .ant-upload {
+  height:250px;
+  width: 150px;
+  border-radius:5%;
+}
+
+.background{
+  height:250px;
+  width: 150px;
+  border-radius:5%;
+}
+
+.border-background{
+  border:2px solid #0095f6;
+  padding: 5px;
+  height:265px;
+  width: 165px;
+  border-radius:5%;
+}
+
+.border-none{
+  padding: 7px;
+  height:265px;
+  width: 165px;
+  border-radius:5%;
+}
+
+.upload-icon{
+  font-size: 28px;
+  display: flex;
+}
+
+.img-background{
+  width: 150px;
+  height: 250px;
+  border-radius: 5%;
 }

@@ -53,6 +53,7 @@
     nzPopconfirmPlacement="top"
     (nzOnConfirm)="onDeleteUser()"
     nz-button
+    [nzLoading]="isLoadingDelete"
     class="button-delete"
   >
     DELETE ACCOUNT

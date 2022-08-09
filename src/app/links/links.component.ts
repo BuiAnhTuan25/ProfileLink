@@ -17,6 +17,8 @@ export class LinksComponent implements OnInit {
   @Input() profile: any;
   mode!: string;
   loading = false;
+  isLoadingSave:boolean=false;
+  isLoadingDelete:boolean=false;
   avatarUrl?: string;
   isVisible: boolean = false;
   isVisibleHeader: boolean = false;
@@ -116,20 +118,23 @@ export class LinksComponent implements OnInit {
           this.modalForm.controls['type'].setValue(TYPE_LINK.LINK);
         if (this.type == 'header')
           this.modalForm.controls['type'].setValue(TYPE_LINK.HEADER);
-
+        this.isLoadingSave=true;
         this.linksService
           .addLink(this.modalForm.value, this.file)
           .subscribe((res: any) => {
             if (res.success) {
+              this.isLoadingSave=false;
               this.listLinks.push(res.data);
               this.data.notifyCountValue(this.listLinks);
               this.handleCancel();
               this.msg.success('Add success');
             } else {
+              this.isLoadingSave=false;
               this.msg.error('Add false');
             }
           });
       } else {
+        this.isLoadingSave=true;
         this.linksService
           .updateLink(
             this.modalForm.value,
@@ -138,12 +143,14 @@ export class LinksComponent implements OnInit {
           )
           .subscribe((res) => {
             if (res.success) {
+              this.isLoadingSave=false;
               this.msg.success('Update success');
               const i = this.listLinks.findIndex((x) => x.id == res.data.id);
               this.listLinks.splice(i, 1, res.data);
               this.data.notifyCountValue(this.listLinks);
               this.handleCancel();
             } else {
+              this.isLoadingSave=false;
               this.msg.error('Update false');
             }
           });
@@ -163,6 +170,7 @@ export class LinksComponent implements OnInit {
         observer.complete();
         return;
       }
+      console.log(file.size!)
       const isLt2M = file.size! / 1024 / 1024 < 2;
       if (!isLt2M) {
         this.msg.error('Image must smaller than 2MB!');
@@ -201,17 +209,20 @@ export class LinksComponent implements OnInit {
   }
 
   onDelete() {
+    this.isLoadingDelete=true;
     this.linksService
       .deleteLink(this.modalForm.controls['id'].value)
       .toPromise()
       .then((res: any) => {
         if (res.success) {
+          this.isLoadingDelete=false;
           const i = this.listLinks.findIndex((x) => x.id == res.data.id);
           this.listLinks.splice(i, 1);
           this.data.notifyCountValue(this.listLinks);
           this.handleCancel();
           this.msg.success('Delete success');
         } else {
+          this.isLoadingDelete=false;
           this.msg.success('Delete success');
         }
       });
