@@ -16,6 +16,8 @@ export class SocialsComponent implements OnInit {
   selectedSocial: any;
   titleSocial: string = '';
   isVisibleSocial: boolean = false;
+  isLoadingSave:boolean=false;
+  isLoadingDelete:boolean=false;
   mode!: string;
 
   listSocials: any[] = [
@@ -122,16 +124,22 @@ export class SocialsComponent implements OnInit {
   }
 
   onDeleteSocial() {
+    this.isLoadingDelete=true;
     this.socialService
       .deleteSocial(this.socialForm.controls['id'].value)
       .subscribe((res: any) => {
         if (res.success) {
+          this.isLoadingDelete=false;
           const i = this.socials.findIndex((x) => x.id == res.data.id);
           this.socials.splice(i, 1);
           this.data.sendSocials(this.socials);
           this.filterSocial(this.socials);
           this.socialModalCancel();
           this.msg.success('Delete social success');
+        } else {
+          this.isLoadingDelete=false;
+          this.msg.error('Delete social false');
+        
         }
       });
   }
@@ -151,17 +159,22 @@ export class SocialsComponent implements OnInit {
       this.socialForm.controls['profile_id'].setValue(this.profile.id);
       this.socialForm.controls['click_count'].setValue(0);
 
+      this.isLoadingSave=true;
       this.socialService
         .addSocial(this.socialForm.value)
         .toPromise()
         .then((res: any) => {
           if (res.success) {
+            this.isLoadingSave=false;
             this.socials.push(res.data);
             this.data.sendSocials(this.socials);
             this.socialModalCancel();
             this.filterSocial(this.socials);
             this.msg.success('Add social success');
-          } else this.msg.error('Add social false');
+          } else {
+            this.isLoadingSave=false;
+            this.msg.error('Add social false');
+          }
         });
     }
   }

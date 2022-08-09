@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { StatisticService } from '../_service/statistic-service/statistic.service';
@@ -10,6 +11,9 @@ import { StatisticService } from '../_service/statistic-service/statistic.servic
 export class StatisticComponent implements OnInit {
   topProfile:any[]=[];
   topMonth:any[]=[];
+  time:any;
+  month!:number;
+  year!:number;
   location:any;
   mapType:string= "satelite";
   max!:number;
@@ -34,8 +38,12 @@ export class StatisticComponent implements OnInit {
   constructor(private statisticService:StatisticService,private msg:NzMessageService) { }
 
   ngOnInit(): void {
+    this.time=new Date();
+    let datepipe  = new DatePipe('en-US');
+    this.time=datepipe.transform(this.time,'yyyy-MM');
+    let date=new Date();
     this.getTopProfile();
-    this.getTopProfileOfMonth();
+    this.getTopProfileOfMonth(date.getMonth()+1,date.getFullYear());
     this.getIp();
     this.getLocation();
     
@@ -50,12 +58,12 @@ export class StatisticComponent implements OnInit {
     });
   }
 
-  getTopProfileOfMonth(){
-    this.statisticService.getTopProfileOfMonth(0,5).subscribe((res:any)=>{
+  getTopProfileOfMonth(month:number,year:number){
+    this.statisticService.getTopProfileOfMonth(0,5,month,year).subscribe((res:any)=>{
       if(res.success){
         this.topMonth=res.data;
-        this.max=res.data[0].click_count;
-        this.topMonth.reverse();
+        // this.max=res.data[0].click_count;
+        // this.topMonth.reverse();
       } else this.msg.error(res.message);
     });
   }
@@ -80,4 +88,8 @@ export class StatisticComponent implements OnInit {
     })
   }
 
+  onChangeMonth(event:any){
+    console.log(event)
+  this.getTopProfileOfMonth(event.substr(5,2),event.substr(0,4));
+  }
 }

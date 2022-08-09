@@ -16,6 +16,7 @@ export class DesignComponent implements OnInit {
   @Input() profile: any;
   
   loading = false;
+  isLoading:boolean=false;
   avatarUrl?: string;
   file!: NzUploadFile;
   profileForm!: FormGroup;
@@ -97,6 +98,7 @@ export class DesignComponent implements OnInit {
 
   updateProfile() {
     if (this.profile != this.profileForm.value || this.file) {
+      this.isLoading=true;
       this.profileService
         .updateProfile(
           this.profileForm.value,
@@ -110,8 +112,10 @@ export class DesignComponent implements OnInit {
             this.avatarUrl = res.data.avatar_link;
             this.sendProfile.emit(this.profile);
             this.msg.success('Update success');
+            this.isLoading=false;
           } else {
             this.msg.error('Update false');
+            this.isLoading=false;
           }
         });
     }

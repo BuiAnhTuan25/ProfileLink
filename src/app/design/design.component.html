@@ -71,7 +71,7 @@
       <div nz-col nzSpan="5" nzOffset="1">
         <nz-upload
           class="avatar-uploader"
-          nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+          nzAction="http://localhost:8080/api/v1.0/link/upload"
           nzName="avatar"
           nzListType="picture-card"
           [nzShowUploadList]="false"
@@ -84,15 +84,16 @@
               nz-icon
               [nzType]="loading ? 'loading' : 'plus'"
             ></i>
-            <div class="ant-upload-text">Upload</div>
+            <div class="ant-upload-text">Upload image</div>
           </ng-container>
-          <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+          <img class="avatar" *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
         </nz-upload>
       </div>
     </div>
     <div class="align-center">
       <button
         nz-button
+        [nzLoading]="isLoading"
         nzType="primary"
         class="button-save"
         (click)="updateProfile()"

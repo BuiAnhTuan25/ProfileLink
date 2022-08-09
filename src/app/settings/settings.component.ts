@@ -16,6 +16,7 @@ export class SettingsComponent implements OnInit {
   modalForm!: FormGroup;
   settingForm!: FormGroup;
   isLoading: boolean = false;
+  isLoadingDelete:boolean=false;
   user: any;
   constructor(
     private fb: FormBuilder,
@@ -82,11 +83,16 @@ export class SettingsComponent implements OnInit {
   }
 
   onDeleteUser(){
+    this.isLoadingDelete=true;
     this.profileService.deleteUser(this.user.id).subscribe((res:any)=>{
       if(res.success){
+        this.isLoadingDelete=false;
         this.msg.success('Delete account success');
         this.router.navigate(['/login']);
-      } else this.msg.error('Delete account false');
+      } else {
+        this.isLoadingDelete=false;
+        this.msg.error('Delete account false');
+      }
     })
   }
 }
