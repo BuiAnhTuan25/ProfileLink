@@ -25,26 +25,26 @@
 }
 
 .wrap-button-default{
-  width: 215px;
-  height:55px;
-  padding:5px;
+  width: 208px;
+  height:48px;
+  padding:2px;
   border: solid 2px #0095f6;
 
 }
 
 .wrap-button-round{
-  width: 215px;
-  height:55px;
-  padding:5px;
+  width: 208px;
+  height:48px;
+  padding:2px;
   border: solid 2px #0095f6;
   border-radius: 25px;
 
 }
 
 .wrap-button{
-  width: 215px;
-  height:55px;
-  padding:7px;
+  width: 208px;
+  height:48px;
+  padding:4px;
 }
 
 .button-default-primary{
@@ -86,15 +86,15 @@
 
 .wrap-font{
   border: solid 2px #0095f6;
-  height: 55px;
-  width: 195px;
-  padding: 5px;
+  height: 48px;
+  width: 188px;
+  padding: 2px;
 }
 
 .wrap-font-default{
-  height: 55px;
-  width: 195px;
-  padding: 7px;
+  height: 48px;
+  width: 188px;
+  padding: 4px;
 }
 
 .font{
@@ -152,16 +152,16 @@
 
 .border-background{
   border:2px solid #0095f6;
-  padding: 5px;
-  height:265px;
-  width: 165px;
+  padding: 2px;
+  height:258px;
+  width: 158px;
   border-radius:5%;
 }
 
 .border-none{
-  padding: 7px;
-  height:265px;
-  width: 165px;
+  padding: 4px;
+  height:258px;
+  width: 158px;
   border-radius:5%;
 }
 
