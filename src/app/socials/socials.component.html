@@ -77,6 +77,7 @@
     style="float: left"
     *ngIf="mode == 'edit'"
     nz-button
+    [nzLoading]="isLoadingDelete"
     nz-popconfirm
     nzCancelText="Cancel"
     nzOkText="OK"
@@ -86,5 +87,5 @@
   >
     DELETE
   </button>
-  <button nz-button nzType="primary" (click)="saveSocial()">SAVE</button>
+  <button nz-button [nzLoading]="isLoadingSave" nzType="primary" (click)="saveSocial()">SAVE</button>
 </ng-template>

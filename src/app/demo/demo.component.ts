@@ -23,7 +23,7 @@ export class DemoComponent implements OnInit {
   listLinks: any[] = [];
   listSocial: any[] = [];
   isPrimary: boolean = true;
-  isBackgroundImage:boolean=false;
+  isBackgroundImage: boolean = false;
   buttonType: NzButtonType = 'primary';
   buttonShape!: NzButtonShape;
   design: any;
@@ -37,9 +37,9 @@ export class DemoComponent implements OnInit {
     private msg: NzMessageService,
     private route: ActivatedRoute,
     private profileService: ProfileService,
-    private socialService: SocialService,
-    //private websocket:WebsocketService
-  ) {}
+    private socialService: SocialService
+  ) //private websocket:WebsocketService
+  {}
 
   async ngOnInit() {
     this.data.dataFromChild.subscribe(
@@ -73,12 +73,26 @@ export class DemoComponent implements OnInit {
           .toPromise()
           .then((res: any) => {
             if (res.success) {
-              document.location.href = 'https://' + linkClick.url;
+              window.open('https://' + linkClick.url, 'mytab');
             } else this.msg.error('False');
           });
       } else this.msg.error('False');
     });
   }
+
+  onClickSocial(social: any) {
+    this.socialService.getSocial(social.id).subscribe((res:any)=>{
+      if(res.success){
+        const socialClick=res.data;
+        socialClick.click_count+=1;
+        this.socialService.updateSocial(socialClick,socialClick.id).toPromise().then((res:any)=>{
+          if(res.success){
+            window.open('https://' +socialClick.social_icon+'.com/'+ socialClick.links, 'mytab');
+          } else this.msg.error('False');
+          })
+      } else this.msg.error('False');
+      })
+    }
 
   getDesign(id: number) {
     this.designService.getDesign(id).subscribe((res: any) => {
@@ -120,9 +134,9 @@ export class DemoComponent implements OnInit {
   }
 
   changeButton(design: any) {
-    if(this.design.background_type=='IMAGE'){
-      this.isBackgroundImage=true;
-    } else this.isBackgroundImage=false;
+    if (this.design.background_type == 'IMAGE') {
+      this.isBackgroundImage = true;
+    } else this.isBackgroundImage = false;
 
     switch (design.button_type) {
       case BUTTON_TYPE.CIRCLE_SOLID:

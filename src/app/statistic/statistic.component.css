@@ -1,32 +1,108 @@
-.title{
-    font-size: 20px;
-    font-weight: 600;
-    font-family: Inter,sans-serif;
-  }
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  font-family: Inter, sans-serif;
+}
 
-  .mr-1 {
-    margin-right: 10px;
-  }
+.mr-1 {
+  margin-right: 10px;
+}
 
-  .mr-2 {
-    margin-right: 20px;
-  }
+.mr-2 {
+  margin-right: 20px;
+}
 
-  [nz-icon] {
-    margin-right: 6px;
-    font-size: 32px;
-  }
+[nz-icon] {
+  margin-right: 6px;
+  font-size: 32px;
+}
 
-  .statistic {
-    margin-top: 15px;
-    width: 100%;
-    height: 100px;
-    border-radius: 5px;
-  }
+.statistic {
+  margin-top: 15px;
+  width: 100%;
+  height: 100px;
+  border-radius: 5px;
+}
 
-  .mt-3{
-    margin-top: 30px;
-  }
-  agm-map {
-    height: 400px;
-  }
+.mt-3 {
+  margin-top: 30px;
+}
+agm-map {
+  height: 400px;
+}
+.tbody-table{
+  align-items: center;
+}
+.wrap-table {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  margin: 0;
+}
+
+#column-example-4 {
+  height: 350px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+.tr-1{
+  margin-right: 5%;
+  display: flex;
+}
+.img-table{
+  
+  width: 50px;
+  height: 50px;
+}
+.tr-2{
+  width: 650px;
+  max-width: 650px;
+  
+  margin-top: 20px;
+  margin-right: 40px;
+  display: flex;
+}
+.tr-21{
+  margin-left: 25px;
+}
+.tr-22{
+  margin-left: 80px;
+}
+.tr-23{
+  margin-left: 80px;
+}
+.tr-24{
+  margin-left: 80px;
+}
+.tr-25{
+  margin-left: 80px;
+}
+
+.avatar{
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  top: -75px;
+}
+
+.rank{
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  bottom: -65px;
+}
+
+.border-avatar{
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: -75px;
+}
+
+.month-picker{
+  width:200px;
+  float:right;
+}
+
