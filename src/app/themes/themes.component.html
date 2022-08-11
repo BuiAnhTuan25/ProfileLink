@@ -28,7 +28,7 @@
   <ng-template #titleThemes><div class="title">Themes</div></ng-template>
 </nz-card>
 <nz-card
-  *ngIf="isVisibleDesign"
+  *ngIf="isVisibleDesign && (role == 'ADMIN' || role == 'USER_VIP')"
   style="margin-top: 30px"
   [nzTitle]="titleDesign"
   [nzHoverable]="true"

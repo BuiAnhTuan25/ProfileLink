@@ -64,3 +64,11 @@
   font-weight: 600;
   font-family: Inter,sans-serif;
 }
+
+.float-right{
+  float:right;
+}
+
+.mr-1{
+  margin-right: 5px;
+}

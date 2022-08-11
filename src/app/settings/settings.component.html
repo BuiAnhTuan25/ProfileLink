@@ -38,11 +38,24 @@
     </nz-form-item>
   </form>
   <div class="align-center">
-    <button class="button-save" nz-button nzType="primary" (click)="openModal()">
+    <button
+      class="button-save"
+      nz-button
+      nzType="primary"
+      (click)="openModal()"
+    >
       Change password
     </button>
   </div>
-  <ng-template #title><div class="title">Account</div></ng-template>
+  <ng-template #title>
+    <div class="title">
+      Account
+      <button *ngIf="user.role=='USER'" class="float-right" nz-button (click)="requestUpgradeRole()">
+        <i class="fa-solid fa-arrow-up mr-1"></i>
+        UPGRADE TO USER VIP
+      </button>
+    </div>
+  </ng-template>
 </nz-card>
 <div class="align-center delete">
   <button

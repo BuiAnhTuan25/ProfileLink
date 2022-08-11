@@ -32,6 +32,7 @@ import { ThemesComponent } from './themes/themes.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { StatisticComponent } from './statistic/statistic.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { StatisticComponent } from './statistic/statistic.component';
     ChangePasswordComponent,
     CreateProfileComponent,
     StatisticComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

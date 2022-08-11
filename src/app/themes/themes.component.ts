@@ -102,8 +102,8 @@ export class ThemesComponent implements OnInit {
     this.designForm = this.fb.group({
       id: [null],
       background_color: ['#FFFFFF'],
-      background_image: [null],
-      background_type: [0],
+      background_image: [''],
+      background_type: ['COLOR'],
       button_type: ['CIRCLE_SOLID'],
       button_color: ['#FFFFFF'],
       text_color: ['#000000'],
