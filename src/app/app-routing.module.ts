@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { DemoComponent } from './demo/demo.component';
@@ -11,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RegisterComponent } from './register/register.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './_shared/auth.guard';
+import { AdminActive } from './_shared/admin.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +24,7 @@ const routes: Routes = [
   { path: 'update_password_token', component: ChangePasswordComponent },
   { path: 'demo/:short_bio', component: DemoComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AdminActive] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

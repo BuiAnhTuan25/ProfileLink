@@ -100,10 +100,10 @@ export class ThemesComponent implements OnInit {
     });
 
     this.designForm = this.fb.group({
-      id: [null],
+      id: [''],
       background_color: ['#FFFFFF'],
-      background_image: [null],
-      background_type: [0],
+      background_image: [''],
+      background_type: ['COLOR'],
       button_type: ['CIRCLE_SOLID'],
       button_color: ['#FFFFFF'],
       text_color: ['#000000'],
@@ -128,10 +128,10 @@ export class ThemesComponent implements OnInit {
         .updateProfile(this.profile, this.profile.id)
         .subscribe((res: any) => {
           if (res.success) {
-            this.msg.success('Change design success');
+            this.msg.success('Change design successfully');
             this.dataService.sendDesign(design);
             if (design != this.userDesign) this.isVisibleDesign = false;
-          } else this.msg.error('Change design false');
+          } else this.msg.error('Change design failed');
         });
     }
   }

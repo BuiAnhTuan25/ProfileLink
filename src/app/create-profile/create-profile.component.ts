@@ -36,14 +36,14 @@ export class CreateProfileComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('auth-user')!);
     this.profileForm = this.fb.group({
       id: [this.user.id],
-      fullname: [null, Validators.required],
+      fullname: ['', Validators.required],
       short_bio: [this.user.username],
       about: [''],
-      birthday: [null, Validators.required],
+      birthday: ['', Validators.required],
       gender: [GENDER.MALE, Validators.required],
       avatar_link: [''],
       design_id: [2],
-      location: [null],
+      location: [''],
       click_count: [0],
     });
   }
@@ -80,11 +80,11 @@ export class CreateProfileComponent implements OnInit {
             .updateUser(this.user, this.user.id)
             .subscribe((res: any) => {
               if (res.success) {
-                this.msg.success('Create profile success');
+                this.msg.success('Create profile successfully');
                 this.router.navigate(['/home']);
               }
             });
-        } else this.msg.error('Create profile false!');
+        } else this.msg.error('Create profile failed!');
       });
     }
     

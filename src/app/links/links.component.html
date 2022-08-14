@@ -120,7 +120,7 @@
           </ng-container>
           <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%;height: 100%;" />
         </nz-upload>
-        <div class="erorr">{{ erorrPictire }}</div>
+        <div class="erorr">{{ erorrPicture }}</div>
       </div>
     </div>
     <ng-template #tplElse>
@@ -146,8 +146,8 @@
     nz-button
     [nzLoading]="isLoadingDelete"
     nz-popconfirm
-    nzCancelText="Cancel"
-    nzOkText="OK"
+    nzCancelText="No"
+    nzOkText="Yes"
     nzPopconfirmTitle="Are you sure delete this item?"
     nzPopconfirmPlacement="top"
     (nzOnConfirm)="onDelete()"

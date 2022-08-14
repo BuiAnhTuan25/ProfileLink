@@ -1,0 +1,297 @@
+
+.card {
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .title{
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Inter,sans-serif;
+  }
+  
+  .avatar-theme{
+    height:200px;
+    width: 150px;
+    object-fit: cover;
+  }
+  .color{
+    width: 100px;
+    height:40px;
+  }
+  
+  .button-type{
+    height: 60px;
+  }
+  
+  .wrap-button-default{
+    width: 208px;
+    height:48px;
+    padding:2px;
+    border: solid 2px #0095f6;
+  
+  }
+  
+  .wrap-button-round{
+    width: 208px;
+    height:48px;
+    padding:2px;
+    border: solid 2px #0095f6;
+    border-radius: 25px;
+  
+  }
+  
+  .wrap-button{
+    width: 208px;
+    height:48px;
+    padding:4px;
+  }
+  
+  .button-default-primary{
+    width:200px;
+    height: 40px;
+    background-color: black;
+    /* border: none; */
+    cursor: pointer;
+  }
+  
+  .button-default-default{
+    width:200px;
+    height: 40px;
+    border:2px solid black;
+    cursor: pointer;
+  }
+  
+  .button-round-primary{
+    width:200px;
+    height: 40px;
+    background-color: black;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .button-round-default{
+    width:200px;
+    height: 40px;
+    border:2px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+  
+  .button-font{
+    height: 60px;
+    width: 200px;
+  }
+  
+  .wrap-font{
+    border: solid 2px #0095f6;
+    height: 48px;
+    width: 188px;
+    padding: 2px;
+  }
+  
+  .wrap-font-default{
+    height: 48px;
+    width: 188px;
+    padding: 4px;
+  }
+  
+  .font{
+    width:180px;
+    height: 40px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border:2px solid black;
+    cursor: pointer;
+    text-align: center;
+    font-size:18px;
+    margin: auto;
+  }
+  
+  .label{
+    text-align: left;
+  }
+  
+  .border{
+    width:215px;
+    height: 55px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    border:2px solid #0095f6;
+    padding: 5px;
+  }
+  
+  .button-save {
+    margin-bottom: 50px;
+    height: 35px;
+    width: 40%;
+    border-radius: 8px;
+    font-family: Inter, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    background: linear-gradient(112.44deg, #ff5858 2.09%, #c058ff 75.22%);
+    letter-spacing: 2px;
+    border: none;
+  }
+  
+  .align-center {
+    text-align: center;
+  }
+  
+  /* :host ::ng-deep .background-uploader > .ant-upload {
+    height:250px;
+    width: 150px;
+    border-radius:5%;
+  } */
+   ::ng-deep .ant-upload.ant-upload-select-picture-card{
+    height:250px;
+    width: 150px;
+    /* border-radius:5%; */
+    margin-right: 8px;
+    margin-bottom: 8px;
+    text-align: center;
+    vertical-align: top;
+    background-color: #fafafa;
+    border: 1px dashed #d9d9d9;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: border-color .3s;
+}
+
+  .background{
+    height:250px;
+    width: 150px;
+    /* border-radius:5%; */
+  }
+  
+  .border-background{
+    border:2px solid #0095f6;
+    padding: 2px;
+    height:258px;
+    width: 158px;
+    /* border-radius:5%; */
+  }
+  
+  .border-none{
+    padding: 4px;
+    height:258px;
+    width: 158px;
+    /* border-radius:5%; */
+  }
+  
+  .upload-icon{
+    font-size: 28px;
+    display: flex;
+  }
+  
+  .img-background{
+    width: 150px;
+    height: 250px;
+    /* border-radius: 5%; */
+  }
+
+  .phone {
+    margin-top:20px;
+    margin-bottom:32px;
+    width: 271px;
+    max-width: 350px;
+    border: 10px solid #222;
+    border-radius: 30px;
+    height: 560px;
+    max-height: 723px;
+    transform-origin: 0 0;
+    background-color: #222;
+    z-index: 50;
+}
+
+.avatar {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: auto;
+    margin-top: 30px;
+}
+.demo{
+    height: 100%;
+}
+.backgrond-img{
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.center {
+    text-align: center;
+    align-items: center;
+}
+
+.name {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.social {
+    font-size: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.avatar-link {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    float: left;
+}
+
+.button-link {
+    width: 80%;
+    height: 40px;
+    border:none;
+    font-size: 12px;
+}
+.mt1{
+    margin-top: 16px;
+}
+.mb1{
+    margin-top: 24px;
+    margin-bottom: 10px;
+}
+.title-link{
+    font-weight: bold;
+}
+.button-center{
+    display: flex;
+    justify-content: center;
+}
+
+.overflow-y{
+    height: 100%; 
+    overflow: hidden auto;
+}
+.overflow-y::-webkit-scrollbar { 
+    width: 0 !important;
+    display: none; 
+  }
+
+  .mr-1{
+    margin-right: 5px;
+  }
+
+  .float-right{
+    float:right;
+  }
+  .float-left{
+    float:left;
+  }
+.pointer{
+  cursor: pointer;
+}
+
+.erorr {
+  color: red;
+}

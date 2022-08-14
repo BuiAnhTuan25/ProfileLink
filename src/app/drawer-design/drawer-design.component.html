@@ -1,0 +1,351 @@
+<!-- <div nz-row>
+  <div class="background-phone" nz-col nzSpan="3"></div>
+  <div class="background-phone" nz-col nzSpan="5">
+    <nz-affix nzOffsetTop="60">
+      <div class="phone">
+        <div
+          *ngIf="backgroundType=='IMAGE'; else elseColor"
+          class="center demo backgrond-img"
+          [ngStyle]="{
+            'background-image': 'url(' + design?.background_image + ')',
+            color: design?.text_color,
+            'font-family': design?.font,
+            'border-radius': '18px'
+          }"
+        >
+          <ng-container [ngTemplateOutlet]="content"></ng-container>
+        </div>
+
+        <ng-template #elseColor>
+          <div
+            class="center demo"
+            [ngStyle]="{
+              'background-color': design?.background_color,
+              color: design?.text_color,
+              'font-family': design?.font,
+              'border-radius': '18px'
+            }"
+          >
+            <ng-container [ngTemplateOutlet]="content"></ng-container>
+          </div>
+        </ng-template>
+
+        <ng-template #content>
+          <div class="overflow-y">
+            <img
+              class="avatar"
+              src="https://res.cloudinary.com/anhtuanbui/image/upload/v1657248868/knybg0tx6rj48d62nv4a.png"
+            />
+            <div class="name">ADMIN</div>
+            <div class="mb1">
+              <div nz-row [nzGutter]="16" class="social">
+                  <i
+                    nz-icon
+                    nz-col
+                    nzSpan="3"
+                    style="cursor: pointer"
+                    nzType="facebook"
+                    nzTheme="outline"
+                  ></i>
+                  <i
+                    nz-icon
+                    nz-col
+                    nzSpan="3"
+                    style="cursor: pointer"
+                    nzType="youtube"
+                    nzTheme="outline"
+                  ></i>
+                  <i
+                    nz-icon
+                    nz-col
+                    nzSpan="3"
+                    style="cursor: pointer"
+                    nzType="instagram"
+                    nzTheme="outline"
+                  ></i>
+              </div>
+            </div>
+            <div style="margin-bottom: 50px">
+                <div
+                  style="font-weight: bold; margin-top: 24px"
+                >
+                  ADMIN
+                </div>
+                <div *ngIf="isPrimary; else elsePrimary">
+                  <button
+                    [ngStyle]="{
+                      'background-color': design?.button_color,
+                      color: design?.text_color
+                    }"
+                    [nzType]="buttonType"
+                    [nzShape]="buttonShape"
+                    nz-button
+                    class="button-link mt1 title-link"
+                  >
+                    <img
+                      alt="example"
+                      class="avatar-link"
+                      src="https://res.cloudinary.com/anhtuanbui/image/upload/v1657248868/knybg0tx6rj48d62nv4a.png"
+                    />
+                    Button
+                  </button>
+                </div>
+                <ng-template #elsePrimary>
+                  <button
+                    [nzGhost]="true"
+                    [ngStyle]="{
+                      border: '2px solid ' + design?.button_color,
+                      color: design?.text_color
+                    }"
+                    [nzType]="buttonType"
+                    [nzShape]="buttonShape"
+                    nz-button
+                    class="button-link mt1 title-link"
+                  >
+                    <img
+                      alt="example"
+                      class="avatar-link"
+                      src="https://res.cloudinary.com/anhtuanbui/image/upload/v1657248868/knybg0tx6rj48d62nv4a.png"
+                    />
+                    Button
+                  </button>
+                </ng-template>
+              </div>
+          </div>
+        </ng-template>
+      </div>
+    </nz-affix>
+  </div>
+  <div class="background-phone" nz-col nzSpan="3"></div>
+  <div nz-col nzSpan="13"> -->
+<nz-drawer
+  [nzClosable]="false"
+  [nzVisible]="isVisible"
+  [nzTitle]="titleTpl"
+  [nzFooter]="footer"
+  [nzWidth]="'60%'"
+  (nzOnClose)="closeDrawer()"
+>
+  <ng-container [ngTemplateOutlet]="contentTpl" *nzDrawerContent>
+  </ng-container>
+</nz-drawer>
+<ng-template #footer>
+  <button
+    nz-button
+    class="float-right"
+    *ngIf="mode == 'create'"
+    (click)="addDesign()"
+  >
+    <i class="fa-solid fa-floppy-disk mr-1"></i>Create
+  </button>
+  <button
+    nz-button
+    class="float-right"
+    *ngIf="mode == 'edit'"
+    (click)="updateDesign()"
+  >
+    <i class="fa-solid fa-floppy-disk mr-1"></i>Save
+  </button>
+  <button
+    nz-button
+    [nzDanger]="true"
+    class="float-left"
+    *ngIf="mode == 'edit'"
+    nz-popconfirm
+    nzCancelText="No"
+    nzOkText="Yes"
+    nzPopconfirmTitle="Are you sure delete this item?"
+    nzPopconfirmPlacement="top"
+    (nzOnConfirm)="deleteDesign()"
+  >
+    <i class="fa-solid fa-trash-can mr-1"></i>Delete
+  </button>
+</ng-template>
+
+<ng-template #titleTpl>
+  <div>
+    {{ title }}
+    <i
+      (click)="closeDrawer()"
+      class="fa-solid fa-xmark float-right pointer"
+    ></i>
+  </div>
+</ng-template>
+
+<ng-template #contentTpl>
+  <form nz-form [formGroup]="designForm">
+    <nz-form-item>
+      <nz-form-label class="label" [nzSpan]="6">Name design</nz-form-label>
+      <nz-form-control [nzSpan]="24" nzErrorTip="Please input name design!">
+        <input
+          formControlName="name"
+          nz-col
+          [nzSpan]="12"
+          nz-input
+          type="text"
+          placeholder="Name design"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label class="label" [nzSpan]="6">Avatar</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <div>
+          <nz-upload
+            class="background-uploader"
+            nzAction="http://localhost:8080/api/v1.0/link/upload"
+            nzName="avatar"
+            nzListType="picture-card"
+            [nzShowUploadList]="false"
+            [nzBeforeUpload]="beforeUploadAvatar"
+            (nzChange)="handleChangeAvatar($event)"
+          >
+            <ng-container *ngIf="!avatarUrl">
+              <i
+                class="upload-icon"
+                nz-icon
+                [nzType]="loadingAvatar ? 'loading' : 'camera'"
+              ></i>
+              <div class="ant-upload-text">Upload image</div>
+            </ng-container>
+            <img
+              class="background"
+              *ngIf="avatarUrl"
+              [src]="avatarUrl"
+              class="img-background"
+            />
+          </nz-upload>
+          <div class="erorr">{{ erorrPicture }}</div>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label class="label" [nzSpan]="6">Background</nz-form-label>
+      <nz-form-control [nzSpan]="24">
+        <div nz-row style="height: 260px">
+          <div
+            [ngClass]="
+              backgroundType == 'COLOR' ? 'border-background' : 'border-none'
+            "
+          >
+            <input
+              nz-input
+              class="background"
+              formControlName="background_color"
+              type="color"
+              (blur)="changeBackgroundType('COLOR')"
+            />
+          </div>
+          <div nz-col [nzSpan]="4"></div>
+          <div
+            [ngClass]="
+              backgroundType == 'IMAGE' ? 'border-background' : 'border-none'
+            "
+          >
+            <nz-upload
+              (click)="changeBackgroundType('IMAGE')"
+              class="background-uploader"
+              nzAction="http://localhost:8080/api/v1.0/link/upload"
+              nzName="avatar"
+              nzListType="picture-card"
+              [nzShowUploadList]="false"
+              [nzBeforeUpload]="beforeUpload"
+              (nzChange)="handleChange($event)"
+            >
+              <ng-container *ngIf="!backgroundUrl">
+                <i
+                  class="upload-icon"
+                  nz-icon
+                  [nzType]="loading ? 'loading' : 'camera'"
+                ></i>
+                <div class="ant-upload-text">Upload image</div>
+              </ng-container>
+              <img
+                class="background"
+                *ngIf="backgroundUrl"
+                [src]="backgroundUrl"
+                class="img-background"
+              />
+            </nz-upload>
+          </div>
+          <div nz-col [nzSpan]="4"></div>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label class="label" [nzSpan]="6">Button Type</nz-form-label>
+      <nz-form-control [nzSpan]="8">
+        <div *ngFor="let buttonType of buttonTypes; index as i" class="">
+          <div
+            *ngIf="buttonType.type == 'round'"
+            [class]="i == indexButton ? 'wrap-button-round' : 'wrap-button'"
+          >
+            <div
+              (click)="onSelectButton(buttonType.value, i)"
+              [ngClass]="buttonType.class"
+            ></div>
+          </div>
+          <div
+            *ngIf="buttonType.type == 'default'"
+            [class]="i == indexButton ? 'wrap-button-default' : 'wrap-button'"
+          >
+            <div
+              (click)="onSelectButton(buttonType.value, i)"
+              [ngClass]="buttonType.class"
+            ></div>
+          </div>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label class="label" [nzSpan]="6">Button color</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          class="color"
+          formControlName="button_color"
+          type="color"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label class="label" [nzSpan]="6">Text color</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <input
+          nz-input
+          class="color"
+          formControlName="text_color"
+          type="color"
+        />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label class="label" [nzSpan]="6">Font</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <div nz-row>
+          <div
+            *ngFor="let font of fonts; index as i"
+            nz-col
+            nzSpan="11"
+            class="button-font"
+          >
+            <div [class]="indexFont == i ? 'wrap-font' : 'wrap-font-default'">
+              <div
+                (click)="onSelectFont(font.name, i)"
+                class="font"
+                [ngStyle]="{ 'font-family': font.name }"
+              >
+                {{ font.name }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>

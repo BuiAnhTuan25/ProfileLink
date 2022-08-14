@@ -5,6 +5,7 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { EMAIL_REGEX } from '../_helpers/validator';
 import { AuthenticationService } from '../_service/auth-service/authentication.service';
 import { ProfileService } from '../_service/profile-service/profile.service';
+import { UserService } from '../_service/user-service/user.service';
 
 @Component({
   selector: 'app-settings',
@@ -24,16 +25,17 @@ export class SettingsComponent implements OnInit {
     private msg: NzMessageService,
     private router: Router,
     private profileService:ProfileService,
+    private userService:UserService
   ) {}
 
   ngOnInit(): void {
     this.settingForm = this.fb.group({
-      username: [null],
-      mail: [null],
-      role: [null],
+      username: [''],
+      mail: [''],
+      role: [''],
     });
     this.modalForm = this.fb.group({
-      mail: [null, [Validators.required, Validators.pattern(EMAIL_REGEX)]],
+      mail: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
     });
     this.user = JSON.parse(localStorage.getItem('auth-user')!);
     this.settingForm.patchValue(this.user);
@@ -69,7 +71,7 @@ export class SettingsComponent implements OnInit {
           if (res.success) {
             this.isLoading = false;
             this.msg.success(
-              'Send email change password success. Please access your email to change password!'
+              'Send email change password successfully. Please access your email to change password!'
             );
             this.handleCancel();
             this.router.navigate(['/login']);
@@ -87,12 +89,20 @@ export class SettingsComponent implements OnInit {
     this.profileService.deleteUser(this.user.id).subscribe((res:any)=>{
       if(res.success){
         this.isLoadingDelete=false;
-        this.msg.success('Delete account success');
+        this.msg.success('Delete account successfully');
         this.router.navigate(['/login']);
       } else {
         this.isLoadingDelete=false;
-        this.msg.error('Delete account false');
+        this.msg.error('Delete account failed');
       }
+    })
+  }
+
+  requestUpgradeRole(){
+    this.userService.requestUpgradeRole(this.user.id,true).subscribe((res:any)=>{
+      if(res.success){
+        this.msg.success('Role upgrade request has been sent')
+      } else this.msg.error('Role upgrade request failed');
     })
   }
 }

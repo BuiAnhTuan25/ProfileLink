@@ -29,17 +29,17 @@ export class DesignComponent implements OnInit {
   ) {}
   ngOnInit() {
     this.profileForm = this.fb.group({
-      id: [null],
-      fullname: [null, Validators.required],
-      short_bio: [null, Validators.required],
-      about: [null],
-      birthday: [null, Validators.required],
+      id: [''],
+      fullname: ['', Validators.required],
+      short_bio: ['', Validators.required],
+      about: [''],
+      birthday: ['', Validators.required],
       gender: [GENDER.MALE, Validators.required],
-      avatar_link: [null],
-      design_id: [null],
-      profile_link: [null],
-      location: [null],
-      click_count: [null],
+      avatar_link: [''],
+      design_id: [''],
+      profile_link: [''],
+      location: [''],
+      click_count: [''],
     });
     this.pathProfile(this.profile);
   }
@@ -111,10 +111,10 @@ export class DesignComponent implements OnInit {
             this.profile = res.data;
             this.avatarUrl = res.data.avatar_link;
             this.sendProfile.emit(this.profile);
-            this.msg.success('Update success');
+            this.msg.success('Update successfully');
             this.isLoading=false;
           } else {
-            this.msg.error('Update false');
+            this.msg.error('Update failed');
             this.isLoading=false;
           }
         });
