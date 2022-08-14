@@ -17,7 +17,7 @@
                 alt="logo"
               />
             </div>
-            <div class="username">{{admin.username}}</div>
+            <div class="username">{{ admin.username }}</div>
             <a href="/login">Logout</a>
           </div>
         </div>
@@ -26,11 +26,37 @@
     <div>
       <nz-tabset class="tabs">
         <nz-tab [nzTitle]="titleRole">
-            <ng-template #header>
-               <input nz-input [(ngModel)]="usernameSearch" style="width:250px" placeholder="Username..." (keyup.enter)="findByUsername($event)" />
-               <button [nzDanger]="true" (click)="cancelUpgradeRoleList()" *ngIf="listUserChecked.length!=0" nz-button class="float-right"><i class="fa-solid fa-trash-can"></i></button>
-               <button (click)="upgradeRoleList()" *ngIf="listUserChecked.length!=0" nz-button class="float-right  mr-1"> <i class="fa-solid fa-arrow-up"></i> </button>
-            </ng-template>
+          <ng-template #header>
+            <input
+              nz-input
+              [(ngModel)]="usernameSearch"
+              style="width: 250px"
+              placeholder="Username..."
+              (keyup.enter)="findByUsername($event)"
+            />
+            <button
+              [nzDanger]="true"
+              *ngIf="listUserChecked.length != 0"
+              nz-button
+              class="float-right none-border"
+              nz-popconfirm
+              nzCancelText="No"
+              nzOkText="Yes"
+              nzPopconfirmTitle="Are you sure delete this items?"
+              nzPopconfirmPlacement="top"
+              (nzOnConfirm)="cancelUpgradeRoleList()"
+            >
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+            <button
+              (click)="upgradeRoleList()"
+              *ngIf="listUserChecked.length != 0"
+              nz-button
+              class="float-right none-border mr-1"
+            >
+              <i class="fa-solid fa-arrow-up"></i>
+            </button>
+          </ng-template>
           <nz-table
             #rowSelectionTable
             nzBordered
@@ -69,27 +95,40 @@
                 <td>{{ data.mail }}</td>
                 <td>{{ data.role }}</td>
                 <td nzAlign="center">
-                    <button class="mr-1" nz-button (click)="upgradeRole(data)">
-                        <i class="fa-solid fa-arrow-up mr-1"></i>
-                        Upgrade
-                    </button>
-               <button (click)="cancelRequestUpgradeRole(data)" nz-button [nzDanger]="true" [nzType]="'primary'">
-                <i class="fa-solid fa-trash-can mr-1"></i>
-                Delete
-              </button>
-
+                  <button class="mr-1" nz-button (click)="upgradeRole(data)">
+                    <i class="fa-solid fa-arrow-up mr-1"></i>
+                    Upgrade
+                  </button>
+                  <button
+                    nz-button
+                    [nzDanger]="true"
+                    [nzType]="'primary'"
+                    nz-popconfirm
+                    nzCancelText="No"
+                    nzOkText="Yes"
+                    nzPopconfirmTitle="Are you sure delete this item?"
+                    nzPopconfirmPlacement="top"
+                    (nzOnConfirm)="cancelRequestUpgradeRole(data)"
+                  >
+                    <i class="fa-solid fa-trash-can mr-1"></i>
+                    Delete
+                  </button>
                 </td>
               </tr>
             </tbody>
           </nz-table>
         </nz-tab>
-        <nz-tab [nzTitle]="titleDesign"> Design </nz-tab>
+        <nz-tab [nzTitle]="titleDesign"
+          ><app-list-design></app-list-design
+        ></nz-tab>
       </nz-tabset>
-      <ng-template #titleRole><div class="title">Upgrade role</div></ng-template>
+      <ng-template #titleRole
+        ><div class="title">Upgrade role</div></ng-template
+      >
       <ng-template #titleDesign><div class="title">Design</div></ng-template>
       <ng-template #footer>
-        <div style="height:40px">
-            <nz-pagination
+        <div style="height: 40px">
+          <nz-pagination
             class="float-right mr-3"
             [(nzPageSize)]="pagination.page_size"
             [nzSize]="size"
@@ -108,7 +147,6 @@
             / {{ total }}
           </ng-template>
         </div>
-        
       </ng-template>
     </div>
   </body>

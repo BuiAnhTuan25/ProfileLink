@@ -33,6 +33,8 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { CreateProfileComponent } from './create-profile/create-profile.component';
 import { StatisticComponent } from './statistic/statistic.component';
 import { AdminComponent } from './admin/admin.component';
+import { DrawerDesignComponent } from './drawer-design/drawer-design.component';
+import { ListDesignComponent } from './list-design/list-design.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { AdminComponent } from './admin/admin.component';
     CreateProfileComponent,
     StatisticComponent,
     AdminComponent,
+    DrawerDesignComponent,
+    ListDesignComponent,
   ],
   imports: [
     BrowserModule,

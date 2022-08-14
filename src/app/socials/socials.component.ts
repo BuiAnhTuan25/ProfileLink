@@ -53,12 +53,12 @@ export class SocialsComponent implements OnInit {
     },
   ];
   socialForm: FormGroup = this.fb.group({
-    id: [null],
-    profile_id: [null],
-    social_name: [null],
-    links: [null, Validators.required],
-    social_icon: [null],
-    click_count: [null],
+    id: [''],
+    profile_id: [''],
+    social_name: [''],
+    links: ['', Validators.required],
+    social_icon: [''],
+    click_count: [''],
   });
 
   constructor(
@@ -80,7 +80,7 @@ export class SocialsComponent implements OnInit {
           this.socials = res.data;
           this.data.sendSocials(this.socials);
           this.filterSocial(this.socials);
-        } else this.msg.error('Get list social false');
+        } else this.msg.error('Get list social failed');
       });
   }
 
@@ -135,10 +135,10 @@ export class SocialsComponent implements OnInit {
           this.data.sendSocials(this.socials);
           this.filterSocial(this.socials);
           this.socialModalCancel();
-          this.msg.success('Delete social success');
+          this.msg.success('Delete social successfully');
         } else {
           this.isLoadingDelete=false;
-          this.msg.error('Delete social false');
+          this.msg.error('Delete social failed');
         
         }
       });
@@ -162,18 +162,17 @@ export class SocialsComponent implements OnInit {
       this.isLoadingSave=true;
       this.socialService
         .addSocial(this.socialForm.value)
-        .toPromise()
-        .then((res: any) => {
+        .subscribe((res: any) => {
           if (res.success) {
             this.isLoadingSave=false;
             this.socials.push(res.data);
             this.data.sendSocials(this.socials);
             this.socialModalCancel();
             this.filterSocial(this.socials);
-            this.msg.success('Add social success');
+            this.msg.success('Add social successfully');
           } else {
             this.isLoadingSave=false;
-            this.msg.error('Add social false');
+            this.msg.error('Add social failed');
           }
         });
     }

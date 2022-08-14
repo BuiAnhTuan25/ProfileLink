@@ -48,11 +48,11 @@ export class LoginComponent implements OnInit {
       this.roles = this.tokenStorage.getUser().roles;
     }
     this.validateForm = this.fb.group({
-      username: [null, [Validators.required, NoSpace]],
-      password: [null, [Validators.required, NoSpace]],
+      username: ['', [Validators.required, NoSpace]],
+      password: ['', [Validators.required, NoSpace]],
     });
     this.modalForm = this.fb.group({
-      mail: [null, [Validators.required, Validators.pattern(EMAIL_REGEX)]],
+      mail: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
     });
 
     this.socialAuthService.authState.subscribe((user) => {
@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
           if (res.success) {
             this.isLoadingSend = false;
             this.msg.success(
-              'Send email forgot password success. Please access your email to check password!'
+              'Send email forgot password successfully. Please access your email to check password!'
             );
             this.handleCancel();
             this.router.navigate(['/login']);
