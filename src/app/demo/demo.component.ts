@@ -70,8 +70,7 @@ export class DemoComponent implements OnInit {
         linkClick.click_count += 1;
         this.linksService
           .updateLink(linkClick, linkClick.id)
-          .toPromise()
-          .then((res: any) => {
+          .subscribe((res: any) => {
             if (res.success) {
               window.open('https://' + linkClick.url, 'mytab');
             } else this.msg.error('False');
@@ -85,7 +84,7 @@ export class DemoComponent implements OnInit {
       if(res.success){
         const socialClick=res.data;
         socialClick.click_count+=1;
-        this.socialService.updateSocial(socialClick,socialClick.id).toPromise().then((res:any)=>{
+        this.socialService.updateSocial(socialClick,socialClick.id).subscribe((res:any)=>{
           if(res.success){
             window.open('https://' +socialClick.social_icon+'.com/'+ socialClick.links, 'mytab');
           } else this.msg.error('False');

@@ -1,0 +1,91 @@
+<ng-template #header>
+  <input
+    nz-input
+    [(ngModel)]="nameSearch"
+    style="width: 250px"
+    placeholder="Name..."
+    (keyup.enter)="findByName()"
+  />
+  <button
+    nz-button
+    (click)="openDrawer('create', null)"
+    class="float-right none-border"
+  >
+    <i class="fa-solid fa-plus sz-20"></i>
+  </button>
+  <button
+    [nzDanger]="true"
+    *ngIf="listDesignChecked.length != 0"
+    nz-button
+    class="float-right none-border mr-1"
+    nz-popconfirm
+    nzCancelText="No"
+    nzOkText="Yes"
+    nzPopconfirmTitle="Are you sure delete this items?"
+    nzPopconfirmPlacement="top"
+    (nzOnConfirm)="deleteListDesign()"
+  >
+    <i class="fa-solid fa-trash-can"></i>
+  </button>
+</ng-template>
+<nz-table
+  #rowSelectionTable
+  nzBordered
+  [nzTitle]="header"
+  [nzData]="listDesign"
+  [nzFrontPagination]="false"
+  [nzShowPagination]="false"
+  [nzLoading]="isLoading"
+  [nzScroll]="{ y: scrollY }"
+>
+  <thead>
+    <tr>
+      <th
+        nzShowCheckbox
+        nzWidth="40px"
+        [(nzChecked)]="isAllDisplayDataChecked"
+        [nzIndeterminate]="isIndeterminate"
+        (nzCheckedChange)="checkAll($event)"
+      ></th>
+      <th nzAlign="center">Avatar</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let data of listDesign"
+      (contextmenu)="contextMenu($event, menu, data)"
+      (click)="openDrawer('edit', data)"
+    >
+      <td
+        nzShowCheckbox
+        [(nzChecked)]="mapOfCheckedId[data.id]"
+        (nzCheckedChange)="refreshStatus()"
+      ></td>
+      <td nzAlign="center">
+        <img alt="example" width="50" height="50" [src]="data.picture" />
+      </td>
+      <td>{{ data.name }}</td>
+    </tr>
+  </tbody>
+</nz-table>
+<app-drawer-design
+  #designDrawer
+  (onUpdate)="onUpdatetDrawer($event)"
+  (onCreate)="onCreateDrawer($event)"
+  (onDelete)="onDeleteDrawer($event)"
+></app-drawer-design>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <ul nz-menu nzOverlayClassName="drop-down">
+    <li nz-menu-item (click)="openDrawer('edit')">
+      <i class="fa-solid fa-pen-to-square mr-2"></i>Edit
+    </li>
+    <li nz-menu-item (click)="onDuplication()">
+      <i class="fa-solid fa-copy mr-2"></i>Replication
+    </li>
+    <li nz-menu-divider></li>
+    <li nz-menu-item (click)="showDeleteConfirm()">
+      <i class="fa-solid fa-trash-can mr-2"></i>Delete
+    </li>
+  </ul>
+</nz-dropdown-menu>

@@ -29,19 +29,11 @@ export class LinksComponent implements OnInit {
   //id:number=1;
   file!: NzUploadFile;
   validateFile: boolean = false;
-  erorrPictire: string = '';
+  erorrPicture: string = '';
 
   listLinks: any[] = [];
 
-  modalForm: FormGroup = this.fb.group({
-    id: [null],
-    profile_id: [null],
-    title: [null, Validators.required],
-    url: [null, Validators.pattern(URL_REGEX)],
-    picture: [null],
-    click_count: [null],
-    type: [TYPE_LINK.LINK],
-  });
+  modalForm!: FormGroup;
 
   constructor(
     private linksService: LinksService,
@@ -52,6 +44,15 @@ export class LinksComponent implements OnInit {
 
   ngOnInit() {
     this.getLinks(this.profile.id);
+    this.modalForm= this.fb.group({
+      id: [''],
+      profile_id: [''],
+      title: ['', Validators.required],
+      url: ['', Validators.pattern(URL_REGEX)],
+      picture: [''],
+      click_count: [''],
+      type: [TYPE_LINK.LINK],
+    });
   }
 
   getLinks(profileId: number) {
@@ -59,7 +60,7 @@ export class LinksComponent implements OnInit {
       if (res.success) {
         this.listLinks = res.data;
         this.data.notifyCountValue(this.listLinks);
-      } else this.msg.error('Get list link false');
+      } else this.msg.error('Get list link failed');
     });
   }
 
@@ -85,11 +86,13 @@ export class LinksComponent implements OnInit {
     if (edit) {
       this.mode = 'edit';
 
-      if (type == 'link') this.title = 'EDIT LINK';
+      if (type == 'link'){
+        this.title = 'EDIT LINK';
+        this.avatarUrl = data.picture;
+      } 
       if (type == 'header') this.title = 'EDIT HEADER';
-
       this.modalForm.patchValue(data);
-      this.avatarUrl = data.picture;
+     
     } else {
       this.mode = 'create';
       if (type == 'link') this.title = 'CREATE LINK';
@@ -98,17 +101,18 @@ export class LinksComponent implements OnInit {
   }
 
   handleOk() {
+    debugger
     for (const i in this.modalForm.controls) {
       this.modalForm.controls[i].markAsDirty();
       this.modalForm.controls[i].updateValueAndValidity();
     }
+
     if (this.type == 'link' && this.modalForm.controls['url'].value == null) {
       this.validForm = false;
       this.modalForm.controls['url'].setErrors({ urlExist: true });
     } else this.validForm = true;
     
     this.checkFile(); 
-
     if (this.modalForm.valid && this.validForm && this.validateFile) {
       if (this.mode === 'create') {
         this.modalForm.controls['profile_id'].setValue(this.profile.id);
@@ -127,10 +131,10 @@ export class LinksComponent implements OnInit {
               this.listLinks.push(res.data);
               this.data.notifyCountValue(this.listLinks);
               this.handleCancel();
-              this.msg.success('Add success');
+              this.msg.success('Add successfully');
             } else {
               this.isLoadingSave=false;
-              this.msg.error('Add false');
+              this.msg.error('Add failed');
             }
           });
       } else {
@@ -144,14 +148,14 @@ export class LinksComponent implements OnInit {
           .subscribe((res) => {
             if (res.success) {
               this.isLoadingSave=false;
-              this.msg.success('Update success');
+              this.msg.success('Update successfully');
               const i = this.listLinks.findIndex((x) => x.id == res.data.id);
               this.listLinks.splice(i, 1, res.data);
               this.data.notifyCountValue(this.listLinks);
               this.handleCancel();
             } else {
               this.isLoadingSave=false;
-              this.msg.error('Update false');
+              this.msg.error('Update failed');
             }
           });
       }
@@ -212,18 +216,17 @@ export class LinksComponent implements OnInit {
     this.isLoadingDelete=true;
     this.linksService
       .deleteLink(this.modalForm.controls['id'].value)
-      .toPromise()
-      .then((res: any) => {
+      .subscribe((res: any) => {
         if (res.success) {
           this.isLoadingDelete=false;
           const i = this.listLinks.findIndex((x) => x.id == res.data.id);
           this.listLinks.splice(i, 1);
           this.data.notifyCountValue(this.listLinks);
           this.handleCancel();
-          this.msg.success('Delete success');
+          this.msg.success('Delete successfully');
         } else {
           this.isLoadingDelete=false;
-          this.msg.success('Delete success');
+          this.msg.success('Delete failed');
         }
       });
   }
@@ -231,10 +234,10 @@ export class LinksComponent implements OnInit {
   checkFile(){
     if (this.mode === 'create' && this.type == 'link' && !this.file) {
       this.validateFile = false;
-      this.erorrPictire = 'Please select picture!';
+      this.erorrPicture = 'Please select picture!';
     } else {
       this.validateFile = true;
-      this.erorrPictire = '';
+      this.erorrPicture = '';
     }
   }
 }

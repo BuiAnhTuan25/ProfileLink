@@ -81,6 +81,7 @@ export class AdminComponent implements OnInit {
         }
         this.msg.success('Upgrade role successfully');
         this.isIndeterminate=false;
+        this.listUserChecked=[];
       } else this.msg.error('Upgrade role failed');
     })
   }
@@ -99,6 +100,7 @@ export class AdminComponent implements OnInit {
         }
         this.msg.success('Cancel upgrade role successfully');
         this.isIndeterminate=false;
+        this.listUserChecked=[];
       } else this.msg.error('Cancel upgrade role failed');
     })
   }
@@ -182,7 +184,7 @@ export class AdminComponent implements OnInit {
   }
 
   calculateHeightBodyTable() {
-    this.scrollY = `calc(100vh - 200px)`;
+    this.scrollY = `calc(100vh - 320px)`;
   }
 
 

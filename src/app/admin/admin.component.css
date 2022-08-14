@@ -70,6 +70,10 @@ body {
     margin-right: 5px;
   }
 
+  .none-border{
+    border:none;
+  }
+
   .username{
     font-size: 24px;
     font-weight: bold;
