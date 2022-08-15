@@ -187,5 +187,7 @@ export class AdminComponent implements OnInit {
     this.scrollY = `calc(100vh - 320px)`;
   }
 
-
+  comeBackHome(){
+    window.location.pathname = '/home';
+  }
 }

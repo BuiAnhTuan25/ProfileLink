@@ -13,7 +13,6 @@ import {
   SocialUser,
 } from 'angularx-social-login';
 import { OauthService } from '../_service/oauth-service/oauth.service';
-import { WebsocketService } from '../_service/websocket-service/websocket.service';
 
 @Component({
   selector: 'app-login',

@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { AuthenticationService } from '../_service/auth-service/authentication.service';
 import { ProfileService } from '../_service/profile-service/profile.service';
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private auth: AuthenticationService,
     private msg: NzMessageService,
     private websocket:WebsocketService,
+    private router:Router,
   ) {}
 
   async ngOnInit() {
@@ -65,5 +67,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   onCloseModal(){
     this.isVisible=false;
     this.dataQr='';
+  }
+
+  onClickAdmin(){
+    window.location.pathname = '/admin';
   }
 }
