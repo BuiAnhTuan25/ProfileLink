@@ -72,12 +72,14 @@
               (nzChange)="handleChange($event)"
             >
               <ng-container *ngIf="!backgroundUrl">
-                <i
+                <div>
+                  <i
                   class="upload-icon"
                   nz-icon
                   [nzType]="loading ? 'loading' : 'camera'"
                 ></i>
-                <div class="ant-upload-text">Upload image</div>
+                <div class="ant-upload-text"><p id="upload-1">Upload image</p></div>
+                </div>
               </ng-container>
               <img
                 class="background"
