@@ -14,16 +14,33 @@
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
-          <nz-form-control nzErrorTip="Please input Short bio!">
+          <nz-form-control [nzErrorTip]="errorUsername">
             <input
               class="input"
               type="text"
               nz-input
               formControlName="short_bio"
               placeholder="Short bio"
+              (blur)="checkShortBio()"
             />
           </nz-form-control>
         </nz-form-item>
+        <ng-template #errorUsername let-control>
+          <div
+            *ngIf="
+              profileForm.controls['short_bio'].invalid &&
+              (profileForm.controls['short_bio'].dirty ||
+              profileForm.controls['short_bio'].touched)
+            "
+          >
+            <span *ngIf="profileForm.get('short_bio')?.hasError('required')"
+              >Please input short bio!</span
+            >
+            <span *ngIf="profileForm.get('short_bio')?.hasError('already_exist')"
+              >Short bio already exist!</span
+            >
+          </div>
+        </ng-template>
         <nz-form-item>
           <nz-form-control>
             <input

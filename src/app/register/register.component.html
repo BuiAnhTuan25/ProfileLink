@@ -112,6 +112,16 @@
               >
             </div>
           </ng-template>
+          <button
+            nz-button
+            id="button1"
+            class="login-form-button login-form-margin"
+            [nzType]="'primary'"
+            [nzLoading]="isLoading"
+            (click)="register()"
+          >
+            Sign up
+          </button>
         </form>
         
         <div id="forgot">
