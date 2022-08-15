@@ -42,7 +42,6 @@
 }
 .mr-1 {
   margin-right: 5px;
-  color: #B7B6BD;
 }
 .mr-2 {
   margin-right: 20px;
@@ -71,4 +70,6 @@
 .float-right{
   float:right;
 }
-
+.eyes{
+  color: #B7B6BD;
+}

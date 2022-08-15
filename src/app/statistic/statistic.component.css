@@ -6,7 +6,6 @@
 
 .mr-1 {
   margin-right: 7px;
-  color:#B7B6BD;
 }
 
 .mr-2 {
@@ -108,5 +107,9 @@ agm-map {
 }
 .float-right{
   float:right;
+}
+
+.eyes{
+  color: #B7B6BD;
 }
 
