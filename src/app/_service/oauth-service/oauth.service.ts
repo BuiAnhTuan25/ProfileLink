@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OauthService {
-  oauthURL = 'http://localhost:8080/login/oauth';
+  oauthURL = 'http://profilelink.ap-south-1.elasticbeanstalk.com/login/oauth';
 
   constructor(private httpClient: HttpClient) { }
 

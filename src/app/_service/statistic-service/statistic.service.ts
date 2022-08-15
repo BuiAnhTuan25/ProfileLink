@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class StatisticService {
-  STATISTIC_PATH = 'http://localhost:8080/api/v1.0/statistic';
-  PROFILE_PATH = 'http://localhost:8080/api/v1.0/profile';
-  GEOIP_PATH = 'http://localhost:8080/api/v1.0/geoip';
+  STATISTIC_PATH = 'http://profilelink.ap-south-1.elasticbeanstalk.com/api/v1.0/statistic';
+  PROFILE_PATH = 'http://profilelink.ap-south-1.elasticbeanstalk.com/api/v1.0/profile';
+  GEOIP_PATH = 'http://profilelink.ap-south-1.elasticbeanstalk.com/api/v1.0/geoip';
   constructor(private http: HttpClient) {}
 
   getTopProfileOfMonth(page:number,pageSize:number,month:number,year:number): Observable<any> {

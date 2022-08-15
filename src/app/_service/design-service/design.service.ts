@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DesignService {
-  BASE_PATH = 'http://localhost:8080/api/v1.0/design';
+  BASE_PATH = 'http://profilelink.ap-south-1.elasticbeanstalk.com/api/v1.0/design';
   constructor(private http: HttpClient) {}
 
   getDesign(id: number): Observable<any> {

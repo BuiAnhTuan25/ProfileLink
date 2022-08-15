@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-const AUTH_API = 'http://localhost:8080';
+const AUTH_API = 'http://profilelink.ap-south-1.elasticbeanstalk.com';
 @Injectable({
   providedIn: 'root',
 })

@@ -10,7 +10,7 @@ export class WebsocketService {
     constructor(private msg:NzMessageService){}
     user:any=JSON.parse(localStorage.getItem('auth-user')!);
     // authToken:any=localStorage.getItem('auth-token')!;
-    webSocketEndPoint: string = 'http://localhost:8080/notification';
+    webSocketEndPoint: string = 'http://profilelink.ap-south-1.elasticbeanstalk.com/notification';
 
     queue: string = '/queue/notification/' ;
     stompClient: any;

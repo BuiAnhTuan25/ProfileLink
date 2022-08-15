@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class SocialService {
-  BASE_PATH = 'http://localhost:8080/api/v1.0/social';
+  BASE_PATH = 'http://profilelink.ap-south-1.elasticbeanstalk.com/api/v1.0/social';
   constructor(private http: HttpClient) {}
 
   getListSocial(

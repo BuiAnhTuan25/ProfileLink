@@ -7,8 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ProfileService {
-  BASE_PATH = 'http://localhost:8080/api/v1.0/profile';
-  USER_PATH = 'http://localhost:8080/api/v1.0/user'
+  BASE_PATH = 'http://profilelink.ap-south-1.elasticbeanstalk.com/api/v1.0/profile';
   constructor(private http: HttpClient) {}
 
   getProfile(id: number): Observable<any> {
@@ -66,11 +65,4 @@ export class ProfileService {
     return this.http.delete(this.BASE_PATH + '/' + id);
   }
 
-  deleteUser(id:number):Observable<any>{
-    return this.http.delete(this.USER_PATH+'/'+id);
-  }
-
-  updateUser(user:any,id:number):Observable<any>{
-    return this.http.put(this.USER_PATH+"/"+id,user);
-  }
 }

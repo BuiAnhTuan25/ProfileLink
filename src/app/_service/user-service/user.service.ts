@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UserService {
-  USER_BASE = 'http://localhost:8080/api/v1.0/user';
+  USER_BASE = 'http://profilelink.ap-south-1.elasticbeanstalk.com/api/v1.0/user';
   constructor(private http: HttpClient) {}
 
   getUserUpdateRole(

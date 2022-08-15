@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class LinksService {
-  BASE_PATH = 'http://localhost:8080/api/v1.0/link';
+  BASE_PATH = 'http://profilelink.ap-south-1.elasticbeanstalk.com/api/v1.0/link';
   constructor(private http: HttpClient) {}
 
   getListLinks(

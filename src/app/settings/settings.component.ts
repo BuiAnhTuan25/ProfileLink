@@ -86,7 +86,7 @@ export class SettingsComponent implements OnInit {
 
   onDeleteUser(){
     this.isLoadingDelete=true;
-    this.profileService.deleteUser(this.user.id).subscribe((res:any)=>{
+    this.userService.deleteUser(this.user.id).subscribe((res:any)=>{
       if(res.success){
         this.isLoadingDelete=false;
         this.msg.success('Delete account successfully');
