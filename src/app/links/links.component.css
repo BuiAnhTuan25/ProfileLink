@@ -41,7 +41,8 @@
   text-align: center;
 }
 .mr-1 {
-  margin-right: 10px;
+  margin-right: 5px;
+  color: #B7B6BD;
 }
 .mr-2 {
   margin-right: 20px;
@@ -61,5 +62,13 @@
 :host ::ng-deep .avatar-uploader > .ant-upload {
   width: 100px;
   height: 100px;
+}
+
+:host ::ng-deep .ant-card-body{
+  width: 100%;
+}
+
+.float-right{
+  float:right;
 }
 

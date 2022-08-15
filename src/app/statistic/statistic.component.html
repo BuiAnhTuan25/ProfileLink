@@ -8,7 +8,7 @@
           (click)="onClickProfile(month.short_bio)"
         >
           <nz-card-meta
-            [nzTitle]="month.fullname"
+            [nzTitle]="titleMonth"
             [nzDescription]="descriptionTemplate"
             [nzAvatar]="avatarTemplate"
           ></nz-card-meta>
@@ -22,9 +22,15 @@
           </ng-template>
           <ng-template #descriptionTemplate>
             <div>localhost:4200/demo/{{ month.short_bio }}</div>
-            <div>
+            
+          </ng-template>
+          <ng-template #titleMonth>
+           <div>
+            {{ month.fullname }}
+            <div class="float-right">
               <i class="fa-solid fa-eye mr-1"></i>{{ month.click_count }}
             </div>
+           </div>
           </ng-template>
         </nz-card>
       </div>
@@ -68,7 +74,7 @@
           (click)="onClickProfile(profile.short_bio)"
         >
           <nz-card-meta
-            [nzTitle]="profile.fullname"
+            [nzTitle]="titleProfile"
             [nzDescription]="descriptionTemplate"
             [nzAvatar]="avatarTemplate"
           ></nz-card-meta>
@@ -82,10 +88,15 @@
           </ng-template>
           <ng-template #descriptionTemplate>
             <div>localhost:4200/demo/{{ profile.short_bio }}</div>
-            <div>
-              <i class="fa-solid fa-eye mr-1"></i>{{ profile.click_count }}
-            </div>
           </ng-template>
+          <ng-template #titleProfile>
+            <div>
+             {{ profile.fullname }}
+             <div class="float-right">
+               <i class="fa-solid fa-eye mr-1"></i>{{ profile.click_count }}
+             </div>
+            </div>
+           </ng-template>
         </nz-card>
       </div>
     </nz-card>
