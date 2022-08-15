@@ -69,6 +69,7 @@
       <nz-dropdown-menu #menu="nzDropdownMenu">
         <ul nz-menu nzOverlayClassName="drop-down">
           <li nz-menu-item (click)="onClickDashboard()"><i class="fa-solid fa-house icon-fontawesome"></i>Dashboard</li>
+          <li *ngIf="user.role=='ADMIN'" nz-menu-item (click)="onClickAdmin()"><i class="fa-solid fa-align-justify icon-fontawesome"></i>Admin page</li>
           <li nz-menu-divider></li>
           <li nz-menu-item (click)="onClickLogout()"><i class="fa-solid fa-right-from-bracket icon-fontawesome"></i>Logout</li>
         </ul>
