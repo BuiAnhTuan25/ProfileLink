@@ -52,4 +52,12 @@ export class UserService {
     param=param.append('is-upgrade-role',isUpgradeRole);
     return this.http.put(this.USER_BASE+'/role-upgrade-request/list',users,{params:param});
   }
+
+  deleteUser(id:number):Observable<any>{
+    return this.http.delete(this.USER_BASE+'/'+id);
+  }
+
+  updateUser(user:any,id:number):Observable<any>{
+    return this.http.put(this.USER_BASE+"/"+id,user);
+  }
 }
