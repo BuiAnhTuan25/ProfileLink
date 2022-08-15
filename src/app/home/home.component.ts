@@ -56,13 +56,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   onClickCopyLink() {
-    navigator.clipboard.writeText('http://localhost:4200/demo/'+this.profile?.short_bio);
+    navigator.clipboard.writeText('http://profilelinkangular.s3-website.ap-south-1.amazonaws.com/demo/'+this.profile?.short_bio);
     this.msg.success('Copied');
   }
 
   onClickQrCode(){
    this.isVisible=true;
-   this.dataQr='http://localhost:4200/demo/'+this.profile?.short_bio;
+   this.dataQr='http://profilelinkangular.s3-website.ap-south-1.amazonaws.com/demo/'+this.profile?.short_bio;
   }
   onCloseModal(){
     this.isVisible=false;
