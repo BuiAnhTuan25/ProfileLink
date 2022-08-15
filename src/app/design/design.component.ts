@@ -20,7 +20,7 @@ export class DesignComponent implements OnInit {
   avatarUrl?: string;
   file!: NzUploadFile;
   profileForm!: FormGroup;
-  validForm: boolean = false;
+  validForm: boolean = true;
   user: any;
 
   constructor(
