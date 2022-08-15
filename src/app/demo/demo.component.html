@@ -21,7 +21,7 @@
   class="avatar"
   [src]="profileBio ? profileBio.avatar_link : profile?.avatar_link"
 />
-<div class="name">{{ profile?.fullname }}</div>
+<div class="name">{{ profileBio ? profileBio.fullname : profile?.fullname }}</div>
 <div class="mb1">
   <div nz-row [nzGutter]="16" class="social">
     <div *ngFor="let social of listSocial">

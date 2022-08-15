@@ -19,6 +19,11 @@ export class ProfileService {
     return this.http.get(this.BASE_PATH + '/shortbio/'+shortBio);
   }
 
+  findByShortBio(shortBio:string):Observable<any>{
+    return this.http.get(this.BASE_PATH + '/findprofile/'+shortBio);
+
+  }
+
   addProfile(profile: any, file?: any): Observable<any> {
     const formdata = new FormData();
     formdata.append('file', file);

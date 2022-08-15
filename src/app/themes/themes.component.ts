@@ -165,7 +165,7 @@ export class ThemesComponent implements OnInit {
     if(backgroundType) this.designForm.controls['background_type'].setValue(backgroundType);
     if(file){
       this.designService
-      .updateDesign(this.designForm.value, this.designForm.controls['id'].value,file)
+      .updateDesign(this.designForm.value, this.designForm.controls['id'].value,null,file)
       .subscribe((res: any) => {
         if (res.success) {
           this.designForm.patchValue(res.data);
@@ -265,7 +265,9 @@ export class ThemesComponent implements OnInit {
   }
 
   changeBackgroundType(backgroundType:string){
-    this.designForm.controls['background_type'].setValue(backgroundType);
-    this.onUpdateDesign();
+    if(this.designForm.controls['background_type'].value != backgroundType){
+      this.designForm.controls['background_type'].setValue(backgroundType);
+      this.onUpdateDesign();
+    }
   }
 }

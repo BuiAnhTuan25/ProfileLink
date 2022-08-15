@@ -160,7 +160,8 @@ export class SocialsComponent implements OnInit {
       this.socialForm.controls['click_count'].setValue(0);
 
       this.isLoadingSave=true;
-      this.socialService
+      if(this.mode == 'create'){
+        this.socialService
         .addSocial(this.socialForm.value)
         .subscribe((res: any) => {
           if (res.success) {
@@ -175,6 +176,25 @@ export class SocialsComponent implements OnInit {
             this.msg.error('Add social failed');
           }
         });
+      }
+      if(this.mode == 'edit'){
+        this.socialService
+        .updateSocial(this.socialForm.value,this.socialForm.controls['id'].value)
+        .subscribe((res: any) => {
+          if (res.success) {
+            this.isLoadingSave=false;
+            const i = this.socials.findIndex((x) => x.id == res.data.id);
+            this.socials.splice(i, 1, res.data);
+            this.data.sendSocials(this.socials);
+            this.socialModalCancel();
+            this.msg.success('Add social successfully');
+          } else {
+            this.isLoadingSave=false;
+            this.msg.error('Add social failed');
+          }
+        });
+      }
+      
     }
   }
 }
