@@ -1,123 +1,3 @@
-<!-- <div nz-row>
-  <div class="background-phone" nz-col nzSpan="3"></div>
-  <div class="background-phone" nz-col nzSpan="5">
-    <nz-affix nzOffsetTop="60">
-      <div class="phone">
-        <div
-          *ngIf="backgroundType=='IMAGE'; else elseColor"
-          class="center demo backgrond-img"
-          [ngStyle]="{
-            'background-image': 'url(' + design?.background_image + ')',
-            color: design?.text_color,
-            'font-family': design?.font,
-            'border-radius': '18px'
-          }"
-        >
-          <ng-container [ngTemplateOutlet]="content"></ng-container>
-        </div>
-
-        <ng-template #elseColor>
-          <div
-            class="center demo"
-            [ngStyle]="{
-              'background-color': design?.background_color,
-              color: design?.text_color,
-              'font-family': design?.font,
-              'border-radius': '18px'
-            }"
-          >
-            <ng-container [ngTemplateOutlet]="content"></ng-container>
-          </div>
-        </ng-template>
-
-        <ng-template #content>
-          <div class="overflow-y">
-            <img
-              class="avatar"
-              src="https://res.cloudinary.com/anhtuanbui/image/upload/v1657248868/knybg0tx6rj48d62nv4a.png"
-            />
-            <div class="name">ADMIN</div>
-            <div class="mb1">
-              <div nz-row [nzGutter]="16" class="social">
-                  <i
-                    nz-icon
-                    nz-col
-                    nzSpan="3"
-                    style="cursor: pointer"
-                    nzType="facebook"
-                    nzTheme="outline"
-                  ></i>
-                  <i
-                    nz-icon
-                    nz-col
-                    nzSpan="3"
-                    style="cursor: pointer"
-                    nzType="youtube"
-                    nzTheme="outline"
-                  ></i>
-                  <i
-                    nz-icon
-                    nz-col
-                    nzSpan="3"
-                    style="cursor: pointer"
-                    nzType="instagram"
-                    nzTheme="outline"
-                  ></i>
-              </div>
-            </div>
-            <div style="margin-bottom: 50px">
-                <div
-                  style="font-weight: bold; margin-top: 24px"
-                >
-                  ADMIN
-                </div>
-                <div *ngIf="isPrimary; else elsePrimary">
-                  <button
-                    [ngStyle]="{
-                      'background-color': design?.button_color,
-                      color: design?.text_color
-                    }"
-                    [nzType]="buttonType"
-                    [nzShape]="buttonShape"
-                    nz-button
-                    class="button-link mt1 title-link"
-                  >
-                    <img
-                      alt="example"
-                      class="avatar-link"
-                      src="https://res.cloudinary.com/anhtuanbui/image/upload/v1657248868/knybg0tx6rj48d62nv4a.png"
-                    />
-                    Button
-                  </button>
-                </div>
-                <ng-template #elsePrimary>
-                  <button
-                    [nzGhost]="true"
-                    [ngStyle]="{
-                      border: '2px solid ' + design?.button_color,
-                      color: design?.text_color
-                    }"
-                    [nzType]="buttonType"
-                    [nzShape]="buttonShape"
-                    nz-button
-                    class="button-link mt1 title-link"
-                  >
-                    <img
-                      alt="example"
-                      class="avatar-link"
-                      src="https://res.cloudinary.com/anhtuanbui/image/upload/v1657248868/knybg0tx6rj48d62nv4a.png"
-                    />
-                    Button
-                  </button>
-                </ng-template>
-              </div>
-          </div>
-        </ng-template>
-      </div>
-    </nz-affix>
-  </div>
-  <div class="background-phone" nz-col nzSpan="3"></div>
-  <div nz-col nzSpan="13"> -->
 <nz-drawer
   [nzClosable]="false"
   [nzVisible]="isVisible"
@@ -173,6 +53,7 @@
 </ng-template>
 
 <ng-template #contentTpl>
+  <div class="overflow-y">
   <form nz-form [formGroup]="designForm">
     <nz-form-item>
       <nz-form-label class="label" [nzSpan]="6">Name design</nz-form-label>
@@ -348,4 +229,5 @@
       </nz-form-control>
     </nz-form-item>
   </form>
+</div>
 </ng-template>

@@ -295,3 +295,12 @@
 .erorr {
   color: red;
 }
+
+.overflow-y{
+  height: 100%; 
+  overflow: hidden auto;
+}
+.overflow-y::-webkit-scrollbar { 
+  width: 0 !important;
+  display: none; 
+}
