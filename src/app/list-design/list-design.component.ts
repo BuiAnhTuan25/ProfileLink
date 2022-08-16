@@ -161,7 +161,7 @@ export class ListDesignComponent implements OnInit {
   }
 
   calculateHeightBodyTable() {
-    this.scrollY = `calc(100vh - 270px)`;
+    this.scrollY = `calc(100vh - 290px)`;
   }
 
   openDrawer(mode: string, data?: any) {

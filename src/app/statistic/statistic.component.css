@@ -5,7 +5,7 @@
 }
 
 .mr-1 {
-  margin-right: 10px;
+  margin-right: 7px;
 }
 
 .mr-2 {
@@ -104,5 +104,12 @@ agm-map {
 .month-picker{
   width:200px;
   float:right;
+}
+.float-right{
+  float:right;
+}
+
+.eyes{
+  color: #B7B6BD;
 }
 

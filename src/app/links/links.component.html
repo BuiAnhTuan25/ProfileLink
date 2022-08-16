@@ -34,7 +34,7 @@
     *ngIf="link.type == 'LINK'"
   >
     <nz-card-meta
-      [nzTitle]="link.title"
+      [nzTitle]="title"
       [nzDescription]="descriptionTemplate"
       [nzAvatar]="avatarTemplate"
     ></nz-card-meta>
@@ -43,8 +43,15 @@
     </ng-template>
     <ng-template #descriptionTemplate>
       <div>{{ link.url }}</div>
-      <div><i class="fa-solid fa-eye mr-1"></i>{{ link.click_count }}</div>
     </ng-template>
+    <ng-template #title>
+      <div>
+        {{link.title}}
+        <div class="float-right">  <i class="fa-solid fa-eye mr-1 eyes"></i>{{ link.click_count }}</div>
+      </div>
+      
+    </ng-template>
+
   </nz-card>
 </div>
 <app-socials [profile]="profile"></app-socials>

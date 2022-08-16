@@ -7,6 +7,7 @@ import { Observable, Observer } from 'rxjs';
 import { GENDER } from '../_model/gender';
 import { AuthenticationService } from '../_service/auth-service/authentication.service';
 import { ProfileService } from '../_service/profile-service/profile.service';
+import { UserService } from '../_service/user-service/user.service';
 
 @Component({
   selector: 'app-create-profile',
@@ -27,6 +28,7 @@ export class CreateProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private profileService: ProfileService,
+    private userService: UserService,
     private router: Router,
     private msg: NzMessageService,
     private auth:AuthenticationService,
@@ -76,7 +78,7 @@ export class CreateProfileComponent implements OnInit {
       .subscribe((res: any) => {
         if (res.success) {
           this.user.is_profile = true;
-          this.profileService
+          this.userService
             .updateUser(this.user, this.user.id)
             .subscribe((res: any) => {
               if (res.success) {

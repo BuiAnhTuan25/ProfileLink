@@ -1,86 +1,112 @@
-<div
-*ngIf="isBackgroundImage;else elseColor"
-  class="center demo backgrond-img"
-  [ngStyle]="{'background-image': 'url('+design?.background_image+')','color': design?.text_color,'font-family': design?.font,'border-radius': border?'18px':'none'}"
->
-<ng-container [ngTemplateOutlet]="content"></ng-container>
-</div>
-
-<ng-template #elseColor>
-  <div
-  class="center demo"
-  [ngStyle]="{'background-color': design?.background_color,'color': design?.text_color,'font-family': design?.font,'border-radius': border?'18px':'none'}"
->
-<ng-container [ngTemplateOutlet]="content"></ng-container>
-</div>
-</ng-template>
-
-<ng-template #content>
-  <div class="overflow-y">
-  <img
-  class="avatar"
-  [src]="profileBio ? profileBio.avatar_link : profile?.avatar_link"
-/>
-<div class="name">{{ profile?.fullname }}</div>
-<div class="mb1">
-  <div nz-row [nzGutter]="16" class="social">
-    <div *ngFor="let social of listSocial">
-      <i
-      (click)="onClickSocial(social)"
-        nz-icon
-        nz-col
-        nzSpan="3"
-        style="cursor:pointer"
-        [nzType]="social?.social_icon"
-        nzTheme="outline"
-      ></i>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div
+      *ngIf="isBackgroundImage; else elseColor"
+      class="center demo backgrond-img"
+      [ngStyle]="{
+        'background-image': 'url(' + design?.background_image + ')',
+        color: design?.text_color,
+        'font-family': design?.font,
+        'border-radius': border ? '18px' : 'none'
+      }"
+    >
+      <ng-container [ngTemplateOutlet]="content"></ng-container>
     </div>
-  </div>
-</div>
-<div style="margin-bottom:50px">
-<div *ngFor="let link of listLinks">
-  <div style="font-weight: bold; margin-top:24px;" *ngIf="link.type == 'HEADER'">
-    {{ link.title }}
-  </div>
-</div>
-<div *ngFor="let link of listLinks">
-  <div *ngIf="isPrimary; else elsePrimary">
-    <button
-      *ngIf="link.type == 'LINK'"
-      [ngStyle]="{
-        'background-color': design?.button_color,
-        'color': design?.text_color
-      }"
-      [nzType]="buttonType"
-      [nzShape]="buttonShape"
-      nz-button
-      class="button-link mt1 title-link"
-      (click)="onClickLink(link)"
-    >
-      <img alt="example" class="avatar-link" [src]="link?.picture" />
-      {{ link.title }}
-    </button>
-  </div>
-  <ng-template #elsePrimary>
-    <button
-    [nzGhost]="true"
-      *ngIf="link.type == 'LINK'"
-      [ngStyle]="{
-        'border': '2px solid ' + design?.button_color,
-        'color': design?.text_color
-      }"
-      [nzType]="buttonType"
-      [nzShape]="buttonShape"
-      nz-button
-      class="button-link mt1 title-link"
-      (click)="onClickLink(link)"
-    >
-      <img alt="example" class="avatar-link" [src]="link?.picture" />
-      {{ link.title }}
-    </button>
-  </ng-template>
-</div>
-</div>
-</div>
-</ng-template>
 
+    <ng-template #elseColor>
+      <div
+        class="center demo"
+        [ngStyle]="{
+          'background-color': design?.background_color,
+          color: design?.text_color,
+          'font-family': design?.font,
+          'border-radius': border ? '18px' : 'none'
+        }"
+      >
+        <ng-container [ngTemplateOutlet]="content"></ng-container>
+      </div>
+    </ng-template>
+
+    <ng-template #content>
+      <div class="overflow-y">
+        <img
+          class="avatar"
+          [src]="profileBio ? profileBio.avatar_link : profile?.avatar_link"
+        />
+        <div [ngClass]="profileBio ? 'name-demo' : 'name'">
+          {{ profileBio ? profileBio.fullname : profile?.fullname }}
+        </div>
+        <div class="mb1">
+          <div nz-row [nzGutter]="16" [ngClass]="profileBio ? 'social-demo' : 'social'">
+            <div *ngFor="let social of listSocial">
+              <i
+                (click)="onClickSocial(social)"
+                nz-icon
+                nz-col
+                nzSpan="3"
+                style="cursor: pointer"
+                [nzType]="social?.social_icon"
+                nzTheme="outline"
+              ></i>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom: 50px">
+          <div *ngFor="let link of listLinks">
+            <div
+              [ngClass]="profileBio ? 'social-title-demo' : 'social-title'"
+              *ngIf="link.type == 'HEADER'"
+            >
+              {{ link.title }}
+            </div>
+          </div>
+          <div *ngFor="let link of listLinks">
+            <div *ngIf="isPrimary; else elsePrimary">
+              <button
+                *ngIf="link.type == 'LINK'"
+                [ngStyle]="{
+                  'background-color': design?.button_color,
+                  color: design?.text_color
+                }"
+                [nzType]="buttonType"
+                [nzShape]="buttonShape"
+                nz-button
+                [ngClass]="profileBio ? 'button-link-demo mt1 title-link' : 'button-link mt1 title-link'"
+                
+                (click)="onClickLink(link)"
+              >
+                <img alt="example" [ngClass]="profileBio ? 'avatar-link-demo' : 'avatar-link'" [src]="link?.picture" />
+                {{ link.title }}
+              </button>
+            </div>
+            <ng-template #elsePrimary>
+              <button
+                [nzGhost]="true"
+                *ngIf="link.type == 'LINK'"
+                [ngStyle]="{
+                  border: '2px solid ' + design?.button_color,
+                  color: design?.text_color
+                }"
+                [nzType]="buttonType"
+                [nzShape]="buttonShape"
+                nz-button
+                [ngClass]="profileBio ? 'button-link-demo mt1 title-link' : 'button-link mt1 title-link'"
+                (click)="onClickLink(link)"
+              >
+                <img alt="example" [ngClass]="profileBio ? 'avatar-link-demo' : 'avatar-link'" [src]="link?.picture" />
+                {{ link.title }}
+              </button>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </body>
+</html>

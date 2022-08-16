@@ -14,12 +14,13 @@ import { GENDER } from '../_model/gender';
 export class DesignComponent implements OnInit {
   @Output() sendProfile = new EventEmitter<any>();
   @Input() profile: any;
-  
+
   loading = false;
-  isLoading:boolean=false;
+  isLoading: boolean = false;
   avatarUrl?: string;
   file!: NzUploadFile;
   profileForm!: FormGroup;
+  validForm: boolean = true;
   user: any;
 
   constructor(
@@ -97,8 +98,16 @@ export class DesignComponent implements OnInit {
   }
 
   updateProfile() {
-    if (this.profile != this.profileForm.value || this.file) {
-      this.isLoading=true;
+    for (const i in this.profileForm.controls) {
+      this.profileForm.controls[i].markAsDirty();
+      this.profileForm.controls[i].updateValueAndValidity();
+    }
+    if (
+      (this.profile != this.profileForm.value || this.file) &&
+      this.validForm &&
+      this.profileForm.valid
+    ) {
+      this.isLoading = true;
       this.profileService
         .updateProfile(
           this.profileForm.value,
@@ -112,11 +121,28 @@ export class DesignComponent implements OnInit {
             this.avatarUrl = res.data.avatar_link;
             this.sendProfile.emit(this.profile);
             this.msg.success('Update successfully');
-            this.isLoading=false;
+            this.isLoading = false;
           } else {
             this.msg.error('Update failed');
-            this.isLoading=false;
+            this.isLoading = false;
           }
+        });
+    }
+  }
+
+  checkShortBio() {
+    if (
+      this.profileForm.controls['short_bio'].value != this.profile.short_bio
+    ) {
+      this.profileService
+        .findByShortBio(this.profileForm.controls['short_bio'].value)
+        .subscribe((res: any) => {
+          if (res.success) {
+            this.validForm = false;
+            this.profileForm.controls['short_bio'].setErrors({
+              already_exist: true,
+            });
+          } else this.validForm = true;
         });
     }
   }

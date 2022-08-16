@@ -8,7 +8,7 @@
           (click)="onClickProfile(month.short_bio)"
         >
           <nz-card-meta
-            [nzTitle]="month.fullname"
+            [nzTitle]="titleMonth"
             [nzDescription]="descriptionTemplate"
             [nzAvatar]="avatarTemplate"
           ></nz-card-meta>
@@ -22,36 +22,18 @@
           </ng-template>
           <ng-template #descriptionTemplate>
             <div>localhost:4200/demo/{{ month.short_bio }}</div>
-            <div>
-              <i class="fa-solid fa-eye mr-1"></i>{{ month.click_count }}
+            
+          </ng-template>
+          <ng-template #titleMonth>
+           <div>
+            {{ month.fullname }}
+            <div class="float-right">
+              <i class="fa-solid fa-eye mr-1 eyes"></i>{{ month.click_count }}
             </div>
+           </div>
           </ng-template>
         </nz-card>
       </div>
-      
-      <!-- <div class="wrap-table">
-        <table id="column-example-4" class="charts-css column">
-          <caption>
-            Column Example #4
-          </caption>
-          <tbody class="tbody-table">
-            <tr class="tr-1" *ngFor="let month of topMonth;index as i">
-              <td
-                (click)="onClickProfile(month.short_bio)"
-                [ngStyle]="{ '--size': month.click_count / max ,'position':'relative'}"
-              >
-              <img class="avatar" [src]="month.avatar_link" alt="" />
-              <img
-                class="rank"
-                [src]="ranks[i].src"
-                alt=""
-              />
-            </td>
-            </tr>
-          </tbody>
-          
-        </table>
-      </div> -->
       
     </nz-card>
     <ng-template #titleTopMonth>
@@ -68,7 +50,7 @@
           (click)="onClickProfile(profile.short_bio)"
         >
           <nz-card-meta
-            [nzTitle]="profile.fullname"
+            [nzTitle]="titleProfile"
             [nzDescription]="descriptionTemplate"
             [nzAvatar]="avatarTemplate"
           ></nz-card-meta>
@@ -82,10 +64,15 @@
           </ng-template>
           <ng-template #descriptionTemplate>
             <div>localhost:4200/demo/{{ profile.short_bio }}</div>
-            <div>
-              <i class="fa-solid fa-eye mr-1"></i>{{ profile.click_count }}
-            </div>
           </ng-template>
+          <ng-template #titleProfile>
+            <div>
+             {{ profile.fullname }}
+             <div class="float-right">
+               <i class="fa-solid fa-eye mr-1 eyes"></i>{{ profile.click_count }}
+             </div>
+            </div>
+           </ng-template>
         </nz-card>
       </div>
     </nz-card>

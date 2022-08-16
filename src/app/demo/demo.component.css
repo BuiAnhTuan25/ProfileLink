@@ -1,3 +1,7 @@
+
+body{
+    border-radius: 18px;
+}
 .avatar {
     height: 80px;
     width: 80px;
@@ -27,8 +31,20 @@
     font-weight: bold;
 }
 
+.name-demo {
+    margin-top: 10px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
 .social {
     font-size: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+.social-demo {
+    font-size: 26px;
     margin-top: 10px;
     display: flex;
     justify-content: center;
@@ -41,12 +57,37 @@
     float: left;
 }
 
+.avatar-link-demo {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    float: left;
+}
+
 .button-link {
     width: 80%;
     height: 40px;
     border:none;
     font-size: 12px;
 }
+.button-link-demo {
+    width: 80%;
+    height: 40px;
+    border:none;
+    font-size: 12px;
+}
+
+.social-title{
+    font-weight: bold; 
+    margin-top: 24px;
+    font-size: 14px;
+}
+.social-title-demo{
+    font-weight: bold; 
+    margin-top: 24px;
+    font-size: 18px;
+}
+
 .mt1{
     margin-top: 16px;
 }
@@ -69,4 +110,14 @@
 .overflow-y::-webkit-scrollbar { 
     width: 0 !important;
     display: none; 
-  }
+}
+
+@media only screen and (min-width: 600px) {
+    .button-link-demo {
+        width: 50%;
+        height: 50px;
+        border:none;
+        font-size: 16px;
+    }
+
+}
