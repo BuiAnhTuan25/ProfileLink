@@ -50,6 +50,7 @@ export class SettingsComponent implements OnInit {
     this.settingForm.controls['mail'].setValue(mailHidden + mail);
   }
   openModal() {
+    this.isLoading=false;
     this.isVisible = true;
     this.modalForm.reset();
 

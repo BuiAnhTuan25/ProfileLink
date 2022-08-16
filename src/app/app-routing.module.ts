@@ -13,6 +13,7 @@ import { RegisterComponent } from './register/register.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AuthGuard } from './_shared/auth.guard';
 import { AdminActive } from './_shared/admin.guard';
+import { RegisterVerifyComponent } from './register-verify/register-verify.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'design', component: DesignComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
+  { path: 'register-verify/:code', component: RegisterVerifyComponent },
   { path: 'create-profile', component: CreateProfileComponent },
   { path: 'update_password_token', component: ChangePasswordComponent },
   { path: 'demo/:short_bio', component: DemoComponent },

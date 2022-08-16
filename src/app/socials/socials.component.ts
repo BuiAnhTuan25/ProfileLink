@@ -93,6 +93,8 @@ export class SocialsComponent implements OnInit {
 
   openSocialModal(data: any, edit: boolean) {
     this.isVisibleSocial = true;
+    this.isLoadingDelete=false;
+    this.isLoadingSave=false;
     this.socialForm.reset();
     if (edit) {
       this.mode = 'edit';
