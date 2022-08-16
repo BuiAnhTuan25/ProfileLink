@@ -35,6 +35,7 @@ import { StatisticComponent } from './statistic/statistic.component';
 import { AdminComponent } from './admin/admin.component';
 import { DrawerDesignComponent } from './drawer-design/drawer-design.component';
 import { ListDesignComponent } from './list-design/list-design.component';
+import { RegisterVerifyComponent } from './register-verify/register-verify.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ListDesignComponent } from './list-design/list-design.component';
     AdminComponent,
     DrawerDesignComponent,
     ListDesignComponent,
+    RegisterVerifyComponent,
   ],
   imports: [
     BrowserModule,

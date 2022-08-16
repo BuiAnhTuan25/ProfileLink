@@ -80,6 +80,8 @@ export class LinksComponent implements OnInit {
   openModal(data: any, edit: boolean, type: string) {
     this.type = type;
     this.isVisible = true;
+    this.isLoadingDelete=false;
+    this.isLoadingSave=false;
     this.modalForm.reset();
     this.avatarUrl = '';
     this.mode = '';
@@ -101,7 +103,6 @@ export class LinksComponent implements OnInit {
   }
 
   handleOk() {
-    debugger
     for (const i in this.modalForm.controls) {
       this.modalForm.controls[i].markAsDirty();
       this.modalForm.controls[i].updateValueAndValidity();
@@ -174,7 +175,6 @@ export class LinksComponent implements OnInit {
         observer.complete();
         return;
       }
-      console.log(file.size!)
       const isLt2M = file.size! / 1024 / 1024 < 2;
       if (!isLt2M) {
         this.msg.error('Image must smaller than 2MB!');

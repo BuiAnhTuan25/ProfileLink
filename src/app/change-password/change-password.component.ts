@@ -25,7 +25,6 @@ export class ChangePasswordComponent implements OnInit {
 
   ngOnInit(): void {
     this.code = this.route.snapshot.queryParamMap.get('code')!;
-    console.log(this.code);
     this.form = this.fb.group({
       newPassword: ['', [Validators.required, NoSpace]],
       confirmPassword: ['', [Validators.required, NoSpace]],
