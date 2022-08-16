@@ -100,7 +100,7 @@
                 [ngClass]="profileBio ? 'button-link-demo mt1 title-link' : 'button-link mt1 title-link'"
                 (click)="onClickLink(link)"
               >
-                <img alt="example" class="avatar-link" [src]="link?.picture" />
+                <img alt="example" [ngClass]="profileBio ? 'avatar-link-demo' : 'avatar-link'" [src]="link?.picture" />
                 {{ link.title }}
               </button>
             </ng-template>
