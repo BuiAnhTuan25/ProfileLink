@@ -8,19 +8,19 @@ import { AuthenticationService } from '../_service/auth-service/authentication.s
   styleUrls: ['./register-verify.component.css']
 })
 export class RegisterVerifyComponent implements OnInit {
-  success:boolean=false;
+  success!:boolean;
   code:string='';
   constructor(private auth:AuthenticationService,private route:ActivatedRoute, private router:Router) { }
 
-  ngOnInit(): void {
+   ngOnInit() {
     this.code = this.route.snapshot.paramMap.get('code')!;
     if(this.code){
-      this.registerVerify(this.code);
-    } else this.success=false;
+       this.registerVerify(this.code);
+    }
   }
   
-  registerVerify(code:string){
-    this.auth.registerVeryfy(code).subscribe((res:any)=>{
+   registerVerify(code:string){
+     this.auth.registerVeryfy(code).subscribe((res:any)=>{
       if(res.success){
         this.success=true;
       } else this.success=false;

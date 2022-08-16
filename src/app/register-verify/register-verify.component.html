@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="center mt-20" *ngIf="success;else elseTpl">
+    <div class="center mt-20" *ngIf="success">
         <div class="title">
             Create account success
         </div>
@@ -40,8 +40,7 @@
           </button>
         </div>
     </div>
-    <ng-template #elseTpl>
-        <div class="center mt-20">
+        <div class="center mt-20" *ngIf="success==false">
             <div class="title">
                 Create account failed
             </div>
@@ -58,9 +57,9 @@
               </button>
             </div>
         </div>
-    </ng-template>
   </body>
 </html>
+
 
 
 
