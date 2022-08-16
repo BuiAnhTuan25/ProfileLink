@@ -110,9 +110,36 @@ export class RegisterComponent implements OnInit {
     }
   );
 }
-
+loginWithFacebook() {
+  this.socialAuthService.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+    (data) => {
+      this.socialUser = data;
+      const tokenFacebook = this.socialUser.authToken;
+      this.oauthService.facebook(tokenFacebook).subscribe(
+        res => {
+          this.tokenStorage.saveToken(res.data.jwt);
+        this.tokenStorage.saveUser(res.data.user);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+        if(res.data.user.is_profile){
+          this.router.navigate(['/home']);
+        } else this.router.navigate(['/create-profile']);
+        
+        },
+        err => {
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
+          this.isLoading = false;
+          this.msg.error('Login with facebook false!')
+        }
+      );
+    }
+  );
+}
 openModal() {
   this.isVisible = true;
+  this.isLoadingSend=false;
   this.modalForm.reset();
 
 }

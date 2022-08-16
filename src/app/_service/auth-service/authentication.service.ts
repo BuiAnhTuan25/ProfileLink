@@ -11,16 +11,26 @@ export class AuthenticationService {
   login(user: any): Observable<any> {
     return this.http.post(AUTH_API + '/test/login', user);
   }
+
   register(user: any): Observable<any> {
     return this.http.post(AUTH_API + '/test/register', user);
   }
+
+  registerVeryfy(code:string):Observable<any>{
+    let param = new HttpParams();
+    param=param.append('code',code);
+    return this.http.get(AUTH_API+'/test/register/verify',{ params : param});
+  }
+
   getToken() {
     return localStorage.getItem('auth-token');
   }
+
   get isLoggedIn(): boolean {
     let authToken = localStorage.getItem('auth-token');
     return authToken !== null ? true : false;
   }
+
   doLogout() {
     let removeToken = localStorage.removeItem('auth-token');
     let removeUser = localStorage.removeItem('auth-user');

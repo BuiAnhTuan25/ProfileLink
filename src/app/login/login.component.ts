@@ -69,22 +69,23 @@ export class LoginComponent implements OnInit {
     if (this.validateForm.valid) {
       this.isLoading = true;
       this.auth.login(this.validateForm.value).subscribe(
-        (data) => {
-          this.isLoading = false;
-          this.tokenStorage.saveToken(data.data.jwt);
-          this.tokenStorage.saveUser(data.data.user);
-          this.isLoginFailed = false;
-          this.isLoggedIn = true;
-          this.roles = this.tokenStorage.getUser().roles;
-          if(data.data.user.is_profile){
-            this.router.navigate(['/home']);
-          } else this.router.navigate(['/create-profile']);
-        },
-        (err) => {
-          this.errorMessage = err.error.message;
-          this.isLoginFailed = true;
-          this.isLoading = false;
-          this.msg.error('Incorrect username or password')
+        (data:any) => {
+          if(data.success){
+            this.isLoading = false;
+            this.tokenStorage.saveToken(data.data.jwt);
+            this.tokenStorage.saveUser(data.data.user);
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            this.roles = this.tokenStorage.getUser().roles;
+            if(data.data.user.is_profile){
+              this.router.navigate(['/home']);
+            } else this.router.navigate(['/create-profile']);
+          } else{
+            this.isLoginFailed = true;
+            this.isLoading = false;
+            this.msg.error('Incorrect username or password')
+          }
+          
         }
       );
     }
@@ -95,6 +96,7 @@ export class LoginComponent implements OnInit {
 
   openModal() {
     this.isVisible = true;
+    this.isLoadingSend=false;
     this.modalForm.reset();
 
   }

@@ -80,6 +80,8 @@ export class LinksComponent implements OnInit {
   openModal(data: any, edit: boolean, type: string) {
     this.type = type;
     this.isVisible = true;
+    this.isLoadingDelete=false;
+    this.isLoadingSave=false;
     this.modalForm.reset();
     this.avatarUrl = '';
     this.mode = '';
