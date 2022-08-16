@@ -69,7 +69,8 @@ export class StatisticComponent implements OnInit {
   }
 
   onClickProfile(url:string){
-    document.location.href = 'http://profilelinkangular.s3-website.ap-south-1.amazonaws.com/demo/' + url;
+    // document.location.href = 'http://profilelinkangular.s3-website.ap-south-1.amazonaws.com/demo/' + url;
+    window.open('http://profilelinkangular.s3-website.ap-south-1.amazonaws.com/demo/' + url, 'mytab');
   }
 
   getIp(){
