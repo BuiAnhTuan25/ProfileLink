@@ -86,7 +86,6 @@ export class RegisterComponent implements OnInit {
   loginWithGoogle() {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       (data) => {
-        debugger
         this.socialUser = data;
         const tokenGoogle = this.socialUser.authToken;
         this.oauthService.google(tokenGoogle).subscribe(

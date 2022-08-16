@@ -90,7 +90,6 @@ export class StatisticComponent implements OnInit {
   }
 
   onChangeMonth(event:any){
-    console.log(event)
   this.getTopProfileOfMonth(event.substr(5,2),event.substr(0,4));
   }
 }

@@ -14,7 +14,6 @@ export class RegisterVerifyComponent implements OnInit {
 
   ngOnInit(): void {
     this.code = this.route.snapshot.paramMap.get('code')!;
-    console.log(this.code);
     if(this.code){
       this.registerVerify(this.code);
     } else this.success=false;
@@ -22,7 +21,6 @@ export class RegisterVerifyComponent implements OnInit {
   
   registerVerify(code:string){
     this.auth.registerVeryfy(code).subscribe((res:any)=>{
-      console.log(res)
       if(res.success){
         this.success=true;
       } else this.success=false;
