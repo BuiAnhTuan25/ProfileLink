@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { AuthenticationService } from '../_service/auth-service/authentication.service';
 import { UserService } from '../_service/user-service/user.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class AdminComponent implements OnInit {
   total!:number;
   size: any = 'small';
   mapOfCheckedId: { [key: string]: boolean } = {};
-  constructor(private userService:UserService,private msg:NzMessageService) { }
+  constructor(private userService:UserService,private msg:NzMessageService, private auth: AuthenticationService) { }
 
   ngOnInit(): void {
     this.admin=JSON.parse(localStorage.getItem('auth-user')!);
@@ -189,5 +190,9 @@ export class AdminComponent implements OnInit {
 
   comeBackHome(){
     window.location.pathname = '/home';
+  }
+
+  logout(){
+    this.auth.doLogout();
   }
 }
