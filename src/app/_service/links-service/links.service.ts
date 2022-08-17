@@ -37,7 +37,7 @@ export class LinksService {
     const formdata = new FormData();
     formdata.append('file', fileUpload);
     formdata.append('title', link.title);
-    formdata.append('url', link.url);
+    formdata.append('url', link.url ? link.url : '');
     formdata.append('type', link.type);
     formdata.append('profileId', link.profile_id);
     formdata.append('clickCount', link.click_count);
@@ -49,7 +49,7 @@ export class LinksService {
     const formdata = new FormData();
     formdata.append('file', fileUpload);
     formdata.append('title', link.title);
-    formdata.append('url', link.url);
+    formdata.append('url', link.url ? link.url : '');
     formdata.append('type', link.type);
     formdata.append('profileId', link.profile_id);
     formdata.append('clickCount', link.click_count);
