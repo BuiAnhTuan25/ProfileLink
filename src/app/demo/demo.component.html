@@ -46,6 +46,7 @@
         <div class="mb1">
           <div nz-row [nzGutter]="16" [ngClass]="profileBio ? 'social-demo' : 'social'">
             <div *ngFor="let social of listSocial">
+              <a [ngStyle]="{color: design?.text_color}" target=”_blank” [href]="'https://' +social.social_icon+'.com/'+ social.links">
               <i
                 (click)="onClickSocial(social)"
                 nz-icon
@@ -55,6 +56,7 @@
                 [nzType]="social?.social_icon"
                 nzTheme="outline"
               ></i>
+            </a>
             </div>
           </div>
         </div>
@@ -87,6 +89,7 @@
               </button>
             </div>
             <ng-template #elsePrimary>
+              <a target=”_blank” [href]="'http://'+link.url">
               <button
                 [nzGhost]="true"
                 *ngIf="link.type == 'LINK'"
@@ -103,6 +106,7 @@
                 <img alt="example" [ngClass]="profileBio ? 'avatar-link-demo' : 'avatar-link'" [src]="link?.picture" />
                 {{ link.title }}
               </button>
+            </a>
             </ng-template>
           </div>
         </div>

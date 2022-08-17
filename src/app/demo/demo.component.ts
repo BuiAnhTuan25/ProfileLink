@@ -72,7 +72,7 @@ export class DemoComponent implements OnInit {
           .updateLink(linkClick, linkClick.id)
           .subscribe((res: any) => {
             if (res.success) {
-              window.open('https://' + linkClick.url, 'mytab');
+              // window.open('https://' + linkClick.url, 'mytab');
             } else this.msg.error('False');
           });
       } else this.msg.error('False');
@@ -86,7 +86,7 @@ export class DemoComponent implements OnInit {
         socialClick.click_count+=1;
         this.socialService.updateSocial(socialClick,socialClick.id).subscribe((res:any)=>{
           if(res.success){
-            window.open('https://' +socialClick.social_icon+'.com/'+ socialClick.links, 'mytab');
+            // window.open('https://' +socialClick.social_icon+'.com/'+ socialClick.links, 'mytab');
           } else this.msg.error('False');
           })
       } else this.msg.error('False');
