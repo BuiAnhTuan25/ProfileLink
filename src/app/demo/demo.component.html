@@ -71,6 +71,7 @@
           </div>
           <div *ngFor="let link of listLinks">
             <div *ngIf="isPrimary; else elsePrimary">
+              <a target=”_blank” [href]="'http://'+link.url">
               <button
                 *ngIf="link.type == 'LINK'"
                 [ngStyle]="{
@@ -87,6 +88,7 @@
                 <img alt="example" [ngClass]="profileBio ? 'avatar-link-demo' : 'avatar-link'" [src]="link?.picture" />
                 {{ link.title }}
               </button>
+            </a>
             </div>
             <ng-template #elsePrimary>
               <a target=”_blank” [href]="'http://'+link.url">
